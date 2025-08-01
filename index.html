@@ -16,37 +16,52 @@
 
   <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
-    <form id="sale-form">
-      <input type="text" id="item" placeholder="Search Item" list="item-list" required>
-      <datalist id="item-list"></datalist>
+   <form id="sale-form">
+  <div class="form-row">
+    <input type="text" id="item" placeholder="Search Item" list="item-list" required>
+    <datalist id="item-list"></datalist>
+  </div>
 
-      <select id="unit" required>
-        <option value="ct">Carton (Ct)</option>
-        <option value="dz">Dozen (Dz)</option>
-        <option value="pc" selected>Piece (Pc)</option>
-      </select>
+  <div class="form-row">
+    <select id="unit" required>
+      <option value="ct">Carton (Ct)</option>
+      <option value="dz">Dozen (Dz)</option>
+      <option value="pc" selected>Piece (Pc)</option>
+    </select>
+  </div>
 
-      <input type="number" id="quantity" placeholder="Quantity" required min="1">
-      <input type="number" id="price" placeholder="Price per item" required min="0" readonly>
+  <div class="form-row">
+    <input type="number" id="quantity" placeholder="Quantity" required min="1">
+  </div>
 
-      <label for="discount">Discount:</label>
-      <input type="number" id="discount" value="0" />
+  <div class="form-row">
+    <input type="number" id="price" placeholder="Price per item" required min="0" readonly>
+  </div>
 
-      <label for="extra">Extra Charges:</label>
-      <input type="number" id="extra" value="0" />
+  <div class="form-row">
+    <label for="discount">Discount:</label>
+    <input type="number" id="discount" value="0" />
+  </div>
 
-      <label for="payment-method">Payment Method:</label>
-      <select id="payment-method">
-        <option value="Cash">Cash</option>
-        <option value="Mpesa">Mpesa</option>
-        <option value="Bank">Bank</option>
-      </select>
+  <div class="form-row">
+    <label for="extra">Extra Charges:</label>
+    <input type="number" id="extra" value="0" />
+  </div>
 
-      <label for="total">Total:</label>
-      <input type="number" id="total" readonly>
+  <div class="form-row">
+    <label for="payment-method">Payment Method:</label>
+    <select id="payment-method">
+      <option value="Cash">Cash</option>
+      <option value="Mpesa">Mpesa</option>
+      <option value="Bank">Bank</option>
+    </select>
+  </div>
 
-      <button type="submit">Add Sale</button>
-    </form>
+  <div class="form-row">
+    <button type="submit">Add Sale</button>
+  </div>
+</form>
+
 
     <table id="sales-table">
       <thead>
