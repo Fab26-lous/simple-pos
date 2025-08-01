@@ -1,3 +1,15 @@
+const correctPassword = "glam2025"; // Change this to your preferred password
+
+function checkLogin() {
+  const entered = document.getElementById("password").value;
+  const error = document.getElementById("login-error");
+  if (entered === correctPassword) {
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("pos-container").style.display = "block";
+  } else {
+    error.textContent = "Incorrect password. Try again.";
+  }
+}
 const sales = [];
 
 document.getElementById('sale-form').addEventListener('submit', function(e) {
