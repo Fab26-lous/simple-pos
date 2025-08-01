@@ -1,792 +1,6322 @@
 [
-{ name: "Bahasha A6", prices: { ct: 20000, dz: 2500, pc: 100 } },
-{ name: "Bahasha A5", prices: { ct: 35000, dz: 3500, pc: 200 } },
-{ name: "Bahasha A4", prices: { ct: 40000, dz: 4500, pc: 200 } },
-{ name: "Bahasha A3", prices: { ct: 70000, dz: 7000, pc: 300 } },
-{ name: "Bahasha A4 Omega", prices: { ct: 35000, dz: 4000, pc: 200 } },
-{ name: "Socks 18-20", prices: { ct: 0, dz: 6500, pc: 1000 } },
-{ name: "Socks 20-22", prices: { ct: 0, dz: 6500, pc: 1000 } },
-{ name: "Socks 23-24", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Socks 25-28", prices: { ct: 0, dz: 7500, pc: 1000 } },
-{ name: "Socks 30-32", prices: { ct: 0, dz: 8500, pc: 1000 } },
-{ name: "Socks 33-36", prices: { ct: 0, dz: 9000, pc: 1000 } },
-{ name: "Socks 28-30", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Leso Nzito", prices: { ct: 0, dz: 9000, pc: 750 } },
-{ name: "Lesso Nyepesi", prices: { ct: 0, dz: 4500, pc: 375 } },
-{ name: "Wallet", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Pamba", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "leso maua", prices: { ct: 300000, dz: 3500, pc: 500 } },
-{ name: "Wallet Kifungo", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Q1", prices: { ct: 74000, dz: 16000, pc: 1500 } },
-{ name: "Q2 Professor", prices: { ct: 72000, dz: 20000, pc: 2000 } },
-{ name: "Q2 Maxon", prices: { ct: 72000, dz: 20000, pc: 2000 } },
-{ name: "Q2 Pride", prices: { ct: 90000, dz: 24000, pc: 2000 } },
-{ name: "Q2 Elimu ni Bahari", prices: { ct: 72000, dz: 20000, pc: 2000 } },
-{ name: "Q2 Freedom", prices: { ct: 70000, dz: 20000, pc: 2000 } },
-{ name: "Q2 Maki", prices: { ct: 85000, dz: 25000, pc: 2500 } },
-{ name: "Q3 Maxon", prices: { ct: 72000, dz: 30000, pc: 3000 } },
-{ name: "Q3 Elimu ni Bahari", prices: { ct: 72000, dz: 30000, pc: 3000 } },
-{ name: "Q3 Professor", prices: { ct: 72000, dz: 30000, pc: 3000 } },
-{ name: "Q3 Freedom", prices: { ct: 72000, dz: 30000, pc: 3000 } },
-{ name: "Quire 4/Q4", prices: { ct: 75000, dz: 40000, pc: 4000 } },
-{ name: "Q4 Amigo", prices: { ct: 76000, dz: 40000, pc: 4000 } },
-{ name: "Counter ndogo Master", prices: { ct: 100000, dz: 14000, pc: 1500 } },
-{ name: "Counter Ndogo DL", prices: { ct: 110000, dz: 15000, pc: 1500 } },
-{ name: "Counter Ndogo SQ", prices: { ct: 110000, dz: 15000, pc: 1500 } },
-{ name: "Ledger Book q2", prices: { ct: 145000, dz: 72000, pc: 7000 } },
-{ name: "Ledger Book q1", prices: { ct: 0, dz: 0, pc: 3500 } },
-{ name: "Cash Book", prices: { ct: 145000, dz: 72000, pc: 7000 } },
-{ name: "Store Ledger", prices: { ct: 145000, dz: 72000, pc: 7000 } },
-{ name: "Guest Register", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Visitors Book", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Dispatch/Log Book", prices: { ct: 975000, dz: 14000, pc: 2500 } },
-{ name: "Q4 PROFESSOR", prices: { ct: 70000, dz: 40000, pc: 3500 } },
-{ name: "Msomi", prices: { ct: 52000, dz: 7500, pc: 800 } },
-{ name: "Champion", prices: { ct: 38000, dz: 5000, pc: 500 } },
-{ name: "Professional", prices: { ct: 56000, dz: 15000, pc: 1500 } },
-{ name: "Pg 32 SL", prices: { ct: 38000, dz: 2300, pc: 300 } },
-{ name: "Pg 32 DL", prices: { ct: 38000, dz: 2300, pc: 300 } },
-{ name: "Pg 32 SQ", prices: { ct: 38000, dz: 2300, pc: 300 } },
-{ name: "Pg 100 SL", prices: { ct: 60000, dz: 6500, pc: 800 } },
-{ name: "Pg 100 DL", prices: { ct: 60000, dz: 6500, pc: 800 } },
-{ name: "Pg 100 SQ", prices: { ct: 60000, dz: 6500, pc: 800 } },
-{ name: "Pg 100 Plain", prices: { ct: 60000, dz: 6500, pc: 800 } },
-{ name: "pg 200 SL Europa", prices: { ct: 100000, dz: 11000, pc: 1000 } },
-{ name: "pg 200 DL Europa", prices: { ct: 100000, dz: 11000, pc: 1000 } },
-{ name: "pg 200 SQ Europa", prices: { ct: 100000, dz: 11000, pc: 1000 } },
-{ name: "pg 200 Plain Europa", prices: { ct: 100000, dz: 11000, pc: 1000 } },
-{ name: "Stakabadhi", prices: { ct: 210000, dz: 6000, pc: 1000 } },
-{ name: "Petty Cash", prices: { ct: 220000, dz: 6000, pc: 1000 } },
-{ name: "Attendance Local", prices: { ct: 40000, dz: 12000, pc: 1500 } },
-{ name: "Attendance Losica", prices: { ct: 0, dz: 15000, pc: 1500 } },
-{ name: "Scheme of Work/ Azimio", prices: { ct: 70000, dz: 18000, pc: 2000 } },
-{ name: "Maandalio", prices: { ct: 70000, dz: 18000, pc: 2000 } },
-{ name: "Kitabu Risiti A4 Carbonized", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Omega", prices: { ct: 53000, dz: 7500, pc: 800 } },
-{ name: "Folder File", prices: { ct: 0, dz: 13000, pc: 500 } },
-{ name: "Office file", prices: { ct: 0, dz: 5000, pc: 1000 } },
-{ name: "Manilla file", prices: { ct: 0, dz: 8500, pc: 1500 } },
-{ name: "Spring file", prices: { ct: 335000, dz: 15000, pc: 2000 } },
-{ name: "Flat File", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Box file ndogo/Ring binder", prices: { ct: 80000, dz: 26400, pc: 3000 } },
-{ name: "Box file kubwa", prices: { ct: 130000, dz: 36000, pc: 3500 } },
-{ name: "Amigo Box File", prices: { ct: 125000, dz: 30000, pc: 3500 } },
-{ name: "Punch Pocket/protective sheets", prices: { ct: 8000, dz: 10000, pc: 0 } },
-{ name: "Clear Book", prices: { ct: 0, dz: 0, pc: 13000 } },
-{ name: "Clearbag", prices: { ct: 0, dz: 4500, pc: 1000 } },
-{ name: "Clearbag ngumu", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Clipboard", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Plastic clipboard", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Clipboard Rangi", prices: { ct: 0, dz: 0, pc: 2500 } },
-{ name: "Portifolio", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Office tray 4", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Office tray 3", prices: { ct: 0, dz: 18000, pc: 23000 } },
-{ name: "Desktop magazine files", prices: { ct: 130000, dz: 15000, pc: 18000 } },
-{ name: "Office Folder PVC", prices: { ct: 0, dz: 40000, pc: 5000 } },
-{ name: "Gluestick Dr. Pepper", prices: { ct: 0, dz: 17000, pc: 2000 } },
-{ name: "Gluestick kubwa Njano", prices: { ct: 0, dz: 10000, pc: 2000 } },
-{ name: "Gluestick MG 36gm", prices: { ct: 0, dz: 12000, pc: 2000 } },
-{ name: "Gluestick MG 9gm", prices: { ct: 0, dz: 5000, pc: 500 } },
-{ name: "Gluestick MG 15gm", prices: { ct: 0, dz: 6500, pc: 1000 } },
-{ name: "Gluestick MG 21gm", prices: { ct: 0, dz: 7000, pc: 1500 } },
-{ name: "Gundi ya maji 90gm", prices: { ct: 23000, dz: 8000, pc: 1000 } },
-{ name: "Gundi ya maji 160gm", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Gundi ya maji 1 litre", prices: { ct: 0, dz: 42000, pc: 4500 } },
-{ name: "ID Kioo Full", prices: { ct: 0, dz: 26000, pc: 3000 } },
-{ name: "ID Kuvuta", prices: { ct: 0, dz: 22000, pc: 3000 } },
-{ name: "ID Ngumu bila kamba", prices: { ct: 0, dz: 10000, pc: 2000 } },
-{ name: "ID", prices: { ct: 45000, dz: 6000, pc: 1000 } },
-{ name: "Kamba Kuvuta", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Kamba/ID", prices: { ct: 24000, dz: 3500, pc: 500 } },
-{ name: "ID Kioo Bila Kamba", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "ID B4 (bila kamba)", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Kamba ID Pana", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "ID plastic (bila kamba)", prices: { ct: 18000, dz: 5500, pc: 1000 } },
-{ name: "Kamba ID Flash", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "ID B7/A7 (bila kamba)", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Name Badge (pc 10)", prices: { ct: 0, dz: 1200, pc: 1500 } },
-{ name: "Vitambulisho(nembo)", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "PVC BusinessCard", prices: { ct: 0, dz: 60000, pc: 500 } },
-{ name: "Leather card bag", prices: { ct: 0, dz: 26000, pc: 3000 } },
-{ name: "Plastic card bag", prices: { ct: 0, dz: 26000, pc: 3000 } },
-{ name: "Passport Holder", prices: { ct: 0, dz: 34000, pc: 5000 } },
-{ name: "Cheap Passport Holder", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Cheap Leather Card Bag/card book", prices: { ct: 0, dz: 10000, pc: 1000 } },
-{ name: "Cheap Leather card bag Kifungo", prices: { ct: 0, dz: 14000, pc: 2000 } },
-{ name: "Vitambulisho (Nembo) Nyeupe", prices: { ct: 0, dz: 8000, pc: 1500 } },
-{ name: "Lamination ID", prices: { ct: 0, dz: 7000, pc: 300 } },
-{ name: "Lamination A4", prices: { ct: 0, dz: 15000, pc: 500 } },
-{ name: "Lamination A3", prices: { ct: 0, dz: 40000, pc: 700 } },
-{ name: "Lamination A5", prices: { ct: 0, dz: 10000, pc: 10000 } },
-{ name: "Lamination Machine", prices: { ct: 105000, dz: 0, pc: 110000 } },
-{ name: "Mkasi 215", prices: { ct: 0, dz: 23000, pc: 2500 } },
-{ name: "Mkasi mkubwa", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Mkasi Kati", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Mkasi Mdogo", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Kisu kikubwa", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Kisu", prices: { ct: 0, dz: 3000, pc: 500 } },
-{ name: "Nail cutter", prices: { ct: 0, dz: 7500, pc: 1000 } },
-{ name: "Nail cutter ndogo", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Keyholder", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Keyholder torch", prices: { ct: 0, dz: 9000, pc: 1000 } },
-{ name: "Keyholder transparent", prices: { ct: 0, dz: 5000, pc: 1000 } },
-{ name: "Keyholder Light", prices: { ct: 0, dz: 0, pc: 2000 } },
-{ name: "Binding spring 8mm", prices: { ct: 0, dz: 8000, pc: 100 } },
-{ name: "Binding Spring 10mm", prices: { ct: 0, dz: 10000, pc: 100 } },
-{ name: "Binding Spring 12mm", prices: { ct: 0, dz: 12000, pc: 300 } },
-{ name: "Binding Spring 14mm", prices: { ct: 0, dz: 14000, pc: 400 } },
-{ name: "Binding Spring 18mm", prices: { ct: 0, dz: 18000, pc: 500 } },
-{ name: "Binding Spring 22mm", prices: { ct: 0, dz: 22000, pc: 600 } },
-{ name: "Binding Spring 28mm", prices: { ct: 0, dz: 28000, pc: 700 } },
-{ name: "Binding Spring 32mm", prices: { ct: 0, dz: 32000, pc: 800 } },
-{ name: "Binder clips 32mm", prices: { ct: 0, dz: 18000, pc: 2500 } },
-{ name: "Scientific Calc 991", prices: { ct: 18000, dz: 20000, pc: 25000 } },
-{ name: "Scientific Calc 991MS 2nd", prices: { ct: 0, dz: 25000, pc: 30000 } },
-{ name: "Scientific Calc 991ES+", prices: { ct: 0, dz: 30000, pc: 35000 } },
-{ name: "Citizen CT512", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Citizen CT 980/3814/140", prices: { ct: 0, dz: 0, pc: 12000 } },
-{ name: "Citizen CT 2124", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Citizen CT 914 / CT 9200N", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Citizen CT 112 Kioo", prices: { ct: 0, dz: 12000, pc: 15000 } },
-{ name: "Citizen CT 912", prices: { ct: 0, dz: 8000, pc: 8000 } },
-{ name: "Enko calc 568A", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Stopwatch", prices: { ct: 0, dz: 10000, pc: 12000 } },
-{ name: "Betri Sony kubwa", prices: { ct: 78000, dz: 22000, pc: 2000 } },
-{ name: "Betri Sony Ndogo", prices: { ct: 78000, dz: 22000, pc: 2000 } },
-{ name: "Flash 8GB Chuma", prices: { ct: 0, dz: 9000, pc: 10000 } },
-{ name: "Flash 16GB Sandisk", prices: { ct: 0, dz: 10000, pc: 15000 } },
-{ name: "Flash 32GB Sandisk", prices: { ct: 0, dz: 11000, pc: 18000 } },
-{ name: "USB", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Dissecting set", prices: { ct: 0, dz: 20000, pc: 25000 } },
-{ name: "Paper Cutter", prices: { ct: 38000, dz: 40000, pc: 45000 } },
-{ name: "Passport Cutter", prices: { ct: 0, dz: 0, pc: 85000 } },
-{ name: "Business cutter", prices: { ct: 0, dz: 0, pc: 90000 } },
-{ name: "Paper Fastener Plastic", prices: { ct: 0, dz: 3000, pc: 0 } },
-{ name: "Paper Fastener Plastic box", prices: { ct: 0, dz: 4000, pc: 0 } },
-{ name: "Index Separator Jan-Dec", prices: { ct: 0, dz: 5000, pc: 0 } },
-{ name: "Index Separator 1-10/A-XX", prices: { ct: 0, dz: 4000, pc: 0 } },
-{ name: "Self-Inking Stamp Round", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Self-Inking Stamp Square", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Self-Inking Stamp with Date", prices: { ct: 0, dz: 25000, pc: 30000 } },
-{ name: "Numbering Machine 8 Digits", prices: { ct: 0, dz: 30000, pc: 35000 } },
-{ name: "Flash 8GB SanDIsk", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Photocopy Machine Drums", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Photocopy Cleaner Films", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Key Holder Opener/Color/Boya", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Flash 4GB SanDIsk", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Transparent Opener", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Charger", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Charger Type C", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Citizen CT 2812", prices: { ct: 0, dz: 3800, pc: 5000 } },
-{ name: "Citizen CT 9600G", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Citizen CT 9300G", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Calculator Kenko", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Binding machine 25 sheets", prices: { ct: 125000, dz: 0, pc: 150000 } },
-{ name: "Glue gun Ndogo", prices: { ct: 0, dz: 0, pc: 18000 } },
-{ name: "Gundi za Glue gun", prices: { ct: 0, dz: 6000, pc: 500 } },
-{ name: "Glue Gun Kubwa", prices: { ct: 0, dz: 0, pc: 20000 } },
-{ name: "Penesamig Battery AA ndogo", prices: { ct: 0, dz: 4500, pc: 4500 } },
-{ name: "kufuri size 25mm", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Padlock 25mm/kufuri njano", prices: { ct: 0, dz: 7000, pc: 2000 } },
-{ name: "Battery Penesamig AA / Kubwa", prices: { ct: 0, dz: 7000, pc: 0 } },
-{ name: "M&G Scientific Calculator", prices: { ct: 0, dz: 18000, pc: 25000 } },
-{ name: "Punch Kangaroo DP600", prices: { ct: 0, dz: 5500, pc: 8000 } },
-{ name: "Punch DL8230", prices: { ct: 0, dz: 27600, pc: 3000 } },
-{ name: "Stapler DL 1034", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Stapler DL 207", prices: { ct: 0, dz: 27000, pc: 3000 } },
-{ name: "Stapler DL 335", prices: { ct: 0, dz: 36000, pc: 4500 } },
-{ name: "Stapler YZW 307", prices: { ct: 0, dz: 0, pc: 4500 } },
-{ name: "Stapler Kangaroo Nowa35", prices: { ct: 0, dz: 0, pc: 6000 } },
-{ name: "Stapler Heavy Duty MG", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Stapler Heavy Duty DL 0531", prices: { ct: 35000, dz: 38000, pc: 45000 } },
-{ name: "Stapler Kangaroo DS210", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Stapler Kangaroo Nowa335", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Stapler Kangaroo DS 45NR", prices: { ct: 0, dz: 5500, pc: 8000 } },
-{ name: "Staple pins China", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Staple pins 23/15", prices: { ct: 0, dz: 0, pc: 2500 } },
-{ name: "Staple pin 23/8", prices: { ct: 0, dz: 0, pc: 2500 } },
-{ name: "Staplepins Extra Heavy", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Staplepins Kangaroo", prices: { ct: 155000, dz: 13000, pc: 1000 } },
-{ name: "Staple Pins 23/10", prices: { ct: 195000, dz: 14000, pc: 2500 } },
-{ name: "Stapler MGS-11", prices: { ct: 0, dz: 48000, pc: 5000 } },
-{ name: "Stapler MG 360", prices: { ct: 0, dz: 6500, pc: 8000 } },
-{ name: "Stapler Kitabu", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Bafan Staplepins", prices: { ct: 6000, dz: 3000, pc: 500 } },
-{ name: "Staple pins 23/13", prices: { ct: 0, dz: 1800, pc: 2500 } },
-{ name: "Manila A4", prices: { ct: 110000, dz: 6000, pc: 200 } },
-{ name: "Manilla Vyeti", prices: { ct: 0, dz: 9000, pc: 200 } },
-{ name: "Manila sheet", prices: { ct: 55000, dz: 7000, pc: 1000 } },
-{ name: "Manilla Sheet ngumu", prices: { ct: 65000, dz: 7000, pc: 1000 } },
-{ name: "Maputo Love Nyeupe", prices: { ct: 10000, dz: 6000, pc: 200 } },
-{ name: "Ribbon", prices: { ct: 0, dz: 39600, pc: 3500 } },
-{ name: "Ribbon Kuvuta Kubwa", prices: { ct: 0, dz: 3000, pc: 1000 } },
-{ name: "Ribbon Kuvuta Ndogo", prices: { ct: 0, dz: 2000, pc: 1000 } },
-{ name: "Frame za picha A3", prices: { ct: 0, dz: 8000, pc: 12000 } },
-{ name: "Frame A4", prices: { ct: 0, dz: 48000, pc: 6000 } },
-{ name: "Frame A4 B", prices: { ct: 130000, dz: 36000, pc: 4000 } },
-{ name: "Frame 6 x 8", prices: { ct: 0, dz: 30000, pc: 3500 } },
-{ name: "Frame A6", prices: { ct: 0, dz: 0, pc: 3500 } },
-{ name: "Album", prices: { ct: 0, dz: 0, pc: 7000 } },
-{ name: "Party popper/Fataki (50 cm)", prices: { ct: 305000, dz: 42000, pc: 5000 } },
-{ name: "Party Popper (30cm)", prices: { ct: 0, dz: 30000, pc: 4000 } },
-{ name: "Mishumaa mikubwa", prices: { ct: 0, dz: 27000, pc: 3000 } },
-{ name: "mishumaa midogo", prices: { ct: 0, dz: 14000, pc: 2500 } },
-{ name: "Mishumaa namba", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Discotape Mishumaa Kubwa", prices: { ct: 0, dz: 8000, pc: 1200 } },
-{ name: "Discotape mishumaa Kati", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Discotape mishumaa ndogo", prices: { ct: 0, dz: 4000, pc: 500 } },
-{ name: "Snow Spray", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Mask", prices: { ct: 0, dz: 3500, pc: 500 } },
-{ name: "Bendera", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Maputo makubwa", prices: { ct: 0, dz: 10000, pc: 1000 } },
-{ name: "Maputo ya namba", prices: { ct: 0, dz: 18000, pc: 3000 } },
-{ name: "Maputo A", prices: { ct: 0, dz: 3500, pc: 100 } },
-{ name: "Maputo B", prices: { ct: 9000, dz: 5000, pc: 200 } },
-{ name: "Maputo Set", prices: { ct: 0, dz: 0, pc: 18000 } },
-{ name: "Pump ya Maputo", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Balloon Glue", prices: { ct: 20000, dz: 9000, pc: 1500 } },
-{ name: "Kofia kubwa urembo", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Kofia ndogo urembo", prices: { ct: 0, dz: 12000, pc: 1500 } },
-{ name: "Kofia Plain Mpya", prices: { ct: 0, dz: 12000, pc: 1500 } },
-{ name: "Kofia ndogo", prices: { ct: 0, dz: 3500, pc: 500 } },
-{ name: "Kofia Kubwa", prices: { ct: 0, dz: 4500, pc: 1000 } },
-{ name: "Kofia Kubwa Christmas", prices: { ct: 0, dz: 0, pc: 1500 } },
-{ name: "Kofia Mng'ao", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Kofia Namba", prices: { ct: 0, dz: 18000, pc: 2500 } },
-{ name: "Birthday Crown", prices: { ct: 0, dz: 30000, pc: 3000 } },
-{ name: "Disco tape", prices: { ct: 12000, dz: 2500, pc: 500 } },
-{ name: "Nyembe", prices: { ct: 200, dz: 4000, pc: 500 } },
-{ name: "Mkanda Graduation/Bday", prices: { ct: 0, dz: 28000, pc: 5000 } },
-{ name: "Box zawadi", prices: { ct: 0, dz: 700, pc: 1000 } },
-{ name: "Gift Paper", prices: { ct: 0, dz: 9000, pc: 300 } },
-{ name: "Gift Paper Maua", prices: { ct: 0, dz: 7000, pc: 300 } },
-{ name: "Gift Paper Ngumu", prices: { ct: 0, dz: 15000, pc: 1000 } },
-{ name: "Gift bag Nyepesi", prices: { ct: 0, dz: 15000, pc: 1500 } },
-{ name: "Gift bag", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Gift Bag Wine", prices: { ct: 0, dz: 20000, pc: 2500 } },
-{ name: "Gift bag ndogo A5", prices: { ct: 0, dz: 14000, pc: 1500 } },
-{ name: "Gift Bag A3", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Gift Bag Christmas", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Gift Bag Birthday", prices: { ct: 0, dz: 12000, pc: 1500 } },
-{ name: "Gift Bag A6", prices: { ct: 0, dz: 9000, pc: 1000 } },
-{ name: "Gift Bag A2", prices: { ct: 0, dz: 40000, pc: 4000 } },
-{ name: "Gift Box 7x7x7", prices: { ct: 0, dz: 0, pc: 2000 } },
-{ name: "Gift Box 10x10x10", prices: { ct: 0, dz: 30000, pc: 4000 } },
-{ name: "Gift Box 15x15x15", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "Gift Box 20x20x20", prices: { ct: 0, dz: 48000, pc: 6000 } },
-{ name: "Box Transparent kubwa", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "Box Transparent kati", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Box transparent ndogo", prices: { ct: 0, dz: 28000, pc: 3000 } },
-{ name: "Sticky Hooks Kubwa12", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "Sticky Hooks", prices: { ct: 0, dz: 36000, pc: 3500 } },
-{ name: "Mataji shanga", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Graduation Taji Moyo", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Birthday Banner", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Birthday Cards", prices: { ct: 0, dz: 5500, pc: 1000 } },
-{ name: "Wallpaper", prices: { ct: 0, dz: 26400, pc: 3500 } },
-{ name: "Party popper kubwa (60cm)", prices: { ct: 225000, dz: 4800, pc: 7000 } },
-{ name: "Party popper ndogo (40cm)", prices: { ct: 275000, dz: 3200, pc: 5000 } },
-{ name: "mataji manyoya", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Mapambo Ndogo Christmas", prices: { ct: 0, dz: 1200, pc: 1500 } },
-{ name: "Balls Kubwa Christmas", prices: { ct: 0, dz: 6500, pc: 7500 } },
-{ name: "Christmas Balls White", prices: { ct: 0, dz: 3000, pc: 3500 } },
-{ name: "Christmas Balls Kubwa Colored", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Mataji Christmas", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Nyota Ndogo", prices: { ct: 0, dz: 12000, pc: 1000 } },
-{ name: "Nyota Kati", prices: { ct: 0, dz: 19000, pc: 2000 } },
-{ name: "Nyota Kubwa", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Christmas Crown", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Kipepo Fan", prices: { ct: 0, dz: 28000, pc: 3000 } },
-{ name: "Album 40pgs", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Xmas Tree 4FT", prices: { ct: 0, dz: 35000, pc: 45000 } },
-{ name: "Xmas Tree 5FT", prices: { ct: 0, dz: 50000, pc: 60000 } },
-{ name: "Xmas Tree 6FT", prices: { ct: 0, dz: 80000, pc: 90000 } },
-{ name: "Xmas Tree 7FT", prices: { ct: 0, dz: 105000, pc: 120000 } },
-{ name: "Miwani Birthday", prices: { ct: 0, dz: 20000, pc: 2000 } },
-{ name: "Christmass light ndogo", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Christmas Light 10m", prices: { ct: 0, dz: 6500, pc: 8000 } },
-{ name: "Maua Rose", prices: { ct: 0, dz: 4000, pc: 4000 } },
-{ name: "Christmas Light 50m", prices: { ct: 0, dz: 0, pc: 45000 } },
-{ name: "Maua Rose Kati", prices: { ct: 0, dz: 10000, pc: 0 } },
-{ name: "Maua Rose Kubwa", prices: { ct: 20000, dz: 0, pc: 0 } },
-{ name: "Maua Rose Koni", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Maua Rose Koni Kubwa", prices: { ct: 0, dz: 22000, pc: 3000 } },
-{ name: "Maua rose kati kutengeneza", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Maua rose kubwa kutengeneza", prices: { ct: 0, dz: 0, pc: 20000 } },
-{ name: "Maua Majani", prices: { ct: 0, dz: 17000, pc: 2000 } },
-{ name: "Mataji ribbon kitambaa", prices: { ct: 25000, dz: 8000, pc: 1000 } },
-{ name: "Maputo Snake", prices: { ct: 0, dz: 10000, pc: 200 } },
-{ name: "Ribbon Kitambaa", prices: { ct: 0, dz: 12500, pc: 3000 } },
-{ name: "Crown Love", prices: { ct: 0, dz: 2000, pc: 3000 } },
-{ name: "Crown Bend", prices: { ct: 0, dz: 2000, pc: 3000 } },
-{ name: "Crown Party", prices: { ct: 0, dz: 5000, pc: 5000 } },
-{ name: "Birthday Banner Plain", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Birthday Crown Taa", prices: { ct: 0, dz: 22000, pc: 3000 } },
-{ name: "Maputo Set Wanyama", prices: { ct: 0, dz: 18000, pc: 20000 } },
-{ name: "Maputo Stand", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "CARD A6 BIRTHDAY", prices: { ct: 0, dz: 5500, pc: 1000 } },
-{ name: "CARD A6 CONGRATULATIONS", prices: { ct: 0, dz: 5500, pc: 1000 } },
-{ name: "CARD A6  BEST WISHES", prices: { ct: 0, dz: 5500, pc: 1000 } },
-{ name: "CARD A5 BIRTHDAY", prices: { ct: 0, dz: 6500, pc: 1500 } },
-{ name: "CARD A5 CONGRATULATIONS", prices: { ct: 0, dz: 6500, pc: 1500 } },
-{ name: "CARD A5 BEST WISHES", prices: { ct: 0, dz: 6500, pc: 1500 } },
-{ name: "CARD A4 BIRTHDAY", prices: { ct: 0, dz: 6500, pc: 2500 } },
-{ name: "CARD A4 BEST WISHES", prices: { ct: 0, dz: 20000, pc: 2500 } },
-{ name: "CARD A4 CONGRATULATIONS", prices: { ct: 0, dz: 20000, pc: 2500 } },
-{ name: "Kadi za Harusi 28", prices: { ct: 0, dz: 28000, pc: 500 } },
-{ name: "Kadi za Harusi 25", prices: { ct: 0, dz: 25000, pc: 500 } },
-{ name: "Kadi ya Harusi 13", prices: { ct: 0, dz: 13000, pc: 500 } },
-{ name: "Kadi ya Harusi 20", prices: { ct: 0, dz: 20000, pc: 500 } },
-{ name: "Kadi Harusi 30", prices: { ct: 0, dz: 30000, pc: 0 } },
-{ name: "Valentine", prices: { ct: 0, dz: 150000, pc: 2500 } },
-{ name: "Mbao love ndogo", prices: { ct: 0, dz: 75000, pc: 1000 } },
-{ name: "Mbao butterfly ndogo", prices: { ct: 0, dz: 75000, pc: 1000 } },
-{ name: "Mbao love kifungo", prices: { ct: 0, dz: 120000, pc: 1800 } },
-{ name: "Mbao 2love nyeupe", prices: { ct: 0, dz: 120000, pc: 1800 } },
-{ name: "Mbao love nyeupe", prices: { ct: 0, dz: 120000, pc: 1800 } },
-{ name: "Kamba Kadi", prices: { ct: 10000, dz: 0, pc: 300 } },
-{ name: "Label Kamati", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Mataji Christmas Green", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Christmas Banner", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Christmass Balls", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Christmas Taji Round", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Maputo ya Mirija", prices: { ct: 0, dz: 11000, pc: 0 } },
-{ name: "Maputo Filimbi", prices: { ct: 0, dz: 3000, pc: 0 } },
-{ name: "Office pins", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Thumb tucks", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Paperclips", prices: { ct: 0, dz: 3500, pc: 1000 } },
-{ name: "Pushpins", prices: { ct: 0, dz: 6500, pc: 1000 } },
-{ name: "Money sponge", prices: { ct: 0, dz: 10000, pc: 1000 } },
-{ name: "Superglue", prices: { ct: 0, dz: 3000, pc: 500 } },
-{ name: "Pen Holder", prices: { ct: 0, dz: 2000, pc: 3000 } },
-{ name: "Office Dustbin", prices: { ct: 0, dz: 0, pc: 12000 } },
-{ name: "Wino wa muhuri", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Mkebe wa muhuri/stamp pad", prices: { ct: 0, dz: 12000, pc: 1500 } },
-{ name: "Stamp Pad Kubwa No.2", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Rubberband Nyepesi", prices: { ct: 40000, dz: 1200, pc: 0 } },
-{ name: "Rubberband Ngumu", prices: { ct: 60000, dz: 2000, pc: 0 } },
-{ name: "duster plastic", prices: { ct: 0, dz: 13000, pc: 1500 } },
-{ name: "dusterMbao", prices: { ct: 0, dz: 16000, pc: 2000 } },
-{ name: "Chaki white", prices: { ct: 28000, dz: 12000, pc: 1500 } },
-{ name: "Chaki colored", prices: { ct: 45000, dz: 2500, pc: 2500 } },
-{ name: "Greentags", prices: { ct: 44000, dz: 800, pc: 1000 } },
-{ name: "Whiteboard duster", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Doms Chaki", prices: { ct: 160000, dz: 12000, pc: 1500 } },
-{ name: "Kaida", prices: { ct: 118000, dz: 12000, pc: 1500 } },
-{ name: "Oxford/Marshal", prices: { ct: 192000, dz: 18000, pc: 2000 } },
-{ name: "Marshal Orange", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "M&G Kaida Mkebe", prices: { ct: 0, dz: 20000, pc: 2500 } },
-{ name: "Mkebe Set", prices: { ct: 0, dz: 3000, pc: 4000 } },
-{ name: "DOMS Mkebe", prices: { ct: 330000, dz: 42000, pc: 5000 } },
-{ name: "Mkebe kichongeo", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Nataraj Mkebe Precise", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "M&G All in One Mkebe", prices: { ct: 0, dz: 40000, pc: 6000 } },
-{ name: "Nataraj Mkebe", prices: { ct: 480000, dz: 60000, pc: 7000 } },
-{ name: "Mkebe urembo Mgumu", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Mkebe Urembo", prices: { ct: 0, dz: 0, pc: 7000 } },
-{ name: "Mkebe saa", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Smile Mkebe set", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Writing Pad", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Writingpad spiral", prices: { ct: 0, dz: 20000, pc: 2500 } },
-{ name: "Shorthand 70", prices: { ct: 110000, dz: 8000, pc: 1000 } },
-{ name: "Leon Shorthand", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Shorthand ndogo", prices: { ct: 0, dz: 3500, pc: 500 } },
-{ name: "Hardcover 400", prices: { ct: 0, dz: 45000, pc: 5000 } },
-{ name: "Hardcover 200pg", prices: { ct: 221000, dz: 30000, pc: 3000 } },
-{ name: "Diary Executive New", prices: { ct: 8000, dz: 10000, pc: 12000 } },
-{ name: "Notebook B5", prices: { ct: 0, dz: 52000, pc: 6500 } },
-{ name: "Notebook A5", prices: { ct: 0, dz: 40000, pc: 4000 } },
-{ name: "Notebook A6", prices: { ct: 0, dz: 23000, pc: 2500 } },
-{ name: "Notebook Mbao ndogo", prices: { ct: 0, dz: 54000, pc: 5000 } },
-{ name: "Notebook Mbao Coffee", prices: { ct: 0, dz: 4500, pc: 5000 } },
-{ name: "Notebook Mbao", prices: { ct: 0, dz: 5500, pc: 7500 } },
-{ name: "Notebook Diary 48K", prices: { ct: 0, dz: 30000, pc: 3500 } },
-{ name: "Notebook Diary A6", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "Notebook Diary 2025", prices: { ct: 0, dz: 4200, pc: 5000 } },
-{ name: "Notebook Diary Kifungo A6", prices: { ct: 0, dz: 4500, pc: 6000 } },
-{ name: "Notebook Diary", prices: { ct: 0, dz: 4500, pc: 7000 } },
-{ name: "Notebook Spiral", prices: { ct: 0, dz: 6500, pc: 8000 } },
-{ name: "Notebook Diary Nene/25K", prices: { ct: 0, dz: 6500, pc: 8000 } },
-{ name: "Notebook Diary 2025 Sumaku", prices: { ct: 0, dz: 8000, pc: 8000 } },
-{ name: "Notebook Wallet/Mfuko", prices: { ct: 0, dz: 8000, pc: 9000 } },
-{ name: "Notebook Diary Calculator", prices: { ct: 0, dz: 8500, pc: 10000 } },
-{ name: "100K", prices: { ct: 315000, dz: 9000, pc: 1000 } },
-{ name: "60K", prices: { ct: 315000, dz: 17000, pc: 1500 } },
-{ name: "48K", prices: { ct: 335000, dz: 18000, pc: 2500 } },
-{ name: "36K", prices: { ct: 335000, dz: 20000, pc: 3000 } },
-{ name: "32K", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Notebook Diary A6 Pen", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Kiwi brush", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "cotton buds plastic", prices: { ct: 0, dz: 4500, pc: 500 } },
-{ name: "cotton buds mbao", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Toothpick kubwa", prices: { ct: 0, dz: 4000, pc: 500 } },
-{ name: "Toothpick ndogo", prices: { ct: 0, dz: 3000, pc: 500 } },
-{ name: "Mwamvuli Mkubwa", prices: { ct: 0, dz: 10000, pc: 12000 } },
-{ name: "Mwamvuli Mdogo", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Alshabab", prices: { ct: 0, dz: 5000, pc: 1000 } },
-{ name: "Simply", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Airfresh Wicker", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "KAI HONG 32MM", prices: { ct: 0, dz: 10000, pc: 2000 } },
-{ name: "Mwamvuli Kati", prices: { ct: 0, dz: 12000, pc: 15000 } },
-{ name: "RainCoat Ndogo", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Mosquito repellent", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "blue ya nguo", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "Dodoki", prices: { ct: 0, dz: 54000, pc: 5000 } },
-{ name: "Urembo Pini", prices: { ct: 0, dz: 1500, pc: 2000 } },
-{ name: "Mwamvuli Draft", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Rola za Mashine 57/40", prices: { ct: 240000, dz: 9000, pc: 1500 } },
-{ name: "Rola za mashine 57/50", prices: { ct: 360000, dz: 12000, pc: 2000 } },
-{ name: "Rola Sheli", prices: { ct: 0, dz: 20000, pc: 5000 } },
-{ name: "Rola Sheli plain", prices: { ct: 0, dz: 20000, pc: 5000 } },
-{ name: "Flipchart", prices: { ct: 60000, dz: 7000, pc: 7000 } },
-{ name: "Legal paper", prices: { ct: 0, dz: 10000, pc: 300 } },
-{ name: "Legal paper zamani", prices: { ct: 0, dz: 8000, pc: 500 } },
-{ name: "Carbon paper", prices: { ct: 0, dz: 4000, pc: 200 } },
-{ name: "Colored paper", prices: { ct: 0, dz: 4000, pc: 0 } },
-{ name: "Rim Mondi", prices: { ct: 49000, dz: 11000, pc: 50 } },
-{ name: "Rim Aone", prices: { ct: 52000, dz: 12000, pc: 50 } },
-{ name: "Rim Color Paper", prices: { ct: 62000, dz: 15000, pc: 0 } },
-{ name: "Rim A3", prices: { ct: 150000, dz: 35000, pc: 300 } },
-{ name: "Ruled paper", prices: { ct: 160000, dz: 12000, pc: 50 } },
-{ name: "Graphpaper(Royal)", prices: { ct: 0, dz: 17000, pc: 2000 } },
-{ name: "Graphpaper(Bongo)", prices: { ct: 0, dz: 13000, pc: 2000 } },
-{ name: "Transparent Colorless", prices: { ct: 0, dz: 9000, pc: 200 } },
-{ name: "Transparent Colored", prices: { ct: 0, dz: 10000, pc: 0 } },
-{ name: "A3 Transparent", prices: { ct: 250000, dz: 23000, pc: 23000 } },
-{ name: "Jarada", prices: { ct: 64000, dz: 7000, pc: 200 } },
-{ name: "Orange Jarada", prices: { ct: 0, dz: 23500, pc: 2500 } },
-{ name: "Legal paper gsm", prices: { ct: 0, dz: 13000, pc: 300 } },
-{ name: "Carbonised paper", prices: { ct: 0, dz: 11000, pc: 0 } },
-{ name: "Rola za Mashine 57/40 plain", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Rola za mashine 57/50 plain", prices: { ct: 360000, dz: 12000, pc: 1500 } },
-{ name: "Rola za Mashine 57/40 Fivestar", prices: { ct: 90000, dz: 10000, pc: 1500 } },
-{ name: "Rola za Mashine 57/50 Fivestar", prices: { ct: 110000, dz: 15000, pc: 2000 } },
-{ name: "HB kawaida", prices: { ct: 8000, dz: 1000, pc: 100 } },
-{ name: "Nataraj HB", prices: { ct: 27000, dz: 2500, pc: 300 } },
-{ name: "HB DOMS/LEON", prices: { ct: 25000, dz: 2500, pc: 300 } },
-{ name: "Nataraj Space Kids Pencil HB", prices: { ct: 45000, dz: 5000, pc: 0 } },
-{ name: "M&G HB pencil", prices: { ct: 18000, dz: 2000, pc: 0 } },
-{ name: "Nataraj Mchina", prices: { ct: 0, dz: 15000, pc: 1500 } },
-{ name: "Pencil Mfuko", prices: { ct: 90000, dz: 4000, pc: 0 } },
-{ name: "M&G Shunshou", prices: { ct: 18000, dz: 2000, pc: 0 } },
-{ name: "WisDOM Gloss", prices: { ct: 28000, dz: 3000, pc: 500 } },
-{ name: "Drawing Pencils", prices: { ct: 30000, dz: 3000, pc: 0 } },
-{ name: "Pencil Mkasi", prices: { ct: 0, dz: 48000, pc: 5000 } },
-{ name: "Pencil Wooden", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Mechanical Pencil", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Mechanical Pencil Risasi", prices: { ct: 0, dz: 5000, pc: 700 } },
-{ name: "colored pencil ndefu", prices: { ct: 9000, dz: 9000, pc: 1000 } },
-{ name: "colored pencil fupi", prices: { ct: 0, dz: 5000, pc: 500 } },
-{ name: "crayons", prices: { ct: 118000, dz: 6000, pc: 800 } },
-{ name: "DOMS color Pencils Fupi (10)", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Nataraj crayons", prices: { ct: 0, dz: 38000, pc: 4000 } },
-{ name: "Doms Crayon", prices: { ct: 0, dz: 25000, pc: 2500 } },
-{ name: "Doms Colour Pencils", prices: { ct: 0, dz: 28000, pc: 3000 } },
-{ name: "Colored Nataraj", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Water Color", prices: { ct: 0, dz: 24000, pc: 2500 } },
-{ name: "Pencil kikopo", prices: { ct: 0, dz: 50400, pc: 5000 } },
-{ name: "Wisdom Pencil kopo", prices: { ct: 205000, dz: 8500, pc: 500 } },
-{ name: "Doms water color", prices: { ct: 315000, dz: 30000, pc: 3500 } },
-{ name: "Doms Crayon Jumbo", prices: { ct: 0, dz: 27000, pc: 4000 } },
-{ name: "Markerpen Delta", prices: { ct: 22000, dz: 2500, pc: 500 } },
-{ name: "Markerpen permanent", prices: { ct: 183000, dz: 2000, pc: 500 } },
-{ name: "Gold Markerpen", prices: { ct: 212000, dz: 2500, pc: 500 } },
-{ name: "CD Marker", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "White Board Marker", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Obama Pen Blue", prices: { ct: 80000, dz: 4500, pc: 200 } },
-{ name: "Obama Black", prices: { ct: 80000, dz: 4500, pc: 200 } },
-{ name: "Obama Red", prices: { ct: 80000, dz: 4500, pc: 200 } },
-{ name: "Nataraj Blue mchina", prices: { ct: 680000, dz: 10000, pc: 500 } },
-{ name: "Nataraj Blue", prices: { ct: 288000, dz: 13000, pc: 500 } },
-{ name: "Nataraj Black", prices: { ct: 288000, dz: 13000, pc: 500 } },
-{ name: "Nataraj Red", prices: { ct: 288000, dz: 12000, pc: 500 } },
-{ name: "Papersoft", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "DOMS pens", prices: { ct: 0, dz: 5000, pc: 500 } },
-{ name: "Pen GP2608", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Pen GP1068", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Pen GP558", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Pen GP3220", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Table Pen", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Pen Roller Tip", prices: { ct: 0, dz: 5000, pc: 1000 } },
-{ name: "Pen Roller Tip Black", prices: { ct: 0, dz: 5000, pc: 1000 } },
-{ name: "Pen Piano PG 227 Blue", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Pen Piano PG 227 Black", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Papersoft 2 Gel, bk, bl", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Pen eraser", prices: { ct: 32000, dz: 18000, pc: 2500 } },
-{ name: "Zuchu Cello", prices: { ct: 100000, dz: 5000, pc: 200 } },
-{ name: "Highliter", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Highlighter Package", prices: { ct: 0, dz: 30000, pc: 3000 } },
-{ name: "Correction fluid or pen", prices: { ct: 250000, dz: 8000, pc: 1000 } },
-{ name: "Pen Kikombe/ AA Pen", prices: { ct: 0, dz: 15000, pc: 500 } },
-{ name: "Cello Sleek", prices: { ct: 0, dz: 6000, pc: 300 } },
-{ name: "Cello Sleek Transparent", prices: { ct: 0, dz: 6500, pc: 300 } },
-{ name: "Pen Bomba 4", prices: { ct: 0, dz: 13000, pc: 1500 } },
-{ name: "Pen Mdoli", prices: { ct: 0, dz: 0, pc: 2000 } },
-{ name: "Jiandan erasable pen", prices: { ct: 54000, dz: 5000, pc: 500 } },
-{ name: "Peni Vertex karatasi", prices: { ct: 0, dz: 7000, pc: 300 } },
-{ name: "Peni mpya", prices: { ct: 0, dz: 5000, pc: 200 } },
-{ name: "Doms Pen Inxify", prices: { ct: 25000, dz: 3500, pc: 500 } },
-{ name: "Doms Pen Inxon", prices: { ct: 50000, dz: 6000, pc: 1000 } },
-{ name: "Piano Finetop", prices: { ct: 22000, dz: 6000, pc: 1000 } },
-{ name: "Piano PT 228/117/031", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Jingpin pen", prices: { ct: 0, dz: 0, pc: 1500 } },
-{ name: "Cat Pen", prices: { ct: 24000, dz: 8000, pc: 1000 } },
-{ name: "Amigo Dot.com", prices: { ct: 224000, dz: 10000, pc: 500 } },
-{ name: "M&G Gel Pen", prices: { ct: 0, dz: 8500, pc: 0 } },
-{ name: "Photo 5X7/ 5R", prices: { ct: 0, dz: 6000, pc: 6000 } },
-{ name: "Photo paper 115gm single side", prices: { ct: 0, dz: 7000, pc: 0 } },
-{ name: "Photo A4 nyeusi", prices: { ct: 0, dz: 4000, pc: 0 } },
-{ name: "photo A4 Single side 260gm", prices: { ct: 0, dz: 8000, pc: 0 } },
-{ name: "Photo A4 double side 260gm", prices: { ct: 0, dz: 8000, pc: 0 } },
-{ name: "Photo A4 double side 240gm", prices: { ct: 0, dz: 8000, pc: 0 } },
-{ name: "Sticker 140gms", prices: { ct: 0, dz: 8000, pc: 500 } },
-{ name: "Photo paper Double 115gm", prices: { ct: 6500, dz: 7000, pc: 1000 } },
-{ name: "Photopaper gm 180", prices: { ct: 0, dz: 7500, pc: 0 } },
-{ name: "Photo A4 double side 300gm", prices: { ct: 0, dz: 10000, pc: 0 } },
-{ name: "Photo paper 120gm", prices: { ct: 0, dz: 6000, pc: 0 } },
-{ name: "Espson Wino BLACK", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson MAGENTA", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson CYAN", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson YELLOW", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson LIGHT MAGENTA", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson LIGHT CYAN", prices: { ct: 18000, dz: 3000, pc: 3500 } },
-{ name: "Epson 103 black", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Epson 103 Magenta", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Epson 103 Cyan", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Epson 103 Yellow", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Epson machine", prices: { ct: 0, dz: 0, pc: 450000 } },
-{ name: "Wino 1kg Photocopy Machine", prices: { ct: 0, dz: 22000, pc: 25000 } },
-{ name: "Printer Epson 3210", prices: { ct: 0, dz: 0, pc: 500000 } },
-{ name: "Toner 500gm/nusu kilo", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Rula ndefu", prices: { ct: 110000, dz: 2500, pc: 500 } },
-{ name: "Rula DOMS", prices: { ct: 0, dz: 4500, pc: 1000 } },
-{ name: "Rula fupi", prices: { ct: 0, dz: 3000, pc: 500 } },
-{ name: "Ruler Flexible", prices: { ct: 0, dz: 15000, pc: 1500 } },
-{ name: "Ruler Aluminium", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Rula za Ubao/Mbao", prices: { ct: 410000, dz: 3500, pc: 5000 } },
-{ name: "Rula Pencil", prices: { ct: 0, dz: 11000, pc: 1500 } },
-{ name: "Typing", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Copy", prices: { ct: 0, dz: 0, pc: 100 } },
-{ name: "Copy Color", prices: { ct: 0, dz: 0, pc: 300 } },
-{ name: "Copy A3", prices: { ct: 0, dz: 0, pc: 300 } },
-{ name: "Copy No Power", prices: { ct: 0, dz: 0, pc: 300 } },
-{ name: "Copy No Power Color", prices: { ct: 0, dz: 0, pc: 500 } },
-{ name: "Print", prices: { ct: 0, dz: 0, pc: 500 } },
-{ name: "Print Color", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Print No Power", prices: { ct: 0, dz: 0, pc: 700 } },
-{ name: "Print A3", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Scan", prices: { ct: 0, dz: 0, pc: 500 } },
-{ name: "Salary Slip", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Loss Report", prices: { ct: 0, dz: 0, pc: 1500 } },
-{ name: "Ajira Portal", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Chuo", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Rita", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Binding Spiral- less page 25", prices: { ct: 0, dz: 0, pc: 1500 } },
-{ name: "Binding Spiral- more page 30", prices: { ct: 0, dz: 0, pc: 2000 } },
-{ name: "Binding Spiral- more 100", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Binding kutumia Tape", prices: { ct: 0, dz: 0, pc: 1500 } },
-{ name: "Kuweka Lamination", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Kufunga zawadi/gift wrapping", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "kuprint vipeperushi double", prices: { ct: 0, dz: 0, pc: 500 } },
-{ name: "Kupiga Passport", prices: { ct: 0, dz: 0, pc: 2000 } },
-{ name: "Kitabu Risiti A5 Carbonized", prices: { ct: 0, dz: 0, pc: 7000 } },
-{ name: "Kitabu Risiti A4 Kawaida", prices: { ct: 0, dz: 0, pc: 12000 } },
-{ name: "Kitabu Risiti A5 Kawaida", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Harusi Business card", prices: { ct: 300, dz: 250, pc: 150 } },
-{ name: "Kudarizi T-shirt (pamoja na Tshirt)", prices: { ct: 0, dz: 17000, pc: 20000 } },
-{ name: "Kudarizi T-shirt (Bila na Tshirt)", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Heat Press Sticker (Pamoja na Tshirt)", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Heat Press (Bila Tshirt)", prices: { ct: 0, dz: 3000, pc: 5000 } },
-{ name: "Vinyl Sticker", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Oneway Sticker", prices: { ct: 0, dz: 0, pc: 12000 } },
-{ name: "vitambulisho", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "Vitambulisho Shule", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "Sticky Notes 3x3", prices: { ct: 0, dz: 7000, pc: 1000 } },
-{ name: "Sticky Notes 3x4", prices: { ct: 0, dz: 8500, pc: 1500 } },
-{ name: "Sticky Notes 3x5", prices: { ct: 0, dz: 9500, pc: 2000 } },
-{ name: "Multicolored", prices: { ct: 0, dz: 3500, pc: 1000 } },
-{ name: "M&G Sticky Notes", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Binding Tape", prices: { ct: 195000, dz: 36000, pc: 3500 } },
-{ name: "brown tape kubwa", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Vin tape", prices: { ct: 0, dz: 5500, pc: 1000 } },
-{ name: "packaging tape ndogo", prices: { ct: 0, dz: 24000, pc: 3500 } },
-{ name: "packaging tape kati", prices: { ct: 205000, dz: 3500, pc: 5000 } },
-{ name: "packaging tape kubwa/YARD 300", prices: { ct: 0, dz: 6500, pc: 8000 } },
-{ name: "Tape 1 inch", prices: { ct: 90000, dz: 8000, pc: 1000 } },
-{ name: "Tape 1/2 inch", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Tape 2 inch 50 yards", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Masking tape 2inch/ 50 yds", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Masking tape 1inch/ 10yds", prices: { ct: 0, dz: 7500, pc: 1000 } },
-{ name: "Double Sided Tape", prices: { ct: 0, dz: 4200, pc: 5000 } },
-{ name: "Price tag kitabu", prices: { ct: 0, dz: 3000, pc: 500 } },
-{ name: "Price Sticker", prices: { ct: 0, dz: 2500, pc: 500 } },
-{ name: "Packaging Tape Kubwa Yard 1000", prices: { ct: 180000, dz: 15500, pc: 18000 } },
-{ name: "Packaging tape 7", prices: { ct: 0, dz: 4500, pc: 7000 } },
-{ name: "Sticker watoto", prices: { ct: 0, dz: 4500, pc: 1000 } },
-{ name: "Name Sticker", prices: { ct: 0, dz: 4000, pc: 1000 } },
-{ name: "Mpira", prices: { ct: 0, dz: 5000, pc: 7000 } },
-{ name: "Mpira No.2", prices: { ct: 0, dz: 42000, pc: 6500 } },
-{ name: "Ubao wa namba", prices: { ct: 0, dz: 0, pc: 9000 } },
-{ name: "Standing Ubao", prices: { ct: 0, dz: 0, pc: 85000 } },
-{ name: "Ubao mkubwa", prices: { ct: 0, dz: 8000, pc: 10000 } },
-{ name: "Ubao mdogo", prices: { ct: 0, dz: 32000, pc: 4000 } },
-{ name: "face/namba board", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Alphabet-mfuko", prices: { ct: 0, dz: 12000, pc: 15000 } },
-{ name: "Blocks", prices: { ct: 0, dz: 2300, pc: 3000 } },
-{ name: "blocks kubwa", prices: { ct: 0, dz: 0, pc: 18000 } },
-{ name: "lego", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "kihesabio kikubwa", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Kihesabio kati", prices: { ct: 0, dz: 2600, pc: 4000 } },
-{ name: "kihesabio kidogo", prices: { ct: 0, dz: 18000, pc: 2000 } },
-{ name: "Yang Magic Cube", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Magic Cube", prices: { ct: 0, dz: 4000, pc: 6000 } },
-{ name: "Magic Cube namba kubwa", prices: { ct: 0, dz: 20400, pc: 3000 } },
-{ name: "Magic Cube namba ndogo", prices: { ct: 0, dz: 12000, pc: 2000 } },
-{ name: "Udongo Kopo", prices: { ct: 0, dz: 0, pc: 3000 } },
-{ name: "Udongo Mfuko", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Namba chart", prices: { ct: 0, dz: 1500, pc: 2000 } },
-{ name: "Chart kubwa", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Foam book ndogo", prices: { ct: 0, dz: 1500, pc: 2000 } },
-{ name: "Foam Book Kubwa", prices: { ct: 0, dz: 2500, pc: 3000 } },
-{ name: "Laptop ndogo/ology", prices: { ct: 0, dz: 12000, pc: 15000 } },
-{ name: "Ipad/learning machine", prices: { ct: 0, dz: 15000, pc: 18000 } },
-{ name: "Miswaki Orange", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Miswaki watoto midoli", prices: { ct: 0, dz: 17000, pc: 2000 } },
-{ name: "Miswaki watoto box", prices: { ct: 0, dz: 9000, pc: 1000 } },
-{ name: "Miswaki Suree", prices: { ct: 0, dz: 23000, pc: 2000 } },
-{ name: "Puzzle animals", prices: { ct: 0, dz: 9000, pc: 1000 } },
-{ name: "Saa Y-60", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Saa T-02", prices: { ct: 0, dz: 15000, pc: 2000 } },
-{ name: "Saa W-6633", prices: { ct: 0, dz: 20000, pc: 2000 } },
-{ name: "Saa touch screen 2.0", prices: { ct: 0, dz: 2000, pc: 3000 } },
-{ name: "Saa XT-937", prices: { ct: 0, dz: 4000, pc: 5000 } },
-{ name: "Saa T-Ultra", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Saa Touch Screen", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Saa Happy Time", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Magnetic Alphabet", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Magnetic Number na Alphabet", prices: { ct: 0, dz: 42000, pc: 5000 } },
-{ name: "Mpira Sponge Ndogo", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Mpira Sponge Kubwa", prices: { ct: 0, dz: 22000, pc: 2500 } },
-{ name: "Mpira Rain Kubwa", prices: { ct: 0, dz: 10000, pc: 2000 } },
-{ name: "Mpira Rain Ndogo", prices: { ct: 0, dz: 5000, pc: 500 } },
-{ name: "Mpira mgumu", prices: { ct: 0, dz: 0, pc: 20000 } },
-{ name: "Mpira Upele Ndogo No.2", prices: { ct: 0, dz: 5000, pc: 7000 } },
-{ name: "Mpira Mkubwa", prices: { ct: 0, dz: 7000, pc: 10000 } },
-{ name: "Mpira basketball", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Vitabu Watoto Story", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Vitabu Watoto Coloring", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Vitabu Watoto Numbers", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Vitabu Watoto Math", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Vitabu Watoto Alphabet", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Magic cube 4 ways", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Magic cube Round", prices: { ct: 0, dz: 0, pc: 6000 } },
-{ name: "Magic Cube Square", prices: { ct: 0, dz: 11000, pc: 3000 } },
-{ name: "Miswaki Dycrol watoto", prices: { ct: 19000, dz: 13000, pc: 1500 } },
-{ name: "Tablet Ubao 8.5"", prices: { ct: 0, dz: 0, pc: 8000 } },
-{ name: "Tablet Ubao 10.5"", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Tablet Ubao 12"", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Puzzle Kitabu", prices: { ct: 0, dz: 2000, pc: 2500 } },
-{ name: "Car Toy", prices: { ct: 0, dz: 4500, pc: 500 } },
-{ name: "Manicure", prices: { ct: 0, dz: 12000, pc: 1500 } },
-{ name: "Brick 999 Game", prices: { ct: 0, dz: 3500, pc: 5000 } },
-{ name: "Keyholder Mdoli", prices: { ct: 0, dz: 6000, pc: 1000 } },
-{ name: "Keyholder Farasi", prices: { ct: 0, dz: 6500, pc: 1000 } },
-{ name: "Ubao Tembo", prices: { ct: 0, dz: 4500, pc: 6000 } },
-{ name: "Wallpaper Ramani Tz", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Maputo Maneno", prices: { ct: 0, dz: 6000, pc: 0 } },
-{ name: "Bubbles", prices: { ct: 0, dz: 30000, pc: 2500 } },
-{ name: "Karata miss/mdada", prices: { ct: 49500, dz: 8400, pc: 1000 } },
-{ name: "Karata cocacola", prices: { ct: 70000, dz: 4000, pc: 500 } },
-{ name: "Mirija", prices: { ct: 0, dz: 10000, pc: 500 } },
-{ name: "Ubao draft", prices: { ct: 164000, dz: 17000, pc: 2000 } },
-{ name: "Sound puzzle", prices: { ct: 0, dz: 15000, pc: 18000 } },
-{ name: "Wallpaper Kushona", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Wallpaper Saloon", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Kihesabio Mdoli", prices: { ct: 0, dz: 4000, pc: 6000 } },
-{ name: "Ubao Mdogo Double", prices: { ct: 0, dz: 5500, pc: 7000 } },
-{ name: "Ubao Samaki", prices: { ct: 0, dz: 4000, pc: 6000 } },
-{ name: "Pencil Ubao", prices: { ct: 0, dz: 0, pc: 1000 } },
-{ name: "Toys Pikipiki Mkanda", prices: { ct: 0, dz: 6500, pc: 2000 } },
-{ name: "Bubbles Kati", prices: { ct: 0, dz: 18000, pc: 1500 } },
-{ name: "Toys Treni", prices: { ct: 0, dz: 4500, pc: 5000 } },
-{ name: "Toys Simu", prices: { ct: 0, dz: 2000, pc: 2500 } },
-{ name: "Toys Gari 4", prices: { ct: 0, dz: 3500, pc: 1500 } },
-{ name: "Toys Miwani", prices: { ct: 0, dz: 4000, pc: 500 } },
-{ name: "Toys Miwani Mask", prices: { ct: 0, dz: 8000, pc: 1000 } },
-{ name: "Toys Mdoli Girl", prices: { ct: 0, dz: 3000, pc: 4000 } },
-{ name: "Toys Jeshi Kadi", prices: { ct: 0, dz: 8500, pc: 1000 } },
-{ name: "Toys Simu Maji", prices: { ct: 0, dz: 10000, pc: 1000 } },
-{ name: "Toys Simu Box", prices: { ct: 0, dz: 11000, pc: 2000 } },
-{ name: "Toys Watergun", prices: { ct: 0, dz: 1700, pc: 2000 } },
-{ name: "Toys Tarumbeta Mkanda", prices: { ct: 0, dz: 8000, pc: 2000 } },
-{ name: "Toys Filimbi Masikio", prices: { ct: 22000, dz: 7000, pc: 1000 } },
-{ name: "Toys Learning Cards", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Toys Kamba", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Toys Gun", prices: { ct: 0, dz: 6000, pc: 8000 } },
-{ name: "Wallpaper", prices: { ct: 0, dz: 26400, pc: 3500 } },
-{ name: "Toys Kamba Ndogo", prices: { ct: 0, dz: 2000, pc: 3000 } },
-{ name: "Toys Golori", prices: { ct: 0, dz: 1000, pc: 1500 } },
-{ name: "Face Paint", prices: { ct: 0, dz: 24000, pc: 3000 } },
-{ name: "Toys Chess/Snake", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Toys Wanyama", prices: { ct: 0, dz: 0, pc: 7000 } },
-{ name: "Toys Pikipiki Kijiti", prices: { ct: 0, dz: 0, pc: 10000 } },
-{ name: "Toys House Puzzle", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "Keyholder Glass", prices: { ct: 0, dz: 31000, pc: 3500 } },
-{ name: "Toys pikipiki mkanda kubwa(5)", prices: { ct: 0, dz: 9000, pc: 3000 } },
-{ name: "Keyholder Tom/Mario", prices: { ct: 0, dz: 22000, pc: 2500 } },
-{ name: "Keyholder Mpira", prices: { ct: 0, dz: 10000, pc: 1500 } },
-{ name: "Sound Book", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Magic Book", prices: { ct: 0, dz: 0, pc: 15000 } },
-{ name: "Color Set", prices: { ct: 0, dz: 0, pc: 5000 } },
-{ name: "Flipchart Stand 60*90", prices: { ct: 0, dz: 0, pc: 120000 } },
-{ name: "Flipchart Stand 70*100", prices: { ct: 0, dz: 0, pc: 135000 } },
-{ name: "Notice/White Board 70*100cm", prices: { ct: 0, dz: 0, pc: 70000 } },
-{ name: "Notice/White Board 90*150cm", prices: { ct: 0, dz: 0, pc: 110000 } },
-{ name: "Notice/White Board 90*120cm", prices: { ct: 0, dz: 90000, pc: 90000 } },
-{ name: "Drawing Board Set", prices: { ct: 0, dz: 0, pc: 58000 } },
-{ name: "Ufuto doms", prices: { ct: 18000, dz: 2000, pc: 200 } },
-{ name: "Ufuto two color", prices: { ct: 0, dz: 3500, pc: 0 } },
-{ name: "Ufuto Doms kati er60", prices: { ct: 250000, dz: 7500, pc: 200 } },
-{ name: "Ufuto Doms kubwa er 100", prices: { ct: 250000, dz: 7500, pc: 200 } },
-{ name: "ufuto nataraj 50", prices: { ct: 216000, dz: 10000, pc: 300 } },
-{ name: "ufuto nataraj 100", prices: { ct: 228000, dz: 10000, pc: 200 } },
-{ name: "Soft Eraser", prices: { ct: 0, dz: 3000, pc: 100 } },
-{ name: "Vichongeo urembo", prices: { ct: 273000, dz: 3000, pc: 100 } },
-{ name: "Vichongeo Doms 20pc", prices: { ct: 0, dz: 3000, pc: 300 } },
-{ name: "Vichongeo Urembo 2.0", prices: { ct: 0, dz: 3500, pc: 200 } },
-{ name: "Vichongeo Europa", prices: { ct: 0, dz: 7000, pc: 200 } },
-{ name: "Vichongeo Doms", prices: { ct: 345000, dz: 7500, pc: 200 } },
-{ name: "Vichongeo Nataraj", prices: { ct: 212000, dz: 10000, pc: 300 } },
-{ name: "Kichongeo Heel/Skuna", prices: { ct: 16000, dz: 7000, pc: 500 } },
-{ name: "Kichongeo Kiatu", prices: { ct: 16000, dz: 7000, pc: 500 } },
-{ name: "Doms Kichongeo collector", prices: { ct: 12000, dz: 7000, pc: 1000 } },
-{ name: "Vifungashio F1", prices: { ct: 90000, dz: 4500, pc: 200 } },
-{ name: "Vifungashio F2", prices: { ct: 100000, dz: 5000, pc: 300 } },
-{ name: "Vifungashio 41", prices: { ct: 150000, dz: 7500, pc: 500 } },
-{ name: "Vifungashio Bahasha Ndogo", prices: { ct: 0, dz: 6000, pc: 100 } },
-{ name: "Vifungashio 55", prices: { ct: 0, dz: 11500, pc: 500 } },
-{ name: "Vifungashio Bahasha Kubwa", prices: { ct: 0, dz: 12000, pc: 200 } },
-{ name: "Dictionary E to E", prices: { ct: 0, dz: 0, pc: 25000 } },
-{ name: "Dictionary E to E ndogo", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Dictionary E to K", prices: { ct: 0, dz: 9000, pc: 12000 } },
-{ name: "Kamusi kubwa", prices: { ct: 0, dz: 20000, pc: 25000 } },
-{ name: "4-figure Examination", prices: { ct: 0, dz: 30000, pc: 3000 } },
-{ name: "logarithmic and mathematical", prices: { ct: 0, dz: 0, pc: 4000 } },
-{ name: "4-Figure Oxford", prices: { ct: 0, dz: 36000, pc: 4000 } },
-{ name: "Vitabu vya watoto 3000", prices: { ct: 0, dz: 18000, pc: 3000 } },
-{ name: "4 Figure NECTA", prices: { ct: 0, dz: 6000, pc: 8000 } },
-{ name: "4 Figure Maximillan", prices: { ct: 125000, dz: 18000, pc: 2500 } },
-{ name: "Atlas English Medium", prices: { ct: 0, dz: 16000, pc: 20000 } },
-{ name: "Atlas Secondary", prices: { ct: 0, dz: 19500, pc: 25000 } },
-{ name: "Form 2 Reviews", prices: { ct: 0, dz: 7000, pc: 8000 } },
-{ name: "Form 3&4 Reviews", prices: { ct: 0, dz: 8900, pc: 10000 } },
-{ name: "Oxford Primary English-English", prices: { ct: 0, dz: 13000, pc: 15000 } },
-{ name: "Concise Eng-Swahili,Swahili-English", prices: { ct: 0, dz: 5500, pc: 7000 } },
-{ name: "Complete Revision STD 5,6,7", prices: { ct: 0, dz: 19000, pc: 22000 } },
-{ name: "Comprehensive Revision STD 3&4", prices: { ct: 0, dz: 13000, pc: 15000 } },
-{ name: "Vinyl Banner (Black) 440g", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "Roll Up Stand", prices: { ct: 0, dz: 0, pc: 170000 } },
-{ name: "PU T shirt Heat Transfer vinyl", prices: { ct: 0, dz: 0, pc: 0 } },
-{ name: "Sublimation Heat Transfer", prices: { ct: 0, dz: 23000, pc: 0 } },
-{ name: "Glitter Printable", prices: { ct: 0, dz: 12000, pc: 0 } },
+    {
+        "name": "Bahasha A6",
+        "prices": {
+            "ct": 20000,
+            "dz": 2500,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Bahasha A5",
+        "prices": {
+            "ct": 35000,
+            "dz": 3500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Bahasha A4",
+        "prices": {
+            "ct": 40000,
+            "dz": 4500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Bahasha A3",
+        "prices": {
+            "ct": 70000,
+            "dz": 7000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Bahasha A4 Omega",
+        "prices": {
+            "ct": 35000,
+            "dz": 4000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Socks 18-20",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 20-22",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 23-24",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 25-28",
+        "prices": {
+            "ct": 0,
+            "dz": 7500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 30-32",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 33-36",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Socks 28-30",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Leso Nzito",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 750
+        }
+    },
+    {
+        "name": "Lesso Nyepesi",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 375
+        }
+    },
+    {
+        "name": "Wallet",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Pamba",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "leso maua",
+        "prices": {
+            "ct": 300000,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Wallet Kifungo",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Q1",
+        "prices": {
+            "ct": 74000,
+            "dz": 16000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Q2 Professor",
+        "prices": {
+            "ct": 72000,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Q2 Maxon",
+        "prices": {
+            "ct": 72000,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Q2 Pride",
+        "prices": {
+            "ct": 90000,
+            "dz": 24000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Q2 Elimu ni Bahari",
+        "prices": {
+            "ct": 72000,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Q2 Freedom",
+        "prices": {
+            "ct": 70000,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Q2 Maki",
+        "prices": {
+            "ct": 85000,
+            "dz": 25000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Q3 Maxon",
+        "prices": {
+            "ct": 72000,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Q3 Elimu ni Bahari",
+        "prices": {
+            "ct": 72000,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Q3 Professor",
+        "prices": {
+            "ct": 72000,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Q3 Freedom",
+        "prices": {
+            "ct": 72000,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Quire 4/Q4",
+        "prices": {
+            "ct": 75000,
+            "dz": 40000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Q4 Amigo",
+        "prices": {
+            "ct": 76000,
+            "dz": 40000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Counter ndogo Master",
+        "prices": {
+            "ct": 100000,
+            "dz": 14000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Counter Ndogo DL",
+        "prices": {
+            "ct": 110000,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Counter Ndogo SQ",
+        "prices": {
+            "ct": 110000,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Ledger Book q2",
+        "prices": {
+            "ct": 145000,
+            "dz": 72000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Ledger Book q1",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Cash Book",
+        "prices": {
+            "ct": 145000,
+            "dz": 72000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Store Ledger",
+        "prices": {
+            "ct": 145000,
+            "dz": 72000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Guest Register",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Visitors Book",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Dispatch/Log Book",
+        "prices": {
+            "ct": 975000,
+            "dz": 14000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Q4 PROFESSOR",
+        "prices": {
+            "ct": 70000,
+            "dz": 40000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Msomi",
+        "prices": {
+            "ct": 52000,
+            "dz": 7500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Champion",
+        "prices": {
+            "ct": 38000,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Professional",
+        "prices": {
+            "ct": 56000,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Pg 32 SL",
+        "prices": {
+            "ct": 38000,
+            "dz": 2300,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Pg 32 DL",
+        "prices": {
+            "ct": 38000,
+            "dz": 2300,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Pg 32 SQ",
+        "prices": {
+            "ct": 38000,
+            "dz": 2300,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Pg 100 SL",
+        "prices": {
+            "ct": 60000,
+            "dz": 6500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Pg 100 DL",
+        "prices": {
+            "ct": 60000,
+            "dz": 6500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Pg 100 SQ",
+        "prices": {
+            "ct": 60000,
+            "dz": 6500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Pg 100 Plain",
+        "prices": {
+            "ct": 60000,
+            "dz": 6500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "pg 200 SL Europa",
+        "prices": {
+            "ct": 100000,
+            "dz": 11000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "pg 200 DL Europa",
+        "prices": {
+            "ct": 100000,
+            "dz": 11000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "pg 200 SQ Europa",
+        "prices": {
+            "ct": 100000,
+            "dz": 11000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "pg 200 Plain Europa",
+        "prices": {
+            "ct": 100000,
+            "dz": 11000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Stakabadhi",
+        "prices": {
+            "ct": 210000,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Petty Cash",
+        "prices": {
+            "ct": 220000,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Attendance Local",
+        "prices": {
+            "ct": 40000,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Attendance Losica",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Scheme of Work/ Azimio",
+        "prices": {
+            "ct": 70000,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Maandalio",
+        "prices": {
+            "ct": 70000,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Kitabu Risiti A4 Carbonized",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Omega",
+        "prices": {
+            "ct": 53000,
+            "dz": 7500,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Folder File",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Office file",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Manilla file",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Spring file",
+        "prices": {
+            "ct": 335000,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Flat File",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Box file ndogo/Ring binder",
+        "prices": {
+            "ct": 80000,
+            "dz": 26400,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Box file kubwa",
+        "prices": {
+            "ct": 130000,
+            "dz": 36000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Amigo Box File",
+        "prices": {
+            "ct": 125000,
+            "dz": 30000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Punch Pocket/protective sheets",
+        "prices": {
+            "ct": 8000,
+            "dz": 10000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Clear Book",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 13000
+        }
+    },
+    {
+        "name": "Clearbag",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Clearbag ngumu",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Clipboard",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Plastic clipboard",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Clipboard Rangi",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Portifolio",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Office tray 4",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Office tray 3",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 23000
+        }
+    },
+    {
+        "name": "Desktop magazine files",
+        "prices": {
+            "ct": 130000,
+            "dz": 15000,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Office Folder PVC",
+        "prices": {
+            "ct": 0,
+            "dz": 40000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Gluestick Dr. Pepper",
+        "prices": {
+            "ct": 0,
+            "dz": 17000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Gluestick kubwa Njano",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Gluestick MG 36gm",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Gluestick MG 9gm",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Gluestick MG 15gm",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Gluestick MG 21gm",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Gundi ya maji 90gm",
+        "prices": {
+            "ct": 23000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Gundi ya maji 160gm",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Gundi ya maji 1 litre",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 4500
+        }
+    },
+    {
+        "name": "ID Kioo Full",
+        "prices": {
+            "ct": 0,
+            "dz": 26000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "ID Kuvuta",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "ID Ngumu bila kamba",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "ID",
+        "prices": {
+            "ct": 45000,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kamba Kuvuta",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kamba/ID",
+        "prices": {
+            "ct": 24000,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "ID Kioo Bila Kamba",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "ID B4 (bila kamba)",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kamba ID Pana",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "ID plastic (bila kamba)",
+        "prices": {
+            "ct": 18000,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kamba ID Flash",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "ID B7/A7 (bila kamba)",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Name Badge (pc 10)",
+        "prices": {
+            "ct": 0,
+            "dz": 1200,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Vitambulisho(nembo)",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "PVC BusinessCard",
+        "prices": {
+            "ct": 0,
+            "dz": 60000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Leather card bag",
+        "prices": {
+            "ct": 0,
+            "dz": 26000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Plastic card bag",
+        "prices": {
+            "ct": 0,
+            "dz": 26000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Passport Holder",
+        "prices": {
+            "ct": 0,
+            "dz": 34000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Cheap Passport Holder",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Cheap Leather Card Bag/card book",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Cheap Leather card bag Kifungo",
+        "prices": {
+            "ct": 0,
+            "dz": 14000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Vitambulisho (Nembo) Nyeupe",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Lamination ID",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Lamination A4",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Lamination A3",
+        "prices": {
+            "ct": 0,
+            "dz": 40000,
+            "pc": 700
+        }
+    },
+    {
+        "name": "Lamination A5",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Lamination Machine",
+        "prices": {
+            "ct": 105000,
+            "dz": 0,
+            "pc": 110000
+        }
+    },
+    {
+        "name": "Mkasi 215",
+        "prices": {
+            "ct": 0,
+            "dz": 23000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Mkasi mkubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Mkasi Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Mkasi Mdogo",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kisu kikubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kisu",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Nail cutter",
+        "prices": {
+            "ct": 0,
+            "dz": 7500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Nail cutter ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Keyholder",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Keyholder torch",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Keyholder transparent",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Keyholder Light",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Binding spring 8mm",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Binding Spring 10mm",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Binding Spring 12mm",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Binding Spring 14mm",
+        "prices": {
+            "ct": 0,
+            "dz": 14000,
+            "pc": 400
+        }
+    },
+    {
+        "name": "Binding Spring 18mm",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Binding Spring 22mm",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 600
+        }
+    },
+    {
+        "name": "Binding Spring 28mm",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 700
+        }
+    },
+    {
+        "name": "Binding Spring 32mm",
+        "prices": {
+            "ct": 0,
+            "dz": 32000,
+            "pc": 800
+        }
+    },
+    {
+        "name": "Binder clips 32mm",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Scientific Calc 991",
+        "prices": {
+            "ct": 18000,
+            "dz": 20000,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Scientific Calc 991MS 2nd",
+        "prices": {
+            "ct": 0,
+            "dz": 25000,
+            "pc": 30000
+        }
+    },
+    {
+        "name": "Scientific Calc 991ES+",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 35000
+        }
+    },
+    {
+        "name": "Citizen CT512",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Citizen CT 980/3814/140",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Citizen CT 2124",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Citizen CT 914 / CT 9200N",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Citizen CT 112 Kioo",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Citizen CT 912",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Enko calc 568A",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Stopwatch",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Betri Sony kubwa",
+        "prices": {
+            "ct": 78000,
+            "dz": 22000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Betri Sony Ndogo",
+        "prices": {
+            "ct": 78000,
+            "dz": 22000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Flash 8GB Chuma",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Flash 16GB Sandisk",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Flash 32GB Sandisk",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "USB",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Dissecting set",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Paper Cutter",
+        "prices": {
+            "ct": 38000,
+            "dz": 40000,
+            "pc": 45000
+        }
+    },
+    {
+        "name": "Passport Cutter",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 85000
+        }
+    },
+    {
+        "name": "Business cutter",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 90000
+        }
+    },
+    {
+        "name": "Paper Fastener Plastic",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Paper Fastener Plastic box",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Index Separator Jan-Dec",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Index Separator 1-10/A-XX",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Self-Inking Stamp Round",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Self-Inking Stamp Square",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Self-Inking Stamp with Date",
+        "prices": {
+            "ct": 0,
+            "dz": 25000,
+            "pc": 30000
+        }
+    },
+    {
+        "name": "Numbering Machine 8 Digits",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 35000
+        }
+    },
+    {
+        "name": "Flash 8GB SanDIsk",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Photocopy Machine Drums",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Photocopy Cleaner Films",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Key Holder Opener/Color/Boya",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Flash 4GB SanDIsk",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Transparent Opener",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Charger",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Charger Type C",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Citizen CT 2812",
+        "prices": {
+            "ct": 0,
+            "dz": 3800,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Citizen CT 9600G",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Citizen CT 9300G",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Calculator Kenko",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Binding machine 25 sheets",
+        "prices": {
+            "ct": 125000,
+            "dz": 0,
+            "pc": 150000
+        }
+    },
+    {
+        "name": "Glue gun Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Gundi za Glue gun",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Glue Gun Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Penesamig Battery AA ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 4500
+        }
+    },
+    {
+        "name": "kufuri size 25mm",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Padlock 25mm/kufuri njano",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Battery Penesamig AA / Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "M&G Scientific Calculator",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Punch Kangaroo DP600",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Punch DL8230",
+        "prices": {
+            "ct": 0,
+            "dz": 27600,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Stapler DL 1034",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Stapler DL 207",
+        "prices": {
+            "ct": 0,
+            "dz": 27000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Stapler DL 335",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4500
+        }
+    },
+    {
+        "name": "Stapler YZW 307",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4500
+        }
+    },
+    {
+        "name": "Stapler Kangaroo Nowa35",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Stapler Heavy Duty MG",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Stapler Heavy Duty DL 0531",
+        "prices": {
+            "ct": 35000,
+            "dz": 38000,
+            "pc": 45000
+        }
+    },
+    {
+        "name": "Stapler Kangaroo DS210",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Stapler Kangaroo Nowa335",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Stapler Kangaroo DS 45NR",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Staple pins China",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Staple pins 23/15",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Staple pin 23/8",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Staplepins Extra Heavy",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Staplepins Kangaroo",
+        "prices": {
+            "ct": 155000,
+            "dz": 13000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Staple Pins 23/10",
+        "prices": {
+            "ct": 195000,
+            "dz": 14000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Stapler MGS-11",
+        "prices": {
+            "ct": 0,
+            "dz": 48000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Stapler MG 360",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Stapler Kitabu",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Bafan Staplepins",
+        "prices": {
+            "ct": 6000,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Staple pins 23/13",
+        "prices": {
+            "ct": 0,
+            "dz": 1800,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Manila A4",
+        "prices": {
+            "ct": 110000,
+            "dz": 6000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Manilla Vyeti",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Manila sheet",
+        "prices": {
+            "ct": 55000,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Manilla Sheet ngumu",
+        "prices": {
+            "ct": 65000,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Maputo Love Nyeupe",
+        "prices": {
+            "ct": 10000,
+            "dz": 6000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Ribbon",
+        "prices": {
+            "ct": 0,
+            "dz": 39600,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Ribbon Kuvuta Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Ribbon Kuvuta Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Frame za picha A3",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Frame A4",
+        "prices": {
+            "ct": 0,
+            "dz": 48000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Frame A4 B",
+        "prices": {
+            "ct": 130000,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Frame 6 x 8",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Frame A6",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Album",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Party popper/Fataki (50 cm)",
+        "prices": {
+            "ct": 305000,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Party Popper (30cm)",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Mishumaa mikubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 27000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "mishumaa midogo",
+        "prices": {
+            "ct": 0,
+            "dz": 14000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Mishumaa namba",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Discotape Mishumaa Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1200
+        }
+    },
+    {
+        "name": "Discotape mishumaa Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Discotape mishumaa ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Snow Spray",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Mask",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Bendera",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Maputo makubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Maputo ya namba",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Maputo A",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Maputo B",
+        "prices": {
+            "ct": 9000,
+            "dz": 5000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Maputo Set",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Pump ya Maputo",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Balloon Glue",
+        "prices": {
+            "ct": 20000,
+            "dz": 9000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kofia kubwa urembo",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Kofia ndogo urembo",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kofia Plain Mpya",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kofia ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kofia Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kofia Kubwa Christmas",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kofia Mng'ao",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Kofia Namba",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Birthday Crown",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Disco tape",
+        "prices": {
+            "ct": 12000,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Nyembe",
+        "prices": {
+            "ct": 200,
+            "dz": 4000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Mkanda Graduation/Bday",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Box zawadi",
+        "prices": {
+            "ct": 0,
+            "dz": 700,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Gift Paper",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Gift Paper Maua",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Gift Paper Ngumu",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Gift bag Nyepesi",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Gift bag",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Gift Bag Wine",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Gift bag ndogo A5",
+        "prices": {
+            "ct": 0,
+            "dz": 14000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Gift Bag A3",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Gift Bag Christmas",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Gift Bag Birthday",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Gift Bag A6",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Gift Bag A2",
+        "prices": {
+            "ct": 0,
+            "dz": 40000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Gift Box 7x7x7",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Gift Box 10x10x10",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Gift Box 15x15x15",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Gift Box 20x20x20",
+        "prices": {
+            "ct": 0,
+            "dz": 48000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Box Transparent kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Box Transparent kati",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Box transparent ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Sticky Hooks Kubwa12",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Sticky Hooks",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Mataji shanga",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Graduation Taji Moyo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Birthday Banner",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Birthday Cards",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Wallpaper",
+        "prices": {
+            "ct": 0,
+            "dz": 26400,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Party popper kubwa (60cm)",
+        "prices": {
+            "ct": 225000,
+            "dz": 4800,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Party popper ndogo (40cm)",
+        "prices": {
+            "ct": 275000,
+            "dz": 3200,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "mataji manyoya",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Mapambo Ndogo Christmas",
+        "prices": {
+            "ct": 0,
+            "dz": 1200,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Balls Kubwa Christmas",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 7500
+        }
+    },
+    {
+        "name": "Christmas Balls White",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Christmas Balls Kubwa Colored",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Mataji Christmas",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Nyota Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Nyota Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 19000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Nyota Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Christmas Crown",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Kipepo Fan",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Album 40pgs",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Xmas Tree 4FT",
+        "prices": {
+            "ct": 0,
+            "dz": 35000,
+            "pc": 45000
+        }
+    },
+    {
+        "name": "Xmas Tree 5FT",
+        "prices": {
+            "ct": 0,
+            "dz": 50000,
+            "pc": 60000
+        }
+    },
+    {
+        "name": "Xmas Tree 6FT",
+        "prices": {
+            "ct": 0,
+            "dz": 80000,
+            "pc": 90000
+        }
+    },
+    {
+        "name": "Xmas Tree 7FT",
+        "prices": {
+            "ct": 0,
+            "dz": 105000,
+            "pc": 120000
+        }
+    },
+    {
+        "name": "Miwani Birthday",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Christmass light ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Christmas Light 10m",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Maua Rose",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Christmas Light 50m",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 45000
+        }
+    },
+    {
+        "name": "Maua Rose Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Maua Rose Kubwa",
+        "prices": {
+            "ct": 20000,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Maua Rose Koni",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Maua Rose Koni Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Maua rose kati kutengeneza",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Maua rose kubwa kutengeneza",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Maua Majani",
+        "prices": {
+            "ct": 0,
+            "dz": 17000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Mataji ribbon kitambaa",
+        "prices": {
+            "ct": 25000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Maputo Snake",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Ribbon Kitambaa",
+        "prices": {
+            "ct": 0,
+            "dz": 12500,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Crown Love",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Crown Bend",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Crown Party",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Birthday Banner Plain",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Birthday Crown Taa",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Maputo Set Wanyama",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Maputo Stand",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "CARD A6 BIRTHDAY",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "CARD A6 CONGRATULATIONS",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "CARD A6  BEST WISHES",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "CARD A5 BIRTHDAY",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "CARD A5 CONGRATULATIONS",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "CARD A5 BEST WISHES",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "CARD A4 BIRTHDAY",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "CARD A4 BEST WISHES",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "CARD A4 CONGRATULATIONS",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Kadi za Harusi 28",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kadi za Harusi 25",
+        "prices": {
+            "ct": 0,
+            "dz": 25000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kadi ya Harusi 13",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kadi ya Harusi 20",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kadi Harusi 30",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Valentine",
+        "prices": {
+            "ct": 0,
+            "dz": 150000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Mbao love ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 75000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Mbao butterfly ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 75000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Mbao love kifungo",
+        "prices": {
+            "ct": 0,
+            "dz": 120000,
+            "pc": 1800
+        }
+    },
+    {
+        "name": "Mbao 2love nyeupe",
+        "prices": {
+            "ct": 0,
+            "dz": 120000,
+            "pc": 1800
+        }
+    },
+    {
+        "name": "Mbao love nyeupe",
+        "prices": {
+            "ct": 0,
+            "dz": 120000,
+            "pc": 1800
+        }
+    },
+    {
+        "name": "Kamba Kadi",
+        "prices": {
+            "ct": 10000,
+            "dz": 0,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Label Kamati",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Mataji Christmas Green",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Christmas Banner",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Christmass Balls",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Christmas Taji Round",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Maputo ya Mirija",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Maputo Filimbi",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Office pins",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Thumb tucks",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Paperclips",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pushpins",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Money sponge",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Superglue",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Pen Holder",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Office Dustbin",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Wino wa muhuri",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Mkebe wa muhuri/stamp pad",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Stamp Pad Kubwa No.2",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Rubberband Nyepesi",
+        "prices": {
+            "ct": 40000,
+            "dz": 1200,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Rubberband Ngumu",
+        "prices": {
+            "ct": 60000,
+            "dz": 2000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "duster plastic",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "dusterMbao",
+        "prices": {
+            "ct": 0,
+            "dz": 16000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Chaki white",
+        "prices": {
+            "ct": 28000,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Chaki colored",
+        "prices": {
+            "ct": 45000,
+            "dz": 2500,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Greentags",
+        "prices": {
+            "ct": 44000,
+            "dz": 800,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Whiteboard duster",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Doms Chaki",
+        "prices": {
+            "ct": 160000,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kaida",
+        "prices": {
+            "ct": 118000,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Oxford/Marshal",
+        "prices": {
+            "ct": 192000,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Marshal Orange",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "M&G Kaida Mkebe",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Mkebe Set",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "DOMS Mkebe",
+        "prices": {
+            "ct": 330000,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Mkebe kichongeo",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Nataraj Mkebe Precise",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "M&G All in One Mkebe",
+        "prices": {
+            "ct": 0,
+            "dz": 40000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Nataraj Mkebe",
+        "prices": {
+            "ct": 480000,
+            "dz": 60000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Mkebe urembo Mgumu",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Mkebe Urembo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Mkebe saa",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Smile Mkebe set",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Writing Pad",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Writingpad spiral",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Shorthand 70",
+        "prices": {
+            "ct": 110000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Leon Shorthand",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Shorthand ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Hardcover 400",
+        "prices": {
+            "ct": 0,
+            "dz": 45000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Hardcover 200pg",
+        "prices": {
+            "ct": 221000,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Diary Executive New",
+        "prices": {
+            "ct": 8000,
+            "dz": 10000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Notebook B5",
+        "prices": {
+            "ct": 0,
+            "dz": 52000,
+            "pc": 6500
+        }
+    },
+    {
+        "name": "Notebook A5",
+        "prices": {
+            "ct": 0,
+            "dz": 40000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Notebook A6",
+        "prices": {
+            "ct": 0,
+            "dz": 23000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Notebook Mbao ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 54000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Notebook Mbao Coffee",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Notebook Mbao",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 7500
+        }
+    },
+    {
+        "name": "Notebook Diary 48K",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Notebook Diary A6",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Notebook Diary 2025",
+        "prices": {
+            "ct": 0,
+            "dz": 4200,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Notebook Diary Kifungo A6",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Notebook Diary",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Notebook Spiral",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Notebook Diary Nene/25K",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Notebook Diary 2025 Sumaku",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Notebook Wallet/Mfuko",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 9000
+        }
+    },
+    {
+        "name": "Notebook Diary Calculator",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "100K",
+        "prices": {
+            "ct": 315000,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "60K",
+        "prices": {
+            "ct": 315000,
+            "dz": 17000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "48K",
+        "prices": {
+            "ct": 335000,
+            "dz": 18000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "36K",
+        "prices": {
+            "ct": 335000,
+            "dz": 20000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "32K",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Notebook Diary A6 Pen",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Kiwi brush",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "cotton buds plastic",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "cotton buds mbao",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toothpick kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Toothpick ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Mwamvuli Mkubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Mwamvuli Mdogo",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Alshabab",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Simply",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Airfresh Wicker",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "KAI HONG 32MM",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Mwamvuli Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "RainCoat Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Mosquito repellent",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "blue ya nguo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Dodoki",
+        "prices": {
+            "ct": 0,
+            "dz": 54000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Urembo Pini",
+        "prices": {
+            "ct": 0,
+            "dz": 1500,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Mwamvuli Draft",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Rola za Mashine 57/40",
+        "prices": {
+            "ct": 240000,
+            "dz": 9000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Rola za mashine 57/50",
+        "prices": {
+            "ct": 360000,
+            "dz": 12000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Rola Sheli",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Rola Sheli plain",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Flipchart",
+        "prices": {
+            "ct": 60000,
+            "dz": 7000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Legal paper",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Legal paper zamani",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Carbon paper",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Colored paper",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Rim Mondi",
+        "prices": {
+            "ct": 49000,
+            "dz": 11000,
+            "pc": 50
+        }
+    },
+    {
+        "name": "Rim Aone",
+        "prices": {
+            "ct": 52000,
+            "dz": 12000,
+            "pc": 50
+        }
+    },
+    {
+        "name": "Rim Color Paper",
+        "prices": {
+            "ct": 62000,
+            "dz": 15000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Rim A3",
+        "prices": {
+            "ct": 150000,
+            "dz": 35000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Ruled paper",
+        "prices": {
+            "ct": 160000,
+            "dz": 12000,
+            "pc": 50
+        }
+    },
+    {
+        "name": "Graphpaper(Royal)",
+        "prices": {
+            "ct": 0,
+            "dz": 17000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Graphpaper(Bongo)",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Transparent Colorless",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Transparent Colored",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "A3 Transparent",
+        "prices": {
+            "ct": 250000,
+            "dz": 23000,
+            "pc": 23000
+        }
+    },
+    {
+        "name": "Jarada",
+        "prices": {
+            "ct": 64000,
+            "dz": 7000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Orange Jarada",
+        "prices": {
+            "ct": 0,
+            "dz": 23500,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Legal paper gsm",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Carbonised paper",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Rola za Mashine 57/40 plain",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Rola za mashine 57/50 plain",
+        "prices": {
+            "ct": 360000,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Rola za Mashine 57/40 Fivestar",
+        "prices": {
+            "ct": 90000,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Rola za Mashine 57/50 Fivestar",
+        "prices": {
+            "ct": 110000,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "HB kawaida",
+        "prices": {
+            "ct": 8000,
+            "dz": 1000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Nataraj HB",
+        "prices": {
+            "ct": 27000,
+            "dz": 2500,
+            "pc": 300
+        }
+    },
+    {
+        "name": "HB DOMS/LEON",
+        "prices": {
+            "ct": 25000,
+            "dz": 2500,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Nataraj Space Kids Pencil HB",
+        "prices": {
+            "ct": 45000,
+            "dz": 5000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "M&G HB pencil",
+        "prices": {
+            "ct": 18000,
+            "dz": 2000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Nataraj Mchina",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Pencil Mfuko",
+        "prices": {
+            "ct": 90000,
+            "dz": 4000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "M&G Shunshou",
+        "prices": {
+            "ct": 18000,
+            "dz": 2000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "WisDOM Gloss",
+        "prices": {
+            "ct": 28000,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Drawing Pencils",
+        "prices": {
+            "ct": 30000,
+            "dz": 3000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Pencil Mkasi",
+        "prices": {
+            "ct": 0,
+            "dz": 48000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Pencil Wooden",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Mechanical Pencil",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Mechanical Pencil Risasi",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 700
+        }
+    },
+    {
+        "name": "colored pencil ndefu",
+        "prices": {
+            "ct": 9000,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "colored pencil fupi",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "crayons",
+        "prices": {
+            "ct": 118000,
+            "dz": 6000,
+            "pc": 800
+        }
+    },
+    {
+        "name": "DOMS color Pencils Fupi (10)",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Nataraj crayons",
+        "prices": {
+            "ct": 0,
+            "dz": 38000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Doms Crayon",
+        "prices": {
+            "ct": 0,
+            "dz": 25000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Doms Colour Pencils",
+        "prices": {
+            "ct": 0,
+            "dz": 28000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Colored Nataraj",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Water Color",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Pencil kikopo",
+        "prices": {
+            "ct": 0,
+            "dz": 50400,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Wisdom Pencil kopo",
+        "prices": {
+            "ct": 205000,
+            "dz": 8500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Doms water color",
+        "prices": {
+            "ct": 315000,
+            "dz": 30000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Doms Crayon Jumbo",
+        "prices": {
+            "ct": 0,
+            "dz": 27000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Markerpen Delta",
+        "prices": {
+            "ct": 22000,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Markerpen permanent",
+        "prices": {
+            "ct": 183000,
+            "dz": 2000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Gold Markerpen",
+        "prices": {
+            "ct": 212000,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "CD Marker",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "White Board Marker",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Obama Pen Blue",
+        "prices": {
+            "ct": 80000,
+            "dz": 4500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Obama Black",
+        "prices": {
+            "ct": 80000,
+            "dz": 4500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Obama Red",
+        "prices": {
+            "ct": 80000,
+            "dz": 4500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Nataraj Blue mchina",
+        "prices": {
+            "ct": 680000,
+            "dz": 10000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Nataraj Blue",
+        "prices": {
+            "ct": 288000,
+            "dz": 13000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Nataraj Black",
+        "prices": {
+            "ct": 288000,
+            "dz": 13000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Nataraj Red",
+        "prices": {
+            "ct": 288000,
+            "dz": 12000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Papersoft",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "DOMS pens",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Pen GP2608",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen GP1068",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen GP558",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen GP3220",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Table Pen",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Pen Roller Tip",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen Roller Tip Black",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen Piano PG 227 Blue",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen Piano PG 227 Black",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Papersoft 2 Gel, bk, bl",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen eraser",
+        "prices": {
+            "ct": 32000,
+            "dz": 18000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Zuchu Cello",
+        "prices": {
+            "ct": 100000,
+            "dz": 5000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Highliter",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Highlighter Package",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Correction fluid or pen",
+        "prices": {
+            "ct": 250000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Pen Kikombe/ AA Pen",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Cello Sleek",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Cello Sleek Transparent",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Pen Bomba 4",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Pen Mdoli",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Jiandan erasable pen",
+        "prices": {
+            "ct": 54000,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Peni Vertex karatasi",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Peni mpya",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Doms Pen Inxify",
+        "prices": {
+            "ct": 25000,
+            "dz": 3500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Doms Pen Inxon",
+        "prices": {
+            "ct": 50000,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Piano Finetop",
+        "prices": {
+            "ct": 22000,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Piano PT 228/117/031",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Jingpin pen",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Cat Pen",
+        "prices": {
+            "ct": 24000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Amigo Dot.com",
+        "prices": {
+            "ct": 224000,
+            "dz": 10000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "M&G Gel Pen",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo 5X7/ 5R",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Photo paper 115gm single side",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo A4 nyeusi",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "photo A4 Single side 260gm",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo A4 double side 260gm",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo A4 double side 240gm",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Sticker 140gms",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Photo paper Double 115gm",
+        "prices": {
+            "ct": 6500,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Photopaper gm 180",
+        "prices": {
+            "ct": 0,
+            "dz": 7500,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo A4 double side 300gm",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Photo paper 120gm",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Espson Wino BLACK",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson MAGENTA",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson CYAN",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson YELLOW",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson LIGHT MAGENTA",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson LIGHT CYAN",
+        "prices": {
+            "ct": 18000,
+            "dz": 3000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Epson 103 black",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Epson 103 Magenta",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Epson 103 Cyan",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Epson 103 Yellow",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Epson machine",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 450000
+        }
+    },
+    {
+        "name": "Wino 1kg Photocopy Machine",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Printer Epson 3210",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 500000
+        }
+    },
+    {
+        "name": "Toner 500gm/nusu kilo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Rula ndefu",
+        "prices": {
+            "ct": 110000,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Rula DOMS",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Rula fupi",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Ruler Flexible",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Ruler Aluminium",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Rula za Ubao/Mbao",
+        "prices": {
+            "ct": 410000,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Rula Pencil",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Typing",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Copy",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Copy Color",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Copy A3",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Copy No Power",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Copy No Power Color",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Print",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Print Color",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Print No Power",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 700
+        }
+    },
+    {
+        "name": "Print A3",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Scan",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Salary Slip",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Loss Report",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Ajira Portal",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Chuo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Rita",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Binding Spiral- less page 25",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Binding Spiral- more page 30",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Binding Spiral- more 100",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Binding kutumia Tape",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Kuweka Lamination",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Kufunga zawadi/gift wrapping",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "kuprint vipeperushi double",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kupiga Passport",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Kitabu Risiti A5 Carbonized",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Kitabu Risiti A4 Kawaida",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Kitabu Risiti A5 Kawaida",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Harusi Business card",
+        "prices": {
+            "ct": 300,
+            "dz": 250,
+            "pc": 150
+        }
+    },
+    {
+        "name": "Kudarizi T-shirt (pamoja na Tshirt)",
+        "prices": {
+            "ct": 0,
+            "dz": 17000,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Kudarizi T-shirt (Bila na Tshirt)",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Heat Press Sticker (Pamoja na Tshirt)",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Heat Press (Bila Tshirt)",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Vinyl Sticker",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Oneway Sticker",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "vitambulisho",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Vitambulisho Shule",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Sticky Notes 3x3",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Sticky Notes 3x4",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Sticky Notes 3x5",
+        "prices": {
+            "ct": 0,
+            "dz": 9500,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Multicolored",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "M&G Sticky Notes",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Binding Tape",
+        "prices": {
+            "ct": 195000,
+            "dz": 36000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "brown tape kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Vin tape",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "packaging tape ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "packaging tape kati",
+        "prices": {
+            "ct": 205000,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "packaging tape kubwa/YARD 300",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Tape 1 inch",
+        "prices": {
+            "ct": 90000,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Tape 1/2 inch",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Tape 2 inch 50 yards",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Masking tape 2inch/ 50 yds",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Masking tape 1inch/ 10yds",
+        "prices": {
+            "ct": 0,
+            "dz": 7500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Double Sided Tape",
+        "prices": {
+            "ct": 0,
+            "dz": 4200,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Price tag kitabu",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Price Sticker",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Packaging Tape Kubwa Yard 1000",
+        "prices": {
+            "ct": 180000,
+            "dz": 15500,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Packaging tape 7",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Sticker watoto",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Name Sticker",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Mpira",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Mpira No.2",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 6500
+        }
+    },
+    {
+        "name": "Ubao wa namba",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 9000
+        }
+    },
+    {
+        "name": "Standing Ubao",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 85000
+        }
+    },
+    {
+        "name": "Ubao mkubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Ubao mdogo",
+        "prices": {
+            "ct": 0,
+            "dz": 32000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "face/namba board",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Alphabet-mfuko",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Blocks",
+        "prices": {
+            "ct": 0,
+            "dz": 2300,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "blocks kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "lego",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "kihesabio kikubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Kihesabio kati",
+        "prices": {
+            "ct": 0,
+            "dz": 2600,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "kihesabio kidogo",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Yang Magic Cube",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Magic Cube",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Magic Cube namba kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 20400,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Magic Cube namba ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Udongo Kopo",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Udongo Mfuko",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Namba chart",
+        "prices": {
+            "ct": 0,
+            "dz": 1500,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Chart kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Foam book ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 1500,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Foam Book Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 2500,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Laptop ndogo/ology",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Ipad/learning machine",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Miswaki Orange",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Miswaki watoto midoli",
+        "prices": {
+            "ct": 0,
+            "dz": 17000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Miswaki watoto box",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Miswaki Suree",
+        "prices": {
+            "ct": 0,
+            "dz": 23000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Puzzle animals",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Saa Y-60",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Saa T-02",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Saa W-6633",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Saa touch screen 2.0",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Saa XT-937",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Saa T-Ultra",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Saa Touch Screen",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Saa Happy Time",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Magnetic Alphabet",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Magnetic Number na Alphabet",
+        "prices": {
+            "ct": 0,
+            "dz": 42000,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Mpira Sponge Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Mpira Sponge Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Mpira Rain Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Mpira Rain Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Mpira mgumu",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Mpira Upele Ndogo No.2",
+        "prices": {
+            "ct": 0,
+            "dz": 5000,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Mpira Mkubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Mpira basketball",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Vitabu Watoto Story",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Vitabu Watoto Coloring",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Vitabu Watoto Numbers",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Vitabu Watoto Math",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Vitabu Watoto Alphabet",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Magic cube 4 ways",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Magic cube Round",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Magic Cube Square",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Miswaki Dycrol watoto",
+        "prices": {
+            "ct": 19000,
+            "dz": 13000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Tablet Ubao 8.5",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Tablet Ubao 10.5",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Tablet Ubao 12",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Puzzle Kitabu",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Car Toy",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Manicure",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Brick 999 Game",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Keyholder Mdoli",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Keyholder Farasi",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Ubao Tembo",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Wallpaper Ramani Tz",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Maputo Maneno",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Bubbles",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Karata miss/mdada",
+        "prices": {
+            "ct": 49500,
+            "dz": 8400,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Karata cocacola",
+        "prices": {
+            "ct": 70000,
+            "dz": 4000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Mirija",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Ubao draft",
+        "prices": {
+            "ct": 164000,
+            "dz": 17000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Sound puzzle",
+        "prices": {
+            "ct": 0,
+            "dz": 15000,
+            "pc": 18000
+        }
+    },
+    {
+        "name": "Wallpaper Kushona",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Wallpaper Saloon",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Kihesabio Mdoli",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Ubao Mdogo Double",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Ubao Samaki",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 6000
+        }
+    },
+    {
+        "name": "Pencil Ubao",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toys Pikipiki Mkanda",
+        "prices": {
+            "ct": 0,
+            "dz": 6500,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Bubbles Kati",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Toys Treni",
+        "prices": {
+            "ct": 0,
+            "dz": 4500,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Toys Simu",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Toys Gari 4",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Toys Miwani",
+        "prices": {
+            "ct": 0,
+            "dz": 4000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Toys Miwani Mask",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toys Mdoli Girl",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Toys Jeshi Kadi",
+        "prices": {
+            "ct": 0,
+            "dz": 8500,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toys Simu Maji",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toys Simu Box",
+        "prices": {
+            "ct": 0,
+            "dz": 11000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Toys Watergun",
+        "prices": {
+            "ct": 0,
+            "dz": 1700,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Toys Tarumbeta Mkanda",
+        "prices": {
+            "ct": 0,
+            "dz": 8000,
+            "pc": 2000
+        }
+    },
+    {
+        "name": "Toys Filimbi Masikio",
+        "prices": {
+            "ct": 22000,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Toys Learning Cards",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Toys Kamba",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Toys Gun",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Wallpaper",
+        "prices": {
+            "ct": 0,
+            "dz": 26400,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Toys Kamba Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 2000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Toys Golori",
+        "prices": {
+            "ct": 0,
+            "dz": 1000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Face Paint",
+        "prices": {
+            "ct": 0,
+            "dz": 24000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Toys Chess/Snake",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Toys Wanyama",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Toys Pikipiki Kijiti",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Toys House Puzzle",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Keyholder Glass",
+        "prices": {
+            "ct": 0,
+            "dz": 31000,
+            "pc": 3500
+        }
+    },
+    {
+        "name": "Toys pikipiki mkanda kubwa(5)",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "Keyholder Tom/Mario",
+        "prices": {
+            "ct": 0,
+            "dz": 22000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Keyholder Mpira",
+        "prices": {
+            "ct": 0,
+            "dz": 10000,
+            "pc": 1500
+        }
+    },
+    {
+        "name": "Sound Book",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Magic Book",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Color Set",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 5000
+        }
+    },
+    {
+        "name": "Flipchart Stand 60*90",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 120000
+        }
+    },
+    {
+        "name": "Flipchart Stand 70*100",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 135000
+        }
+    },
+    {
+        "name": "Notice/White Board 70*100cm",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 70000
+        }
+    },
+    {
+        "name": "Notice/White Board 90*150cm",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 110000
+        }
+    },
+    {
+        "name": "Notice/White Board 90*120cm",
+        "prices": {
+            "ct": 0,
+            "dz": 90000,
+            "pc": 90000
+        }
+    },
+    {
+        "name": "Drawing Board Set",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 58000
+        }
+    },
+    {
+        "name": "Ufuto doms",
+        "prices": {
+            "ct": 18000,
+            "dz": 2000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Ufuto two color",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Ufuto Doms kati er60",
+        "prices": {
+            "ct": 250000,
+            "dz": 7500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Ufuto Doms kubwa er 100",
+        "prices": {
+            "ct": 250000,
+            "dz": 7500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "ufuto nataraj 50",
+        "prices": {
+            "ct": 216000,
+            "dz": 10000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "ufuto nataraj 100",
+        "prices": {
+            "ct": 228000,
+            "dz": 10000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Soft Eraser",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Vichongeo urembo",
+        "prices": {
+            "ct": 273000,
+            "dz": 3000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Vichongeo Doms 20pc",
+        "prices": {
+            "ct": 0,
+            "dz": 3000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Vichongeo Urembo 2.0",
+        "prices": {
+            "ct": 0,
+            "dz": 3500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Vichongeo Europa",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Vichongeo Doms",
+        "prices": {
+            "ct": 345000,
+            "dz": 7500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Vichongeo Nataraj",
+        "prices": {
+            "ct": 212000,
+            "dz": 10000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Kichongeo Heel/Skuna",
+        "prices": {
+            "ct": 16000,
+            "dz": 7000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Kichongeo Kiatu",
+        "prices": {
+            "ct": 16000,
+            "dz": 7000,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Doms Kichongeo collector",
+        "prices": {
+            "ct": 12000,
+            "dz": 7000,
+            "pc": 1000
+        }
+    },
+    {
+        "name": "Vifungashio F1",
+        "prices": {
+            "ct": 90000,
+            "dz": 4500,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Vifungashio F2",
+        "prices": {
+            "ct": 100000,
+            "dz": 5000,
+            "pc": 300
+        }
+    },
+    {
+        "name": "Vifungashio 41",
+        "prices": {
+            "ct": 150000,
+            "dz": 7500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Vifungashio Bahasha Ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 100
+        }
+    },
+    {
+        "name": "Vifungashio 55",
+        "prices": {
+            "ct": 0,
+            "dz": 11500,
+            "pc": 500
+        }
+    },
+    {
+        "name": "Vifungashio Bahasha Kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 200
+        }
+    },
+    {
+        "name": "Dictionary E to E",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Dictionary E to E ndogo",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Dictionary E to K",
+        "prices": {
+            "ct": 0,
+            "dz": 9000,
+            "pc": 12000
+        }
+    },
+    {
+        "name": "Kamusi kubwa",
+        "prices": {
+            "ct": 0,
+            "dz": 20000,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "4-figure Examination",
+        "prices": {
+            "ct": 0,
+            "dz": 30000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "logarithmic and mathematical",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "4-Figure Oxford",
+        "prices": {
+            "ct": 0,
+            "dz": 36000,
+            "pc": 4000
+        }
+    },
+    {
+        "name": "Vitabu vya watoto 3000",
+        "prices": {
+            "ct": 0,
+            "dz": 18000,
+            "pc": 3000
+        }
+    },
+    {
+        "name": "4 Figure NECTA",
+        "prices": {
+            "ct": 0,
+            "dz": 6000,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "4 Figure Maximillan",
+        "prices": {
+            "ct": 125000,
+            "dz": 18000,
+            "pc": 2500
+        }
+    },
+    {
+        "name": "Atlas English Medium",
+        "prices": {
+            "ct": 0,
+            "dz": 16000,
+            "pc": 20000
+        }
+    },
+    {
+        "name": "Atlas Secondary",
+        "prices": {
+            "ct": 0,
+            "dz": 19500,
+            "pc": 25000
+        }
+    },
+    {
+        "name": "Form 2 Reviews",
+        "prices": {
+            "ct": 0,
+            "dz": 7000,
+            "pc": 8000
+        }
+    },
+    {
+        "name": "Form 3&4 Reviews",
+        "prices": {
+            "ct": 0,
+            "dz": 8900,
+            "pc": 10000
+        }
+    },
+    {
+        "name": "Oxford Primary English-English",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Concise Eng-Swahili,Swahili-English",
+        "prices": {
+            "ct": 0,
+            "dz": 5500,
+            "pc": 7000
+        }
+    },
+    {
+        "name": "Complete Revision STD 5,6,7",
+        "prices": {
+            "ct": 0,
+            "dz": 19000,
+            "pc": 22000
+        }
+    },
+    {
+        "name": "Comprehensive Revision STD 3&4",
+        "prices": {
+            "ct": 0,
+            "dz": 13000,
+            "pc": 15000
+        }
+    },
+    {
+        "name": "Vinyl Banner (Black) 440g",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Roll Up Stand",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 170000
+        }
+    },
+    {
+        "name": "PU T shirt Heat Transfer vinyl",
+        "prices": {
+            "ct": 0,
+            "dz": 0,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Sublimation Heat Transfer",
+        "prices": {
+            "ct": 0,
+            "dz": 23000,
+            "pc": 0
+        }
+    },
+    {
+        "name": "Glitter Printable",
+        "prices": {
+            "ct": 0,
+            "dz": 12000,
+            "pc": 0
+        }
+    }
 ]
