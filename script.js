@@ -97,8 +97,8 @@ function updateTable() {
       <td>${sale.price.toFixed(2)}</td>
       <td>${sale.discount.toFixed(2)}</td>
       <td>${sale.extra.toFixed(2)}</td>
-      <td>${sale.paymentMethod}</td>
       <td>${sale.total.toFixed(2)}</td>
+      <td>${sale.paymentMethod}</td>
     `;
     tbody.appendChild(row);
   });
