@@ -90,3 +90,24 @@ th {
 #download:hover {
   background: #2980b9;
 }
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px; /* space between label and input */
+}
+
+.form-row label {
+  min-width: 120px; /* fixed width for all labels so they line up */
+  font-weight: bold;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1; /* inputs take remaining space */
+  padding: 6px 8px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
