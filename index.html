@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple POS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="pos-container">
+    <h2>Simple POS</h2>
+    <form id="sale-form">
+      <input type="text" id="item" placeholder="Item Name" required>
+      <input type="number" id="quantity" placeholder="Quantity" required min="1">
+      <input type="number" id="price" placeholder="Price per item" required min="0">
+      <button type="submit">Add Sale</button>
+    </form>
+
+    <table id="sales-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <button id="download">Download Sales (CSV)</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
