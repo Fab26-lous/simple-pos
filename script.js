@@ -30,7 +30,6 @@ function populateDatalist() {
   });
 }
 
-// Auto-fill price when item or unit changes
 document.getElementById('item').addEventListener('input', updatePrice);
 document.getElementById('unit').addEventListener('change', updatePrice);
 
@@ -45,6 +44,7 @@ function updatePrice() {
     document.getElementById('price').value = '';
   }
 }
+
 function calculateTotal(updateUI = false) {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
@@ -60,11 +60,14 @@ function calculateTotal(updateUI = false) {
 
   return total;
 }
+
 ['quantity', 'price', 'discount', 'extra'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => calculateTotal(true));
 });
 
-const sales = [];
+// ⛔️ REMOVE download to CSV
+// document.getElementById('download').addEventListener(...)
+// DELETE that button from your HTML too if it's still there
 
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -80,52 +83,13 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 
   const sale = { item, unit, quantity, price, discount, extra, paymentMethod, total };
 
-  sales.push(sale);
-
-  // ✅ Send sale to Google Sheet
+  // ✅ Send to Google Sheet
   sendSaleToSheet(sale);
 
-  updateTable();
   this.reset();
+  document.getElementById('total').value = '';
 });
 
-function updateTable() {
-  const tbody = document.querySelector('#sales-table tbody');
-  tbody.innerHTML = '';
-  sales.forEach((sale, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${sale.item}</td>
-      <td>${sale.unit}</td>
-      <td>${sale.quantity}</td>
-      <td>${sale.price.toFixed(2)}</td>
-      <td>${sale.discount.toFixed(2)}</td>
-      <td>${sale.extra.toFixed(2)}</td>
-      <td>${sale.total.toFixed(2)}</td>
-      <td>${sale.paymentMethod}</td>
-    `;
-    tbody.appendChild(row);
-  });
-}
-
-document.getElementById('download').addEventListener('click', function() {
-  const csvRows = [
-    ['Item', 'Quantity', 'Price', 'Total'],
-    ...sales.map(sale => [sale.item, sale.quantity, sale.price, sale.total])
-  ];
-  const csvContent = csvRows.map(e => e.join(",")).join("\n");
-  const blob = new Blob([csvContent], { type: 'text/csv' });
-  const url = window.URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  a.setAttribute('hidden', '');
-  a.setAttribute('href', url);
-  a.setAttribute('download', 'daily_sales.csv');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-});
 function sendSaleToSheet(sale) {
   fetch("https://script.google.com/macros/s/AKfycbxQGAdcK6I76luWZD6G_7YPqLQqsxn9SwEBovp8U1hF1qiNp3gqazTDrNkB5hGr-43Xpg/exec", {
     method: "POST",
@@ -140,7 +104,6 @@ function sendSaleToSheet(sale) {
   })
   .catch(err => {
     console.error("Error sending sale:", err);
+    alert("Failed to save sale. Please check your internet or script.");
   });
 }
-
-
