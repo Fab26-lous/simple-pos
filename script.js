@@ -121,3 +121,34 @@ document.getElementById('download').addEventListener('click', function() {
   a.click();
   document.body.removeChild(a);
 });
+function sendSaleToSheet(sale) {
+  fetch("https://script.google.com/macros/s/AKfycbxQGAdcK6I76luWZD6G_7YPqLQqsxn9SwEBovp8U1hF1qiNp3gqazTDrNkB5hGr-43Xpg/exec", {
+    method: "POST",
+    body: JSON.stringify(sale),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(response => {
+    console.log("Sale saved:", response);
+  })
+  .catch(err => {
+    console.error("Error sending sale:", err);
+  });
+}
+
+// Example usage after clicking 'Add Sale'
+const saleData = {
+  item: "Quire 4/Q4",
+  unit: "Pc",
+  quantity: 2,
+  price: 40000,
+  discount: 0,
+  extra: 0,
+  payment: 80000,
+  total: 80000
+};
+
+sendSaleToSheet(saleData);
+
