@@ -19,55 +19,22 @@
   <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
 
-  <form id="sale-form" action="https://script.google.com/macros/s/AKfycbxlGoNFrjbG3wSn3Iax-EouIHTIe8QXCsvrom9pr3iyfdZG6p4zMnUldkzUjaZfO06gOQ/exec" method="post">
-  <div class="form-row">
-    <input type="text" id="item" name="item" placeholder="Search Item" list="item-list" required>
-    <datalist id="item-list"></datalist>
-  </div>
+ <form
+  action="https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/viewform?usp=pp_url&entry.1049372289=Copy&entry.1483059350=pc&entry.573514662=1&entry.1489672505=100&entry.1474609854=0&entry.204222640=0&entry.1933162022=100&entry.1676608087=Cash"
+  method="POST"
+  target="hidden_iframe"
+  onsubmit="submitted=true;"
+>
+  <!-- Your input fields with special 'name' attributes (explained later) -->
 
-  <div class="form-row">
-    <select id="unit" name="unit" required>
-      <option value="ct">Carton (Ct)</option>
-      <option value="dz">Dozen (Dz)</option>
-      <option value="pc" selected>Piece (Pc)</option>
-    </select>
-  </div>
+  <input name="entry.123456" placeholder="Item" required>
+  <input name="entry.654321" placeholder="Unit" required>
+  <!-- Add the rest of the inputs here -->
 
-  <div class="form-row">
-    <input type="number" id="quantity" name="quantity" placeholder="Quantity" required min="1">
-  </div>
-
-  <div class="form-row">
-    <input type="number" id="price" name="price" placeholder="Price per item" required readonly>
-  </div>
-
-  <div class="form-row">
-    <label for="discount">Discount:</label>
-    <input type="number" id="discount" name="discount" value="0" />
-  </div>
-
-  <div class="form-row">
-    <label for="extra">Extra Charges:</label>
-    <input type="number" id="extra" name="extra" value="0" />
-  </div>
-
-  <div class="form-row">
-    <label for="payment-method">Payment Method:</label>
-    <select id="payment-method" name="payment">
-      <option value="Cash">Cash</option>
-      <option value="Mpesa">Mpesa</option>
-      <option value="Bank">Bank</option>
-    </select>
-  </div>
-
-  <div class="form-row">
-    <input type="text" id="total" name="total" placeholder="Total" readonly />
-  </div>
-
-  <div class="form-row">
-    <button type="submit">Add Sale</button>
-  </div>
+  <button type="submit">Submit Sale</button>
 </form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <!-- Optional: Show submitted sales -->
     <table id="sales-table">
