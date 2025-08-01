@@ -1,4 +1,4 @@
-const correctPassword = "glam2025"; // Change this to your preferred password
+const correctPassword = "1234"; // Change this to your preferred password
 
 function checkLogin() {
   const entered = document.getElementById("password").value;
@@ -10,6 +10,7 @@ function checkLogin() {
     error.textContent = "Incorrect password. Try again.";
   }
 }
+
 const sales = [];
 
 document.getElementById('sale-form').addEventListener('submit', function(e) {
