@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,60 +20,55 @@
   <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
 
-<form 
-  action="https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse" 
-  method="POST" 
-  target="hidden_iframe"
-  onsubmit="submitted=true;"
->
-  <div class="form-row">
-    <input type="text" name="entry.1049372289" id="item" placeholder="Item" required>
-  </div>
+    <form id="sale-form">
+      <div class="form-row">
+        <input type="text" id="item" placeholder="Search Item" list="item-list" required>
+        <datalist id="item-list"></datalist>
+      </div>
 
-  <div class="form-row">
-    <select name="entry.1483059350" id="unit" required>
-      <option value="ct">Carton (Ct)</option>
-      <option value="dz">Dozen (Dz)</option>
-      <option value="pc" selected>Piece (Pc)</option>
-    </select>
-  </div>
+      <div class="form-row">
+        <select id="unit" required>
+          <option value="ct">Carton (Ct)</option>
+          <option value="dz">Dozen (Dz)</option>
+          <option value="pc" selected>Piece (Pc)</option>
+        </select>
+      </div>
 
-  <div class="form-row">
-    <input type="number" name="entry.573514662" id="quantity" placeholder="Quantity" required min="1">
-  </div>
+      <div class="form-row">
+        <input type="number" id="quantity" placeholder="Quantity" required min="1">
+      </div>
 
-  <div class="form-row">
-    <input type="number" name="entry.1489672505" id="price" placeholder="Price" required readonly>
-  </div>
+      <div class="form-row">
+        <input type="number" id="price" placeholder="Price per item" required readonly>
+      </div>
 
-  <div class="form-row">
-    <label for="discount">Discount:</label>
-    <input type="number" name="entry.1474609854" id="discount" value="0">
-  </div>
+      <div class="form-row">
+        <label for="discount">Discount:</label>
+        <input type="number" id="discount" value="0" />
+      </div>
 
-  <div class="form-row">
-    <label for="extra">Extra Charges:</label>
-    <input type="number" name="entry.204222640" id="extra" value="0">
-  </div>
+      <div class="form-row">
+        <label for="extra">Extra Charges:</label>
+        <input type="number" id="extra" value="0" />
+      </div>
 
-  <div class="form-row">
-    <input type="number" name="entry.1933162022" id="total" placeholder="Total" required readonly>
-  </div>
+      <div class="form-row">
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method">
+          <option value="Cash">Cash</option>
+          <option value="Mpesa">Mpesa</option>
+          <option value="Bank">Bank</option>
+        </select>
+      </div>
 
-  <div class="form-row">
-    <select name="entry.1676608087" id="payment-method" required>
-      <option value="Cash">Cash</option>
-      <option value="Mpesa">Mpesa</option>
-      <option value="Bank">Bank</option>
-    </select>
-  </div>
+      <div class="form-row">
+        <input type="text" id="total" placeholder="Total" readonly />
+      </div>
 
-  <div class="form-row">
-    <button type="submit">Add Sale</button>
-  </div>
-</form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+      <div class="form-row">
+        <button type="submit">Add Sale</button>
+      </div>
+    </form>
 
     <!-- Optional: Show submitted sales -->
     <table id="sales-table">
