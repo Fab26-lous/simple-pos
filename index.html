@@ -17,11 +17,20 @@
   <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
     <form id="sale-form">
-      <input type="text" id="item" placeholder="Item Name" required>
-      <input type="number" id="quantity" placeholder="Quantity" required min="1">
-      <input type="number" id="price" placeholder="Price per item" required min="0">
-      <button type="submit">Add Sale</button>
-    </form>
+  <input type="text" id="item" placeholder="Search Item" list="item-list" required>
+  <datalist id="item-list"></datalist>
+
+  <select id="unit" required>
+    <option value="ct">Carton (Ct)</option>
+    <option value="dz">Dozen (Dz)</option>
+    <option value="pc" selected>Piece (Pc)</option>
+  </select>
+
+  <input type="number" id="quantity" placeholder="Quantity" required min="1">
+  <input type="number" id="price" placeholder="Price per item" required min="0" readonly>
+  
+  <button type="submit">Add Sale</button>
+</form>
 
     <table id="sales-table">
       <thead>
