@@ -773,6 +773,29 @@ const products = [
 { name: "4-figure Examination", prices: { ct: 0, dz: 30000, pc: 3000 } },
 { name: "logarithmic and mathematical", prices: { ct: 0, dz: 0, pc: 4000 } },
 ];
+// Populate product names in the datalist
+const datalist = document.getElementById('item-list');
+products.forEach(p => {
+  const option = document.createElement('option');
+  option.value = p.name;
+  datalist.appendChild(option);
+});
+
+// Auto-fill price when item or unit changes
+document.getElementById('item').addEventListener('input', updatePrice);
+document.getElementById('unit').addEventListener('change', updatePrice);
+
+function updatePrice() {
+  const itemName = document.getElementById('item').value.trim();
+  const unit = document.getElementById('unit').value;
+  const product = products.find(p => p.name.toLowerCase() === itemName.toLowerCase());
+  if (product) {
+    const price = product.prices[unit];
+    document.getElementById('price').value = price;
+  } else {
+    document.getElementById('price').value = '';
+  }
+}
 
 const correctPassword = "1234"; // Change this to your preferred password
 
