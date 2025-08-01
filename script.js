@@ -91,7 +91,7 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 });
 
 function sendSaleToSheet(sale) {
-  fetch("https://script.google.com/macros/s/AKfycbyilUUUokcSSCj9OonFIekupsMP5UZCn6-tX686JKS4zqzuOdWPYAx4d5PJqYJbZs7zZQ/exec", {
+  fetch("YOUR_WEB_APP_URL_HERE", {
     method: "POST",
     body: JSON.stringify(sale),
     headers: {
@@ -100,10 +100,17 @@ function sendSaleToSheet(sale) {
   })
   .then(res => res.json())
   .then(response => {
-    console.log("Sale saved:", response);
+    if (response.status === "success") {
+      console.log("Sale saved:", response);
+      alert("Sale recorded successfully!");
+    } else {
+      console.error("Error from script:", response.message);
+      alert("Failed to save sale: " + response.message);
+    }
   })
   .catch(err => {
-    console.error("Error sending sale:", err);
-    alert("Failed to save sale. Please check your internet or script.");
+    console.error("Fetch error:", err);
+    alert("Failed to save. Please check your internet or script.");
   });
 }
+
