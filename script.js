@@ -10,13 +10,25 @@ function checkLogin() {
     error.textContent = "Incorrect password. Try again.";
   }
 }
-// Populate product names in the datalist
-const datalist = document.getElementById('item-list');
-products.forEach(p => {
-  const option = document.createElement('option');
-  option.value = p.name;
-  datalist.appendChild(option);
-});
+
+let products = [];
+
+fetch('products.json')
+  .then(response => response.json())
+  .then(data => {
+    products = data;
+    populateDatalist();
+  });
+
+function populateDatalist() {
+  const datalist = document.getElementById('item-list');
+  datalist.innerHTML = '';
+  products.forEach(p => {
+    const option = document.createElement('option');
+    option.value = p.name;
+    datalist.appendChild(option);
+  });
+}
 
 // Auto-fill price when item or unit changes
 document.getElementById('item').addEventListener('input', updatePrice);
