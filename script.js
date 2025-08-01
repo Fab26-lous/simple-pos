@@ -45,6 +45,24 @@ function updatePrice() {
     document.getElementById('price').value = '';
   }
 }
+function calculateTotal(updateUI = false) {
+  const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+  const price = parseFloat(document.getElementById('price').value) || 0;
+  const discount = parseFloat(document.getElementById('discount').value) || 0;
+  const extra = parseFloat(document.getElementById('extra').value) || 0;
+
+  const subtotal = quantity * price;
+  const total = subtotal - discount + extra;
+
+  if (updateUI) {
+    document.getElementById('total').value = total.toFixed(2);
+  }
+
+  return total;
+}
+['quantity', 'price', 'discount', 'extra'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => calculateTotal(true));
+});
 
 const sales = [];
 
@@ -54,7 +72,8 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const item = document.getElementById('item').value;
   const quantity = parseInt(document.getElementById('quantity').value);
   const price = parseFloat(document.getElementById('price').value);
-  const total = quantity * price;
+  const total = calculateTotal(); // Uses discount + extra
+
 
   sales.push({ item, quantity, price, total });
 
