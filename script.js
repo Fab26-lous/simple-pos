@@ -84,12 +84,17 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 function updateTable() {
   const tbody = document.querySelector('#sales-table tbody');
   tbody.innerHTML = '';
-  sales.forEach((sale) => {
+  sales.forEach((sale, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
+      <td>${index + 1}</td>
       <td>${sale.item}</td>
+      <td>${sale.unit}</td>
       <td>${sale.quantity}</td>
       <td>${sale.price.toFixed(2)}</td>
+      <td>${sale.discount.toFixed(2)}</td>
+      <td>${sale.extra.toFixed(2)}</td>
+      <td>${sale.paymentMethod}</td>
       <td>${sale.total.toFixed(2)}</td>
     `;
     tbody.appendChild(row);
