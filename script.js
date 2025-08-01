@@ -28,7 +28,7 @@ const products = [
 { name: "Wallet", prices: { ct: 0, dz: 3500, pc: 5000 } },
 { name: "Pamba", prices: { ct: 0, dz: 0, pc: 1000 } },
 { name: "leso maua", prices: { ct: 300000, dz: 3500, pc: 500 } },
-{ name: "Wallet Kifungo", prices: { ct: , dz: 3500, pc: 5000 } },
+{ name: "Wallet Kifungo", prices: { ct:0, dz: 3500, pc: 5000 } },
 { name: "Q1", prices: { ct: 74000, dz: 16000, pc: 1500 } },
 { name: "Q2 Professor", prices: { ct: 72000, dz: 20000, pc: 2000 } },
 { name: "Q2 Maxon", prices: { ct: 72000, dz: 20000, pc: 2000 } },
