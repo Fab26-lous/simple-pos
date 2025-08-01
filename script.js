@@ -1,3 +1,15 @@
+const correctPassword = "1234"; // Change this to your preferred password
+
+function checkLogin() {
+  const entered = document.getElementById("password").value;
+  const error = document.getElementById("login-error");
+  if (entered === correctPassword) {
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("pos-container").style.display = "block";
+  } else {
+    error.textContent = "Incorrect password. Try again.";
+  }
+}
 const products = [
 { name: "Bahasha A6", prices: { ct: 20000, dz: 2500, pc: 100 } },
 { name: "Bahasha A5", prices: { ct: 35000, dz: 3500, pc: 200 } },
@@ -794,19 +806,6 @@ function updatePrice() {
     document.getElementById('price').value = price;
   } else {
     document.getElementById('price').value = '';
-  }
-}
-
-const correctPassword = "1234"; // Change this to your preferred password
-
-function checkLogin() {
-  const entered = document.getElementById("password").value;
-  const error = document.getElementById("login-error");
-  if (entered === correctPassword) {
-    document.getElementById("login-container").style.display = "none";
-    document.getElementById("pos-container").style.display = "block";
-  } else {
-    error.textContent = "Incorrect password. Try again.";
   }
 }
 
