@@ -91,20 +91,29 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 });
 
 function sendSaleToSheet(sale) {
-  fetch("https://script.google.com/macros/s/AKfycbyilUUUokcSSCj9OonFIekupsMP5UZCn6-tX686JKS4zqzuOdWPYAx4d5PJqYJbZs7zZQ/exec", {
+  fetch("YOUR_WEB_APP_URL_HERE", {
     method: "POST",
     body: JSON.stringify(sale),
     headers: {
       "Content-Type": "application/json"
     }
   })
-  .then(res => res.json())
-  .then(response => {
+  .then(res => res.text()) // 👈 FIRST get raw text
+  .then(text => {
+    console.log("Raw response:", text);
+
+    let response;
+    try {
+      response = JSON.parse(text);
+    } catch (err) {
+      console.error("Failed to parse JSON:", err);
+      alert("Server responded with invalid format.");
+      return;
+    }
+
     if (response.status === "success") {
-      console.log("Sale saved:", response);
       alert("Sale recorded successfully!");
     } else {
-      console.error("Error from script:", response.message);
       alert("Failed to save sale: " + response.message);
     }
   })
