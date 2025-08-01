@@ -69,7 +69,7 @@ const sales = [];
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
-   const item = document.getElementById('item').value;
+  const item = document.getElementById('item').value;
   const unit = document.getElementById('unit').value;
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
@@ -78,7 +78,12 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const paymentMethod = document.getElementById('payment-method').value;
   const total = calculateTotal();
 
-  sales.push({ item, unit, quantity, price, discount, extra, paymentMethod, total });
+  const sale = { item, unit, quantity, price, discount, extra, paymentMethod, total };
+
+  sales.push(sale);
+
+  // ✅ Send sale to Google Sheet
+  sendSaleToSheet(sale);
 
   updateTable();
   this.reset();
@@ -138,17 +143,4 @@ function sendSaleToSheet(sale) {
   });
 }
 
-// Example usage after clicking 'Add Sale'
-const saleData = {
-  item: "Quire 4/Q4",
-  unit: "Pc",
-  quantity: 2,
-  price: 40000,
-  discount: 0,
-  extra: 0,
-  payment: 80000,
-  total: 80000
-};
-
-sendSaleToSheet(saleData);
 
