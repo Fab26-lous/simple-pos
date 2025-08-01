@@ -91,7 +91,7 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 });
 
 function sendSaleToSheet(sale) {
-  fetch("https://script.google.com/macros/s/AKfycbxQGAdcK6I76luWZD6G_7YPqLQqsxn9SwEBovp8U1hF1qiNp3gqazTDrNkB5hGr-43Xpg/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyilUUUokcSSCj9OonFIekupsMP5UZCn6-tX686JKS4zqzuOdWPYAx4d5PJqYJbZs7zZQ/exec", {
     method: "POST",
     body: JSON.stringify(sale),
     headers: {
