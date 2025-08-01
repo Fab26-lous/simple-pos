@@ -91,7 +91,7 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 });
 
 function sendSaleToSheet(sale) {
-  fetch("YOUR_WEB_APP_URL_HERE", {
+  fetch("https://script.google.com/macros/s/AKfycbyilUUUokcSSCj9OonFIekupsMP5UZCn6-tX686JKS4zqzuOdWPYAx4d5PJqYJbZs7zZQ/exec", {
     method: "POST",
     body: JSON.stringify(sale),
     headers: {
