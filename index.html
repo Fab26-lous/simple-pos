@@ -7,7 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="pos-container">
+  <div class="login-container" id="login-container">
+    <h2>Login</h2>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkLogin()">Login</button>
+    <p id="login-error" style="color: red;"></p>
+  </div>
+
+  <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
     <form id="sale-form">
       <input type="text" id="item" placeholder="Item Name" required>
