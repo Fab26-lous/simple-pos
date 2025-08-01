@@ -69,13 +69,16 @@ const sales = [];
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const item = document.getElementById('item').value;
-  const quantity = parseInt(document.getElementById('quantity').value);
-  const price = parseFloat(document.getElementById('price').value);
-  const total = calculateTotal(); // Uses discount + extra
+   const item = document.getElementById('item').value;
+  const unit = document.getElementById('unit').value;
+  const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+  const price = parseFloat(document.getElementById('price').value) || 0;
+  const discount = parseFloat(document.getElementById('discount').value) || 0;
+  const extra = parseFloat(document.getElementById('extra').value) || 0;
+  const paymentMethod = document.getElementById('payment-method').value;
+  const total = calculateTotal();
 
-
-  sales.push({ item, quantity, price, total });
+  sales.push({ item, unit, quantity, price, discount, extra, paymentMethod, total });
 
   updateTable();
   this.reset();
