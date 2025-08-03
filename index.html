@@ -81,6 +81,24 @@
       <div class="form-row">
         <button type="submit">Add to Sale</button>
       </div>
+      <!-- Below the item input field -->
+<div class="form-row">
+  <label>Item Search:</label>
+  <div style="display: flex; align-items: center;">
+    <input type="text" id="item" list="item-list" placeholder="Search item...">
+    <span id="stock-display" style="margin-left: 10px;">Stock: -</span>
+  </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="button-group">
+  <button onclick="restockItem()" class="restock-btn">
+    <i class="fas fa-boxes"></i> Restock Item
+  </button>
+  <button onclick="generateReport()" class="report-btn">
+    <i class="fas fa-file-alt"></i> Inventory Report
+  </button>
+</div>
     </form>
 
     <!-- Sales Table -->
@@ -121,3 +139,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
