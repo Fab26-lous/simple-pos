@@ -79,40 +79,22 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const discount = parseFloat(document.getElementById('discount').value) || 0;
   const extra = parseFloat(document.getElementById('extra').value) || 0;
   const paymentMethod = document.getElementById('payment-method').value;
+
   const total = calculateTotal();
 
   const sale = { item, unit, quantity, price, discount, extra, paymentMethod, total };
 
-document.getElementById('sale-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+  submitSaleToGoogleForm(sale);
+});
 
-  const item = document.getElementById('item').value;
-  const unit = document.getElementById('unit').value;
+function calculateTotal() {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
   const discount = parseFloat(document.getElementById('discount').value) || 0;
   const extra = parseFloat(document.getElementById('extra').value) || 0;
-  const paymentMethod = document.getElementById('payment-method').value;
-  const total = calculateTotal();
 
-  const sale = { 
-    item, 
-    unit, 
-    quantity, 
-    price, 
-    discount, 
-    extra, 
-    payment: paymentMethod,  // Make sure keys match your form fields
-    total 
-  };
-
-  // Call the function to submit sale to Google Form
-  submitSaleToGoogleForm(sale);
-
-  // Optional: Reset form or show success message
-  e.target.reset();
-  alert("Sale recorded successfully!");
-});
+  return (quantity * price) - discount + extra;
+}
 
 function submitSaleToGoogleForm(sale) {
   const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
@@ -122,10 +104,10 @@ function submitSaleToGoogleForm(sale) {
   formData.append("entry.1483059350", sale.unit);
   formData.append("entry.573514662", sale.quantity);
   formData.append("entry.1489672505", sale.price);
-  formData.append("entry.1474609854", sale.discount || "0");
-  formData.append("entry.204222640", sale.extra || "0");
+  formData.append("entry.1474609854", sale.discount);
+  formData.append("entry.204222640", sale.extra);
   formData.append("entry.1933162022", sale.total);
-  formData.append("entry.1676608087", sale.payment);
+  formData.append("entry.1676608087", sale.paymentMethod);
 
   fetch(formUrl, {
     method: "POST",
@@ -137,8 +119,11 @@ function submitSaleToGoogleForm(sale) {
   })
   .then(() => {
     console.log("Sale recorded successfully.");
+    alert("Sale recorded successfully.");
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Error recording sale:", err);
+    alert("Error recording sale.");
   });
 }
+
