@@ -71,13 +71,17 @@
 <body>
   <!-- Login -->
   <div class="login-container" id="login-container">
-    <h2>Login</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="checkLogin()">Login</button>
-    <p id="login-error" style="color: red;"></p>
-  </div>
+  <h2>POS Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="checkLogin()">Login</button>
+  <p id="login-error" style="color: red;"></p>
+</div>
 
   <!-- POS Form -->
+  <div class="pos-container" id="pos-container" style="display: none;">
+  <h2 id="store-name">Simple POS</h2>
+  <!-- Rest of your existing POS form... -->
   <div class="pos-container" id="pos-container" style="display: none;">
     <h2>Simple POS</h2>
 
@@ -159,4 +163,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
