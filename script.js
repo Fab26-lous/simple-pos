@@ -291,7 +291,7 @@ function submitSaleToGoogleForm(sale) {
     formData.append("entry.204222640", sale.extra);
     formData.append("entry.1933162022", sale.total);
     formData.append("entry.1676608087", sale.paymentMethod);
-    formData.append("entry.XXXXXXX", stores[currentStore].name); // Add store name
+    formData.append("entry.2065126566", stores[currentStore].name); // Add store name
 
     setTimeout(() => {
       fetch(formUrl, {
@@ -307,3 +307,4 @@ function submitSaleToGoogleForm(sale) {
     }, 150 * Math.random());
   });
 }
+
