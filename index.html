@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple POS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login -->
+  <div class="login-container" id="login-container">
+    <h2>POS Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Login</button>
+    <p id="login-error" style="color: red;"></p>
+  </div>
+
+  <!-- Store Selection -->
+  <div class="store-selection" id="store-selection" style="display: none;">
+    <h2>Select Store</h2>
+    <button onclick="selectStore('store1')">One Stop</button>
+    <button onclick="selectStore('store2')">Golden</button>
+  </div>
+
+  <!-- POS Form -->
+  <div class="pos-container" id="pos-container" style="display: none;">
+    <h2 id="store-name">Simple POS</h2>
+
+    <form id="sale-form">
+      <div class="form-row">
+        <input type="text" id="item" placeholder="Search Item" list="item-list" required>
+        <datalist id="item-list"></datalist>
+      </div>
+
+      <div class="form-row">
+        <select id="unit" required>
+          <option value="ct">Carton (Ct)</option>
+          <option value="dz">Dozen (Dz)</option>
+          <option value="pc" selected>Piece (Pc)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <input type="number" id="quantity" placeholder="Quantity" required min="1">
+      </div>
+
+      <div class="form-row">
+        <input type="number" id="price" placeholder="Price per item" required readonly>
+      </div>
+
+      <div class="form-row">
+        <label for="discount">Discount:</label>
+        <input type="number" id="discount" value="0" />
+      </div>
+
+      <div class="form-row">
+        <label for="extra">Extra Charges:</label>
+        <input type="number" id="extra" value="0" />
+      </div>
+
+      <div class="form-row">
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method">
+          <option value="Cash">Cash</option>
+          <option value="Mpesa">Mpesa</option>
+          <option value="Bank">Bank</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <input type="text" id="total" placeholder="Total" readonly />
+      </div>
+
+      <div class="form-row">
+        <button type="submit">Add to Order</button>
+      </div>
+    </form>
+
+    <!-- Order Summary -->
+    <table id="sales-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Extra</th>
+          <th>Total</th>
+          <th>Payment</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="form-row">
+      <button id="submit-all-btn" onclick="submitAllSales()" style="display: none;">Submit All Items</button>
+      <button id="clear-all-btn" onclick="clearAllSales()" style="display: none;">Clear All Items</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
