@@ -279,7 +279,7 @@ function submitAllSales() {
 }
 
 function submitSaleToGoogleForm(sale) {
-  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse&submit=Submit";
 
   // Required hidden fields (extracted from form inspection)
   const hiddenFields = {
@@ -328,4 +328,5 @@ function submitSaleToGoogleForm(sale) {
     return false;
   });
 }
+
 
