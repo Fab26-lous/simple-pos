@@ -279,41 +279,53 @@ function submitAllSales() {
 }
 
 function submitSaleToGoogleForm(sale) {
-  return new Promise((resolve, reject) => {
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
 
-    const formData = new URLSearchParams();
+  // Required hidden fields (extracted from form inspection)
+  const hiddenFields = {
+    "fvv": "1",
+    "draftResponse": "[null,null,\"1293769185075733533\"]", // From your form's HTML
+    "pageHistory": "0",
+    "fbzx": "1293769185075733533" // Unique form identifier
+  };
+
+  const formData = new URLSearchParams({
+    ...hiddenFields,
     // Your item fields
-    formData.append("entry.1049372289", sale.item);
-    formData.append("entry.1483059350", sale.unit);
-    formData.append("entry.573514662", sale.quantity);
-    formData.append("entry.1489672505", sale.price);
-    formData.append("entry.1474609854", sale.discount);
-    formData.append("entry.204222640", sale.extra);
-    formData.append("entry.1933162022", sale.total);
-    formData.append("entry.1676608087", sale.paymentMethod);
-    
-    // Store name field
-    formData.append("entry.2065126566", stores[currentStore].name);
+        
+    // YOUR FORM FIELDS (replace with actual entry IDs)
+    "entry.902078713": sale.item,         // Item name
+    "entry.448082825": sale.unit,         // Unit (pc/dz/ct)
+    "entry.617272247": sale.quantity,      // Quantity
+    "entry.591650069": sale.price,        // Price
+    "entry.209491416": sale.discount,     // Discount
+    "entry.1362215713": sale.extra,         // Extra charges
+    "entry.492804547": sale.total,        // Total
+    "entry.197957478": sale.paymentMethod,// Payment method
+    "entry.370318910": stores[currentStore].name // Store name
+  });
 
-    console.log("Submitting to store:", stores[currentStore].name);
-    console.log("Form data:", Object.fromEntries(formData));
+  // Enhanced headers
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Referer": formUrl.replace("/formResponse", "/viewform"),
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  };
 
-    fetch(formUrl, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: formData.toString()
-    })
-    .then(() => {
-      console.log("Submission successful");
-      resolve();
-    })
-    .catch(err => {
-      console.error("Submission failed:", err);
-      reject(err);
-    });
+  // Submit with error handling
+  return fetch(formUrl, {
+    method: "POST",
+    mode: "no-cors",
+    headers: headers,
+    body: formData.toString()
+  })
+  .then(() => {
+    console.log("Sale submitted successfully");
+    return true;
+  })
+  .catch(error => {
+    console.error("Submission failed:", error);
+    return false;
   });
 }
+
