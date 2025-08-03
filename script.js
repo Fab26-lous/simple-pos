@@ -280,9 +280,10 @@ function submitAllSales() {
 
 function submitSaleToGoogleForm(sale) {
   return new Promise((resolve, reject) => {
-    const formUrl = "ttps://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
 
     const formData = new URLSearchParams();
+    // Your item fields
     formData.append("entry.1049372289", sale.item);
     formData.append("entry.1483059350", sale.unit);
     formData.append("entry.573514662", sale.quantity);
@@ -291,22 +292,28 @@ function submitSaleToGoogleForm(sale) {
     formData.append("entry.204222640", sale.extra);
     formData.append("entry.1933162022", sale.total);
     formData.append("entry.1676608087", sale.paymentMethod);
-    formData.append("entry.2065126566", stores[currentStore].name || "Unknown Store");
-  
-  console.log("Submitting store:", stores[currentStore].name); 
-  console.log("Using field ID: entry.2065126566");
-  
-    setTimeout(() => {
-      fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-      })
-      .then(() => resolve())
-      .catch(err => reject(err));
-    }, 150 * Math.random());
+    
+    // Store name field
+    formData.append("entry.2065126566", stores[currentStore].name);
+
+    console.log("Submitting to store:", stores[currentStore].name);
+    console.log("Form data:", Object.fromEntries(formData));
+
+    fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: formData.toString()
+    })
+    .then(() => {
+      console.log("Submission successful");
+      resolve();
+    })
+    .catch(err => {
+      console.error("Submission failed:", err);
+      reject(err);
+    });
   });
 }
