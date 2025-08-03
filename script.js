@@ -38,11 +38,24 @@ function checkLogin() {
     currentStore = validStore;
     currentUser = username;
     document.getElementById("login-container").style.display = "none";
-    document.getElementById("pos-container").style.display = "block";
-    document.getElementById("store-name").textContent = stores[validStore].name;
-    loadProducts(); // Load the shared products.json
+    document.getElementById("store-selection").style.display = "block";
+    // Highlight the user's store
+    document.querySelector(`button[onclick="selectStore('${currentStore}')"]`)
+      .classList.add('active-store');
   } else {
     error.textContent = "Invalid username or password";
+  }
+}
+
+function selectStore(storeId) {
+  if (storeId === currentStore) {
+    // User selected their authorized store
+    document.getElementById("store-selection").style.display = "none";
+    document.getElementById("pos-container").style.display = "block";
+    document.getElementById("store-name").textContent = stores[storeId].name;
+    loadProducts();
+  } else {
+    alert("You are not authorized for this store");
   }
 }
 
@@ -62,41 +75,6 @@ function loadProducts() {
     });
 }
 
-// [Rest of your existing code remains the same...]
-
-function loadProducts(productsFile) {
-  fetch(productsFile)
-    .then(response => {
-      if (!response.ok) throw new Error('Failed to load products');
-      return response.json();
-    })
-    .then(data => {
-      products = data;
-      populateDatalist();
-    })
-    .catch(err => {
-      console.error('Error loading products:', err);
-      alert('Failed to load product data. Please check your connection.');
-    });
-}
-
-// [Rest of your existing code...]
-// Load products
-fetch('products.json')
-  .then(response => {
-    if (!response.ok) throw new Error('Failed to load products');
-    return response.json();
-  })
-  .then(data => {
-    products = data;
-    populateDatalist();
-  })
-  .catch(err => {
-    console.error('Error loading products:', err);
-    alert('Failed to load product data. Please check your connection.');
-  });
-
-// Populate item datalist
 function populateDatalist() {
   const datalist = document.getElementById('item-list');
   datalist.innerHTML = '';
@@ -111,7 +89,6 @@ function populateDatalist() {
 document.getElementById('item').addEventListener('input', updatePrice);
 document.getElementById('unit').addEventListener('change', updatePrice);
 
-// Update price when item or unit changes
 function updatePrice() {
   const itemName = document.getElementById('item').value.trim();
   const unit = document.getElementById('unit').value;
@@ -125,7 +102,6 @@ function updatePrice() {
   calculateTotal();
 }
 
-// Calculate total for current item
 function calculateTotal() {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
@@ -139,12 +115,10 @@ function calculateTotal() {
   return total;
 }
 
-// Auto-calculate when inputs change
 ['quantity', 'price', 'discount', 'extra'].forEach(id => {
   document.getElementById(id).addEventListener('input', calculateTotal);
 });
 
-// Handle form submission (adds to order)
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -162,7 +136,6 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const paymentMethod = document.getElementById('payment-method').value;
   const total = calculateTotal();
 
-  // Add to current sales array
   const sale = {
     item, 
     unit, 
@@ -172,7 +145,8 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
     extra, 
     paymentMethod, 
     total,
-    timestamp: new Date().toLocaleTimeString()
+    timestamp: new Date().toLocaleTimeString(),
+    store: currentStore
   };
   
   currentSales.push(sale);
@@ -180,7 +154,6 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   resetForm();
 });
 
-// Reset the form after adding an item
 function resetForm() {
   document.getElementById('sale-form').reset();
   document.getElementById('price').value = '';
@@ -188,7 +161,6 @@ function resetForm() {
   document.getElementById('item').focus();
 }
 
-// Update the sales table with all items
 function updateSalesTable() {
   const tbody = document.querySelector('#sales-table tbody');
   tbody.innerHTML = '';
@@ -215,7 +187,6 @@ function updateSalesTable() {
     grandTotal += sale.total;
   });
   
-  // Show/hide action buttons
   const submitBtn = document.getElementById('submit-all-btn');
   const clearBtn = document.getElementById('clear-all-btn');
   
@@ -223,7 +194,6 @@ function updateSalesTable() {
     submitBtn.style.display = 'inline-block';
     clearBtn.style.display = 'inline-block';
     
-    // Add grand total row
     const footerRow = document.createElement('tr');
     footerRow.innerHTML = `
       <td colspan="7" style="text-align: right;"><strong>Grand Total:</strong></td>
@@ -237,13 +207,11 @@ function updateSalesTable() {
   }
 }
 
-// Remove a sale from the order
 function removeSale(index) {
   currentSales.splice(index, 1);
   updateSalesTable();
 }
 
-// Clear all items from the order
 function clearAllSales() {
   if (confirm('Are you sure you want to clear all items?')) {
     currentSales = [];
@@ -251,7 +219,6 @@ function clearAllSales() {
   }
 }
 
-// Submit all items to Google Forms
 function submitAllSales() {
   if (currentSales.length === 0) {
     alert('No items to submit');
@@ -262,7 +229,6 @@ function submitAllSales() {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Submitting...';
 
-  // Create progress indicator
   const progress = document.createElement('div');
   progress.style.margin = '10px 0';
   progress.style.fontWeight = 'bold';
@@ -274,7 +240,6 @@ function submitAllSales() {
   
   const submitNext = (index) => {
     if (index >= currentSales.length) {
-      // All submissions complete
       progress.innerHTML = `Completed: ${successCount}/${currentSales.length} items submitted successfully`;
       
       if (errors.length > 0) {
@@ -283,14 +248,13 @@ function submitAllSales() {
       }
       
       if (successCount > 0) {
-        currentSales.splice(0, successCount); // Remove successful ones
+        currentSales.splice(0, successCount);
         updateSalesTable();
       }
       
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit All Items';
       
-      // Remove progress after 5 seconds
       setTimeout(() => {
         progress.remove();
       }, 5000);
@@ -311,11 +275,9 @@ function submitAllSales() {
       });
   };
 
-  // Start submitting with a small delay between each
   submitNext(0);
 }
 
-// Submit individual sale to Google Form
 function submitSaleToGoogleForm(sale) {
   return new Promise((resolve, reject) => {
     const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
@@ -329,8 +291,8 @@ function submitSaleToGoogleForm(sale) {
     formData.append("entry.204222640", sale.extra);
     formData.append("entry.1933162022", sale.total);
     formData.append("entry.1676608087", sale.paymentMethod);
+    formData.append("entry.XXXXXXX", stores[currentStore].name); // Add store name
 
-    // Add a small random delay between submissions (100-500ms)
     setTimeout(() => {
       fetch(formUrl, {
         method: "POST",
@@ -342,7 +304,6 @@ function submitSaleToGoogleForm(sale) {
       })
       .then(() => resolve())
       .catch(err => reject(err));
-    }, 100 + (400 * Math.random()));
+    }, 150 * Math.random());
   });
 }
-
