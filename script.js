@@ -9,12 +9,58 @@ let currentUser = null;
 let products = [];
 let currentSales = [];
 
+function checkLogin() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value;
+  const errorElement = document.getElementById("login-error");
+
+  // Clear previous errors
+  errorElement.textContent = "";
+
+  // Validate inputs
+  if (!username || !password) {
+    errorElement.textContent = "Please enter both username and password";
+    return;
+  }
+
+  // Check credentials
+  let validStore = null;
+  for (const [storeId, store] of Object.entries(stores)) {
+    if (store.users[username] && store.users[username] === password) {
+      validStore = storeId;
+      break;
+    }
+  }
+
+  if (validStore) {
+    currentStore = validStore;
+    currentUser = username;
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("pos-container").style.display = "block";
+    document.getElementById("store-name").textContent = stores[validStore].name;
+    loadProducts();
+  } else {
+    errorElement.textContent = "Invalid username or password";
+    // Clear password field
+    document.getElementById("password").value = "";
+  }
+}
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   setupEventListeners();
 });
-
+function selectStore(storeId) {
+  if (storeId === currentStore) {
+    // User selected their authorized store
+    document.getElementById("store-selection").style.display = "none";
+    document.getElementById("pos-container").style.display = "block";
+    document.getElementById("store-name").textContent = stores[storeId].name;
+    loadProducts();
+  } else {
+    alert("You are not authorized for this store");
+  }
+}
 // Core Functions
 function loadProducts() {
   fetch('products.json')
@@ -197,4 +243,5 @@ function saveProducts() {
   localStorage.setItem('inventory', JSON.stringify(products));
   populateDatalist();
 }
+
 
