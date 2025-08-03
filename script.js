@@ -2,18 +2,20 @@ const correctPassword = "1234"; // Change this to your preferred password
 let products = [];
 let currentSales = []; // Array to store multiple sales
 
+// Login function
 function checkLogin() {
   const entered = document.getElementById("password").value;
   const error = document.getElementById("login-error");
   if (entered === correctPassword) {
     document.getElementById("login-container").style.display = "none";
     document.getElementById("pos-container").style.display = "block";
+    document.getElementById("item").focus();
   } else {
     error.textContent = "Incorrect password. Try again.";
   }
 }
 
-// Fetch products
+// Load products
 fetch('products.json')
   .then(response => {
     if (!response.ok) throw new Error('Failed to load products');
@@ -28,6 +30,7 @@ fetch('products.json')
     alert('Failed to load product data. Please check your connection.');
   });
 
+// Populate item datalist
 function populateDatalist() {
   const datalist = document.getElementById('item-list');
   datalist.innerHTML = '';
@@ -42,6 +45,7 @@ function populateDatalist() {
 document.getElementById('item').addEventListener('input', updatePrice);
 document.getElementById('unit').addEventListener('change', updatePrice);
 
+// Update price when item or unit changes
 function updatePrice() {
   const itemName = document.getElementById('item').value.trim();
   const unit = document.getElementById('unit').value;
@@ -55,6 +59,7 @@ function updatePrice() {
   calculateTotal();
 }
 
+// Calculate total for current item
 function calculateTotal() {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
@@ -73,7 +78,7 @@ function calculateTotal() {
   document.getElementById(id).addEventListener('input', calculateTotal);
 });
 
-// Handle form submission (now adds to sales table)
+// Handle form submission (adds to order)
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -109,6 +114,7 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   resetForm();
 });
 
+// Reset the form after adding an item
 function resetForm() {
   document.getElementById('sale-form').reset();
   document.getElementById('price').value = '';
@@ -116,6 +122,7 @@ function resetForm() {
   document.getElementById('item').focus();
 }
 
+// Update the sales table with all items
 function updateSalesTable() {
   const tbody = document.querySelector('#sales-table tbody');
   tbody.innerHTML = '';
@@ -142,75 +149,133 @@ function updateSalesTable() {
     grandTotal += sale.total;
   });
   
-  // Add grand total row
+  // Show/hide action buttons
+  const submitBtn = document.getElementById('submit-all-btn');
+  const clearBtn = document.getElementById('clear-all-btn');
+  
   if (currentSales.length > 0) {
+    submitBtn.style.display = 'inline-block';
+    clearBtn.style.display = 'inline-block';
+    
+    // Add grand total row
     const footerRow = document.createElement('tr');
     footerRow.innerHTML = `
       <td colspan="7" style="text-align: right;"><strong>Grand Total:</strong></td>
       <td><strong>${grandTotal.toFixed(2)}</strong></td>
-      <td colspan="2">
-        <button onclick="submitAllSales()">Submit All</button>
-        <button onclick="clearAllSales()">Clear All</button>
-      </td>
+      <td colspan="2"></td>
     `;
     tbody.appendChild(footerRow);
+  } else {
+    submitBtn.style.display = 'none';
+    clearBtn.style.display = 'none';
   }
 }
 
+// Remove a sale from the order
 function removeSale(index) {
   currentSales.splice(index, 1);
   updateSalesTable();
 }
 
+// Clear all items from the order
 function clearAllSales() {
-  if (confirm('Are you sure you want to clear all sales?')) {
+  if (confirm('Are you sure you want to clear all items?')) {
     currentSales = [];
     updateSalesTable();
   }
 }
 
+// Submit all items to Google Forms
 function submitAllSales() {
   if (currentSales.length === 0) {
-    alert('No sales to submit');
+    alert('No items to submit');
     return;
   }
+
+  const submitBtn = document.getElementById('submit-all-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+
+  // Create progress indicator
+  const progress = document.createElement('div');
+  progress.style.margin = '10px 0';
+  progress.style.fontWeight = 'bold';
+  progress.innerHTML = `Submitting 0/${currentSales.length} items...`;
+  submitBtn.parentNode.appendChild(progress);
+
+  let successCount = 0;
+  const errors = [];
   
-  // Submit each sale one by one
-  const promises = currentSales.map(sale => {
-    return submitSaleToGoogleForm(sale);
-  });
-  
-  Promise.all(promises)
-    .then(() => {
-      alert('All sales submitted successfully!');
-      currentSales = [];
-      updateSalesTable();
-    })
-    .catch(err => {
-      console.error('Error submitting some sales:', err);
-      alert('Some sales may not have been submitted. Please check your connection.');
-    });
+  const submitNext = (index) => {
+    if (index >= currentSales.length) {
+      // All submissions complete
+      progress.innerHTML = `Completed: ${successCount}/${currentSales.length} items submitted successfully`;
+      
+      if (errors.length > 0) {
+        progress.innerHTML += `<br>${errors.length} items failed`;
+        console.error('Failed submissions:', errors);
+      }
+      
+      if (successCount > 0) {
+        currentSales.splice(0, successCount); // Remove successful ones
+        updateSalesTable();
+      }
+      
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit All Items';
+      
+      // Remove progress after 5 seconds
+      setTimeout(() => {
+        progress.remove();
+      }, 5000);
+      
+      return;
+    }
+
+    progress.innerHTML = `Submitting ${index + 1}/${currentSales.length} items...`;
+    
+    submitSaleToGoogleForm(currentSales[index])
+      .then(() => {
+        successCount++;
+        submitNext(index + 1);
+      })
+      .catch(err => {
+        errors.push({ index, error: err });
+        submitNext(index + 1);
+      });
+  };
+
+  // Start submitting with a small delay between each
+  submitNext(0);
 }
 
+// Submit individual sale to Google Form
 function submitSaleToGoogleForm(sale) {
-  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
+  return new Promise((resolve, reject) => {
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
 
-  const formData = new URLSearchParams();
-  formData.append("entry.1049372289", sale.item);
-  formData.append("entry.1483059350", sale.unit);
-  formData.append("entry.573514662", sale.quantity);
-  formData.append("entry.1489672505", sale.price);
-  formData.append("entry.1474609854", sale.discount);
-  formData.append("entry.204222640", sale.extra);
-  formData.append("entry.1933162022", sale.total);
-  formData.append("entry.1676608087", sale.paymentMethod);
+    const formData = new URLSearchParams();
+    formData.append("entry.1049372289", sale.item);
+    formData.append("entry.1483059350", sale.unit);
+    formData.append("entry.573514662", sale.quantity);
+    formData.append("entry.1489672505", sale.price);
+    formData.append("entry.1474609854", sale.discount);
+    formData.append("entry.204222640", sale.extra);
+    formData.append("entry.1933162022", sale.total);
+    formData.append("entry.1676608087", sale.paymentMethod);
 
-  return fetch(formUrl, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: formData.toString()
+    // Add a small random delay between submissions (100-500ms)
+    setTimeout(() => {
+      fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData.toString()
+      })
+      .then(() => resolve())
+      .catch(err => reject(err));
+    }, 100 + (400 * Math.random()));
   });
 }
