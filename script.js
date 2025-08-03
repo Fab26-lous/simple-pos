@@ -310,4 +310,3 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
-
