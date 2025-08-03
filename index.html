@@ -1,11 +1,66 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simple POS</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .login-container, .pos-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .form-row {
+      margin-bottom: 10px;
+    }
+    input, select, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #login-error {
+      color: red;
+    }
+    #sales-table button {
+      margin: 2px;
+      padding: 4px 8px;
+      width: auto;
+    }
+  </style>
 </head>
 <body>
   <!-- Login -->
@@ -66,31 +121,35 @@
       </div>
 
       <div class="form-row">
-        <button type="submit">Add Sale</button>
+        <button type="submit">Add to Order</button>
       </div>
     </form>
 
+    <!-- Order Summary -->
     <table id="sales-table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Item</th>
-      <th>Unit</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Discount</th>
-      <th>Extra</th>
-      <th>Total</th>
-      <th>Payment</th>
-      <th>Action</th> <!-- Added for remove button -->
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Extra</th>
+          <th>Total</th>
+          <th>Payment</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
+    <div class="form-row">
+      <button id="submit-all-btn" onclick="submitAllSales()" style="display: none;">Submit All Items</button>
+      <button id="clear-all-btn" onclick="clearAllSales()" style="display: none;">Clear All Items</button>
+    </div>
   </div>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
