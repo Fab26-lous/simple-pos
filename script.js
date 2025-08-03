@@ -1,4 +1,6 @@
 const correctPassword = "1234"; // Change this to your preferred password
+let products = [];
+let currentSales = []; // Array to store multiple sales
 
 function checkLogin() {
   const entered = document.getElementById("password").value;
@@ -11,8 +13,7 @@ function checkLogin() {
   }
 }
 
-let products = [];
-
+// Fetch products
 fetch('products.json')
   .then(response => {
     if (!response.ok) throw new Error('Failed to load products');
@@ -37,6 +38,7 @@ function populateDatalist() {
   });
 }
 
+// Event listeners for price calculation
 document.getElementById('item').addEventListener('input', updatePrice);
 document.getElementById('unit').addEventListener('change', updatePrice);
 
@@ -50,6 +52,7 @@ function updatePrice() {
   } else {
     document.getElementById('price').value = '';
   }
+  calculateTotal();
 }
 
 function calculateTotal() {
@@ -65,10 +68,12 @@ function calculateTotal() {
   return total;
 }
 
+// Auto-calculate when inputs change
 ['quantity', 'price', 'discount', 'extra'].forEach(id => {
   document.getElementById(id).addEventListener('input', calculateTotal);
 });
 
+// Handle form submission (now adds to sales table)
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -84,13 +89,108 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const discount = parseFloat(document.getElementById('discount').value) || 0;
   const extra = parseFloat(document.getElementById('extra').value) || 0;
   const paymentMethod = document.getElementById('payment-method').value;
-
   const total = calculateTotal();
 
-  const sale = { item, unit, quantity, price, discount, extra, paymentMethod, total };
-
-  submitSaleToGoogleForm(sale);
+  // Add to current sales array
+  const sale = {
+    item, 
+    unit, 
+    quantity, 
+    price, 
+    discount, 
+    extra, 
+    paymentMethod, 
+    total,
+    timestamp: new Date().toLocaleTimeString()
+  };
+  
+  currentSales.push(sale);
+  updateSalesTable();
+  resetForm();
 });
+
+function resetForm() {
+  document.getElementById('sale-form').reset();
+  document.getElementById('price').value = '';
+  document.getElementById('total').value = '';
+  document.getElementById('item').focus();
+}
+
+function updateSalesTable() {
+  const tbody = document.querySelector('#sales-table tbody');
+  tbody.innerHTML = '';
+  
+  let grandTotal = 0;
+  
+  currentSales.forEach((sale, index) => {
+    const row = document.createElement('tr');
+    
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${sale.item}</td>
+      <td>${sale.unit}</td>
+      <td>${sale.quantity}</td>
+      <td>${sale.price.toFixed(2)}</td>
+      <td>${sale.discount.toFixed(2)}</td>
+      <td>${sale.extra.toFixed(2)}</td>
+      <td>${sale.total.toFixed(2)}</td>
+      <td>${sale.paymentMethod}</td>
+      <td><button onclick="removeSale(${index})">×</button></td>
+    `;
+    
+    tbody.appendChild(row);
+    grandTotal += sale.total;
+  });
+  
+  // Add grand total row
+  if (currentSales.length > 0) {
+    const footerRow = document.createElement('tr');
+    footerRow.innerHTML = `
+      <td colspan="7" style="text-align: right;"><strong>Grand Total:</strong></td>
+      <td><strong>${grandTotal.toFixed(2)}</strong></td>
+      <td colspan="2">
+        <button onclick="submitAllSales()">Submit All</button>
+        <button onclick="clearAllSales()">Clear All</button>
+      </td>
+    `;
+    tbody.appendChild(footerRow);
+  }
+}
+
+function removeSale(index) {
+  currentSales.splice(index, 1);
+  updateSalesTable();
+}
+
+function clearAllSales() {
+  if (confirm('Are you sure you want to clear all sales?')) {
+    currentSales = [];
+    updateSalesTable();
+  }
+}
+
+function submitAllSales() {
+  if (currentSales.length === 0) {
+    alert('No sales to submit');
+    return;
+  }
+  
+  // Submit each sale one by one
+  const promises = currentSales.map(sale => {
+    return submitSaleToGoogleForm(sale);
+  });
+  
+  Promise.all(promises)
+    .then(() => {
+      alert('All sales submitted successfully!');
+      currentSales = [];
+      updateSalesTable();
+    })
+    .catch(err => {
+      console.error('Error submitting some sales:', err);
+      alert('Some sales may not have been submitted. Please check your connection.');
+    });
+}
 
 function submitSaleToGoogleForm(sale) {
   const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
@@ -105,20 +205,12 @@ function submitSaleToGoogleForm(sale) {
   formData.append("entry.1933162022", sale.total);
   formData.append("entry.1676608087", sale.paymentMethod);
 
-  fetch(formUrl, {
+  return fetch(formUrl, {
     method: "POST",
     mode: "no-cors",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: formData.toString()
-  })
-  .then(() => {
-    alert("Sale recorded successfully.");
-    document.getElementById('sale-form').reset();
-  })
-  .catch((err) => {
-    console.error("Error recording sale:", err);
-    alert("Error recording sale. Please check your internet connection.");
   });
 }
