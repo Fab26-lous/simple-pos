@@ -129,17 +129,20 @@ function processRestock() {
 // UI Functions
 function updatePrice() {
   const itemName = document.getElementById('item').value;
-  const unit = document.getElementById('unit').value;
   const product = products.find(p => p.name === itemName);
   
   if (product) {
-    document.getElementById('price').value = product.prices[unit] || '';
-    document.getElementById('stock-display').textContent = 
-      `Stock: ${product.stock !== undefined ? product.stock : 'N/A'}`;
-  } else {
-    document.getElementById('price').value = '';
-    document.getElementById('stock-display').textContent = '';
+    const stockDisplay = document.getElementById('stock-display');
+    stockDisplay.textContent = `Stock: ${product.stock}`;
+    
+    // Highlight low stock
+    if (product.stock < 5) {
+      stockDisplay.classList.add('low-stock');
+    } else {
+      stockDisplay.classList.remove('low-stock');
+    }
   }
+}
   calculateTotal();
 }
 
@@ -161,3 +164,37 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
+// Restock Function
+function restockItem() {
+  const itemName = prompt("Enter item name to restock:");
+  const quantity = parseInt(prompt("Enter restock quantity:"));
+  
+  if (itemName && quantity) {
+    const product = products.find(p => p.name === itemName);
+    if (product) {
+      product.stock += quantity;
+      saveProducts();
+      updatePrice(); // Refresh display
+      alert(`${quantity} ${itemName} added. New stock: ${product.stock}`);
+    }
+  }
+}
+
+// Inventory Report
+function generateReport() {
+  let report = "INVENTORY REPORT\n\n";
+  products.forEach(p => {
+    report += `${p.name.padEnd(20)} ${p.stock.toString().padStart(4)} units\n`;
+  });
+  
+  // Display in new window
+  const reportWindow = window.open('', '_blank');
+  reportWindow.document.write(`<pre>${report}</pre>`);
+}
+
+// Save to localStorage
+function saveProducts() {
+  localStorage.setItem('inventory', JSON.stringify(products));
+  populateDatalist();
+}
+
