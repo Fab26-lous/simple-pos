@@ -1,20 +1,86 @@
-const correctPassword = "1234"; // Change this to your preferred password
-let products = [];
-let currentSales = []; // Array to store multiple sales
+// Store configurations
+const stores = {
+  store1: {
+    name: "One Stop",
+    users: {
+      "Cashier": "1234"
+    }
+  },
+  store2: {
+    name: "Golden",
+    users: {
+      "Cashier": "1234"
+    }
+  }
+};
 
-// Login function
+let currentStore = null;
+let currentUser = null;
+let products = [];
+let currentSales = [];
+
 function checkLogin() {
-  const entered = document.getElementById("password").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
   const error = document.getElementById("login-error");
-  if (entered === correctPassword) {
+
+  // Check if username exists in any store
+  let validStore = null;
+  
+  for (const [storeId, store] of Object.entries(stores)) {
+    if (store.users[username] && store.users[username] === password) {
+      validStore = storeId;
+      break;
+    }
+  }
+
+  if (validStore) {
+    currentStore = validStore;
+    currentUser = username;
     document.getElementById("login-container").style.display = "none";
     document.getElementById("pos-container").style.display = "block";
-    document.getElementById("item").focus();
+    document.getElementById("store-name").textContent = stores[validStore].name;
+    loadProducts(); // Load the shared products.json
   } else {
-    error.textContent = "Incorrect password. Try again.";
+    error.textContent = "Invalid username or password";
   }
 }
 
+function loadProducts() {
+  fetch('products.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load products');
+      return response.json();
+    })
+    .then(data => {
+      products = data;
+      populateDatalist();
+    })
+    .catch(err => {
+      console.error('Error loading products:', err);
+      alert('Failed to load product data. Please check your connection.');
+    });
+}
+
+// [Rest of your existing code remains the same...]
+
+function loadProducts(productsFile) {
+  fetch(productsFile)
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load products');
+      return response.json();
+    })
+    .then(data => {
+      products = data;
+      populateDatalist();
+    })
+    .catch(err => {
+      console.error('Error loading products:', err);
+      alert('Failed to load product data. Please check your connection.');
+    });
+}
+
+// [Rest of your existing code...]
 // Load products
 fetch('products.json')
   .then(response => {
@@ -279,3 +345,4 @@ function submitSaleToGoogleForm(sale) {
     }, 100 + (400 * Math.random()));
   });
 }
+
