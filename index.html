@@ -4,86 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simple POS</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .login-container, .pos-container {
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-    }
-    <!-- Store Selection -->
-<div class="store-selection" id="store-selection" style="display: none;">
-  <h2>Select Store</h2>
-  <button onclick="selectStore('store1')">Store 1</button>
-  <button onclick="selectStore('store2')">Store 2</button>
-</div>
-    .form-row {
-      margin-bottom: 10px;
-    }
-    input, select, button {
-      padding: 8px;
-      margin: 5px 0;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    #login-error {
-      color: red;
-    }
-    #sales-table button {
-      margin: 2px;
-      padding: 4px 8px;
-      width: auto;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Login -->
   <div class="login-container" id="login-container">
-  <h2>POS Login</h2>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="checkLogin()">Login</button>
-  <p id="login-error" style="color: red;"></p>
-</div>
+    <h2>POS Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Login</button>
+    <p id="login-error" style="color: red;"></p>
+  </div>
+
+  <!-- Store Selection -->
+  <div class="store-selection" id="store-selection" style="display: none;">
+    <h2>Select Store</h2>
+    <button onclick="selectStore('store1')">One Stop</button>
+    <button onclick="selectStore('store2')">Golden</button>
+  </div>
 
   <!-- POS Form -->
   <div class="pos-container" id="pos-container" style="display: none;">
-  <h2 id="store-name">Simple POS</h2>
-  <!-- Rest of your existing POS form... -->
-  <div class="pos-container" id="pos-container" style="display: none;">
-    <h2>Simple POS</h2>
+    <h2 id="store-name">Simple POS</h2>
 
     <form id="sale-form">
       <div class="form-row">
@@ -163,5 +105,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
