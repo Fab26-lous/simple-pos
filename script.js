@@ -14,10 +14,17 @@ function checkLogin() {
 let products = [];
 
 fetch('products.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to load products');
+    return response.json();
+  })
   .then(data => {
     products = data;
     populateDatalist();
+  })
+  .catch(err => {
+    console.error('Error loading products:', err);
+    alert('Failed to load product data. Please check your connection.');
   });
 
 function populateDatalist() {
@@ -45,7 +52,7 @@ function updatePrice() {
   }
 }
 
-function calculateTotal(updateUI = false) {
+function calculateTotal() {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
   const discount = parseFloat(document.getElementById('discount').value) || 0;
@@ -53,26 +60,24 @@ function calculateTotal(updateUI = false) {
 
   const subtotal = quantity * price;
   const total = subtotal - discount + extra;
-
-  if (updateUI) {
-    document.getElementById('total').value = total.toFixed(2);
-  }
-
+  
+  document.getElementById('total').value = total.toFixed(2);
   return total;
 }
 
 ['quantity', 'price', 'discount', 'extra'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => calculateTotal(true));
+  document.getElementById(id).addEventListener('input', calculateTotal);
 });
-
-// ⛔️ REMOVE download to CSV
-// document.getElementById('download').addEventListener(...)
-// DELETE that button from your HTML too if it's still there
 
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
   const item = document.getElementById('item').value;
+  if (!item) {
+    alert('Please select an item');
+    return;
+  }
+
   const unit = document.getElementById('unit').value;
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
   const price = parseFloat(document.getElementById('price').value) || 0;
@@ -86,15 +91,6 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
 
   submitSaleToGoogleForm(sale);
 });
-
-function calculateTotal() {
-  const quantity = parseFloat(document.getElementById('quantity').value) || 0;
-  const price = parseFloat(document.getElementById('price').value) || 0;
-  const discount = parseFloat(document.getElementById('discount').value) || 0;
-  const extra = parseFloat(document.getElementById('extra').value) || 0;
-
-  return (quantity * price) - discount + extra;
-}
 
 function submitSaleToGoogleForm(sale) {
   const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvdliK9bPE9ehvA7FVtc3cYnaFhBrwh-qTB_EyfH38pWzLdA/formResponse";
@@ -118,12 +114,11 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   })
   .then(() => {
-    console.log("Sale recorded successfully.");
     alert("Sale recorded successfully.");
+    document.getElementById('sale-form').reset();
   })
   .catch((err) => {
     console.error("Error recording sale:", err);
-    alert("Error recording sale.");
+    alert("Error recording sale. Please check your internet connection.");
   });
 }
-
