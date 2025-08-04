@@ -3,13 +3,13 @@ const stores = {
   store1: {
     name: "One Stop",
     users: {
-      "Cashier": "1234"
+      "Cashier": "Glam2025"
     }
   },
   store2: {
     name: "Golden",
     users: {
-      "Cashier2": "1234"
+      "Cashier2": "Glam2025"
     }
   }
 };
@@ -310,3 +310,4 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
+
