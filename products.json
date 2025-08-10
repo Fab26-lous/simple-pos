@@ -20,8 +20,8 @@
 {
   "name": "Bahasha A4",
   "prices": {
-    "ct": 40000,
-    "dz": 4500,
+    "ct": 36000,
+    "dz": 4000,
     "pc": 200
   },
   "stock": 11
@@ -354,10 +354,19 @@
   "name": "Visitors Book",
   "prices": {
     "ct": 0,
-    "dz": 24000,
-    "pc": 2500
+    "dz": 30000,
+    "pc": 3000
   },
   "stock": 7
+},
+{
+  "name": "Mkopo",
+  "prices": {
+    "ct": 0,
+    "dz": 0,
+    "pc": 15000
+  },
+  "stock": 0
 },
 {
   "name": "Dispatch/Log Book",
@@ -2306,8 +2315,8 @@
 {
   "name": "Nyembe",
   "prices": {
-    "ct": 200,
-    "dz": 4000,
+    "ct": 0,
+    "dz": 8000,
     "pc": 500
   },
   "stock": 0
@@ -2317,6 +2326,15 @@
   "prices": {
     "ct": 0,
     "dz": 28000,
+    "pc": 5000
+  },
+  "stock": 0
+},
+  {
+  "name": "Notebook Diary Nyembamba",
+  "prices": {
+    "ct": 0,
+    "dz": 4000,
     "pc": 5000
   },
   "stock": 0
@@ -3225,8 +3243,8 @@
   "name": "Superglue",
   "prices": {
     "ct": 0,
-    "dz": 3000,
-    "pc": 500
+    "dz": 4000,
+    "pc": 800
   },
   "stock": 0
 },
@@ -4697,12 +4715,30 @@
   },
   "stock": 0
 },
+  {
+  "name": "Pen Bomba 6",
+  "prices": {
+    "ct": 26000,
+    "dz": 9000,
+    "pc": 1500
+  },
+  "stock": 0
+},
 {
   "name": "Pen Mdoli",
   "prices": {
     "ct": 0,
     "dz": 0,
     "pc": 2000
+  },
+  "stock": 0
+},
+{
+  "name": "Kioo",
+  "prices": {
+    "ct": 0,
+    "dz": 4000,
+    "pc": 5000
   },
   "stock": 0
 },
@@ -5206,7 +5242,7 @@
   "prices": {
     "ct": 0,
     "dz": 0,
-    "pc": 1500
+    "pc": 4000
   },
   "stock": 0
 },
@@ -7109,4 +7145,5 @@
   },
   "stock": 0
 }
+
 ]
