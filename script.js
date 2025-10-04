@@ -13,7 +13,86 @@ const stores = {
     }
   }
 };
+// ============ STEP 1: BASIC GOOGLE SHEETS LOADING ============
+const GOOGLE_SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; // You'll replace this
+const PRODUCTS_SHEET_NAME = 'Products';
 
+// New function to load from Google Sheets
+async function loadProductsFromGoogleSheets() {
+    try {
+        console.log('Trying to load from Google Sheets...');
+        
+        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${PRODUCTS_SHEET_NAME}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch from Google Sheets: ${response.status}`);
+        }
+        
+        const csvText = await response.text();
+        console.log('Raw CSV data:', csvText);
+        
+        const products = parseCSVToProducts(csvText);
+        console.log(`Successfully loaded ${products.length} products from Google Sheets`);
+        return products;
+        
+    } catch (error) {
+        console.error('Error loading from Google Sheets:', error);
+        // Fallback to local JSON
+        return await loadProductsFromJSON();
+    }
+}
+
+// Parse CSV data
+function parseCSVToProducts(csvText) {
+    const lines = csvText.split('\n').filter(line => line.trim());
+    const products = [];
+    
+    console.log('CSV lines:', lines);
+    
+    // Skip header row (assuming first row has column names)
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i];
+        // Simple CSV parsing - adjust if needed
+        const cells = line.split(',').map(cell => cell.trim());
+        
+        console.log(`Parsing line ${i}:`, cells);
+        
+        if (cells.length >= 5) {
+            const product = {
+                name: cells[0],
+                prices: {
+                    ct: parseFloat(cells[1]) || 0,
+                    dz: parseFloat(cells[2]) || 0,
+                    pc: parseFloat(cells[3]) || 0
+                },
+                stock: parseInt(cells[4]) || 0
+            };
+            
+            // Only add valid products
+            if (product.name) {
+                products.push(product);
+            }
+        }
+    }
+    
+    return products;
+}
+
+// Fallback to local JSON
+async function loadProductsFromJSON() {
+    try {
+        const response = await fetch('products.json');
+        if (!response.ok) throw new Error('Failed to load local JSON');
+        const data = await response.json();
+        console.log('Loaded products from local JSON fallback');
+        return data;
+    } catch (error) {
+        console.error('Error loading from JSON fallback:', error);
+        return [];
+    }
+}
+// ============ END STEP 1 ============
 let currentStore = null;
 let currentUser = null;
 let products = [];
@@ -310,4 +389,5 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
+
 
