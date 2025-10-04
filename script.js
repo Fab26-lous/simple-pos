@@ -389,5 +389,22 @@ function submitSaleToGoogleForm(sale) {
   });
 }
 
+// ============ TEMPORARY TEST CODE ============
+console.log('Script loaded successfully!');
+
+// Test function to check if our new code is working
+function testGoogleSheetsLoad() {
+    console.log('testGoogleSheetsLoad function is available');
+    loadProductsFromGoogleSheets().then(products => {
+        console.log('Test successful! Loaded products:', products);
+    }).catch(error => {
+        console.error('Test failed:', error);
+    });
+}
+
+// Make it available globally for testing
+window.testGoogleSheetsLoad = testGoogleSheetsLoad;
+console.log('Test function ready. Run testGoogleSheetsLoad() in console.');
+// ============ END TEMPORARY TEST CODE ============
 
 
