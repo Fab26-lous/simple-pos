@@ -14,16 +14,15 @@ const stores = {
   }
 };
 // ============ STEP 1: BASIC GOOGLE SHEETS LOADING ============
-const GOOGLE_SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; // You'll replace this
-const PRODUCTS_SHEET_NAME = 'Products';
+// Use your direct CSV URL - no need for Sheet ID!
+const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMoJA4uj6dsPvt0LjS5wiqPb18u7TRdmuXa4NVht_lbM58Auqxb_JOPld2sIqOcLb7wyzx0KJaTCsM/pub?gid=0&single=true&output=csv';
 
 // New function to load from Google Sheets
 async function loadProductsFromGoogleSheets() {
     try {
-        console.log('Trying to load from Google Sheets...');
+        console.log('Trying to load from Google Sheets CSV...');
         
-        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${PRODUCTS_SHEET_NAME}`;
-        const response = await fetch(url);
+        const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         
         if (!response.ok) {
             throw new Error(`Failed to fetch from Google Sheets: ${response.status}`);
@@ -53,7 +52,7 @@ function parseCSVToProducts(csvText) {
     // Skip header row (assuming first row has column names)
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i];
-        // Simple CSV parsing - adjust if needed
+        // Simple CSV parsing
         const cells = line.split(',').map(cell => cell.trim());
         
         console.log(`Parsing line ${i}:`, cells);
@@ -389,5 +388,6 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
+
 
 
