@@ -130,19 +130,17 @@ function selectStore(storeId) {
 }
 
 function loadProducts() {
-  fetch('products.json')
-    .then(response => {
-      if (!response.ok) throw new Error('Failed to load products');
-      return response.json();
-    })
-    .then(data => {
-      products = data;
-      populateDatalist();
-    })
-    .catch(err => {
-      console.error('Error loading products:', err);
-      alert('Failed to load product data. Please check your connection.');
-    });
+    // Try Google Sheets first, fallback to local JSON
+    loadProductsFromGoogleSheets()
+        .then(data => {
+            products = data;
+            populateDatalist();
+            console.log(`Loaded ${products.length} products for ${stores[currentStore].name}`);
+        })
+        .catch(err => {
+            console.error('Error loading products:', err);
+            alert('Failed to load product data.');
+        });
 }
 
 function populateDatalist() {
@@ -398,6 +396,7 @@ function testGoogleSheetsLoad() {
 window.testGoogleSheetsLoad = testGoogleSheetsLoad;
 console.log('Test function ready. Run testGoogleSheetsLoad() in console.');
 // ============ END TEMPORARY TEST CODE ============
+
 
 
 
