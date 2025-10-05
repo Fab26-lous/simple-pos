@@ -518,39 +518,68 @@ function populateStockTable(products) {
     setupStockSearch();
 }
 function setupStockSearch() {
+    console.log('=== Setting up stock search ===');
+    
     const searchInput = document.getElementById('stock-search');
+    console.log('Search input element:', searchInput);
+    
     if (!searchInput) {
-        console.error('Stock search input not found!');
+        console.error('❌ Stock search input not found!');
+        // Let's check all inputs on the page
+        const allInputs = document.querySelectorAll('input');
+        console.log('All inputs on page:', allInputs);
         return;
     }
     
+    console.log('Search input properties:');
+    console.log('- ID:', searchInput.id);
+    console.log('- Type:', searchInput.type);
+    console.log('- Placeholder:', searchInput.placeholder);
+    console.log('- Current value:', searchInput.value);
+    
     searchInput.value = ''; // Clear previous search
     
+    // Test if we can manually set and get values
+    searchInput.value = 'test';
+    console.log('After setting value to "test":', searchInput.value);
+    searchInput.value = ''; // Clear it again
+    
     searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        console.log('Searching for:', searchTerm, '| Length:', searchTerm.length);
+        console.log('=== INPUT EVENT FIRED ===');
+        console.log('Event target:', this);
+        console.log('Event target value:', this.value);
+        console.log('Event target ID:', this.id);
         
-        // Check if we have products to search through
+        const searchTerm = this.value.toLowerCase().trim();
+        console.log('Search term:', searchTerm, '| Length:', searchTerm.length);
+        
+        // Test if we can read the value directly
+        const directValue = document.getElementById('stock-search').value;
+        console.log('Direct value read:', directValue);
+        
         if (!allStoreProducts || allStoreProducts.length === 0) {
             console.log('No products available to search');
             return;
         }
         
         if (searchTerm === '') {
-            // If search is empty, show all products
-            console.log('Showing all products');
+            console.log('Showing all', allStoreProducts.length, 'products');
             populateStockTable(allStoreProducts);
         } else {
-            // Filter products that match the search term
             const filteredProducts = allStoreProducts.filter(function(product) {
-                const match = product.name.toLowerCase().includes(searchTerm);
-                console.log('Checking:', product.name, 'against:', searchTerm, 'Match:', match);
-                return match;
+                return product.name.toLowerCase().includes(searchTerm);
             });
             console.log('Found', filteredProducts.length, 'matching products');
             populateStockTable(filteredProducts);
         }
     });
+    
+    // Also try keyup event as backup
+    searchInput.addEventListener('keyup', function() {
+        console.log('=== KEYUP EVENT === Value:', this.value);
+    });
+    
+    console.log('✅ Search event listeners added');
 }
 document.getElementById('stock-modal').addEventListener('click', function(e) {
     if (e.target === this) {
@@ -562,6 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
