@@ -1,4 +1,37 @@
 console.log('=== POS SYSTEM LOADED ===');
+console.log('=== POS SYSTEM LOADED ===');
+
+// CSV PARSING FUNCTION - PUT THIS AT THE VERY TOP
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    result.push(current);
+    
+    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
+}
+
+// Store configurations
+const stores = {
+  store1: {
+    name: "One Stop",
+    users: {
+      "Cashier": "Glam2025"
+    }
+  },
 console.log('checkLogin function exists:', typeof checkLogin);
 console.log('selectStore function exists:', typeof selectStore);
 console.log('loadProducts function exists:', typeof loadProducts);
@@ -21,27 +54,7 @@ const stores = {
   // ============ GOOGLE SHEETS WITH STORE-SPECIFIC STOCKS ============
 const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMoJA4uj6dsPvt0LjS5wiqPb18u7TRdmuXa4NVht_lbM58Auqxb_JOPld2sIqOcLb7wyzx0KJaTCsM/pub?gid=0&single=true&output=csv';
 // Add this function - it's used by loadAllStoreProducts but wasn't defined
-function parseCSVLine(line) {
-    const result = [];
-    let current = '';
-    let inQuotes = false;
-    
-    for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        
-        if (char === '"') {
-            inQuotes = !inQuotes;
-        } else if (char === ',' && !inQuotes) {
-            result.push(current);
-            current = '';
-        } else {
-            current += char;
-        }
-    }
-    result.push(current);
-    
-    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
-}
+
 async function loadProductsFromGoogleSheets() {
     try {
         console.log('Loading from Google Sheets...');
@@ -578,6 +591,7 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
 
 
 
