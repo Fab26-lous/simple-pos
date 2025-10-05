@@ -184,39 +184,16 @@ function populateDatalist() {
 }
 
 function updatePrice() {
-    console.log('=== UPDATE PRICE FUNCTION CALLED ===');
-    
     const itemName = document.getElementById('item').value.trim();
     const unit = document.getElementById('unit').value;
-    
-    console.log('1. Item input value:', itemName);
-    console.log('2. Selected unit:', unit);
-    console.log('3. Products array length:', products.length);
-    console.log('4. Products available:', products);
-    
-    if (products.length === 0) {
-        console.log('❌ ERROR: Products array is empty!');
-        document.getElementById('price').value = '';
-        return;
-    }
-    
-    // Find the product
     const product = products.find(function(p) {
-        const match = p.name.toLowerCase() === itemName.toLowerCase();
-        console.log('Checking product:', p.name, 'vs input:', itemName, 'Match:', match);
-        return match;
+        return p.name.toLowerCase() === itemName.toLowerCase();
     });
     
     if (product) {
-        console.log('5. ✅ Product found:', product);
-        console.log('6. Product prices:', product.prices);
-        console.log('7. Price for unit', unit + ':', product.prices[unit]);
-        
         const price = product.prices[unit];
         document.getElementById('price').value = price;
-        console.log('8. ✅ Price field set to:', price);
     } else {
-        console.log('5. ❌ Product not found for:', itemName);
         document.getElementById('price').value = '';
     }
     
@@ -591,5 +568,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Event listeners added');
 });
+
 
 
