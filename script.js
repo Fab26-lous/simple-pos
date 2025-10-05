@@ -519,14 +519,28 @@ function populateStockTable(products) {
 
 function setupStockSearch() {
     const searchInput = document.getElementById('stock-search');
-    searchInput.value = '';
+    if (!searchInput) {
+        console.error('Stock search input not found!');
+        return;
+    }
+    
+    searchInput.value = ''; // Clear previous search
     
     searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const filteredProducts = allStoreProducts.filter(function(product) {
-            return product.name.toLowerCase().includes(searchTerm);
-        });
-        populateStockTable(filteredProducts);
+        const searchTerm = this.value.toLowerCase().trim();
+        console.log('Searching for:', searchTerm);
+        
+        if (searchTerm === '') {
+            // If search is empty, show all products
+            populateStockTable(allStoreProducts);
+        } else {
+            // Filter products that match the search term
+            const filteredProducts = allStoreProducts.filter(function(product) {
+                return product.name.toLowerCase().includes(searchTerm);
+            });
+            console.log('Filtered products:', filteredProducts);
+            populateStockTable(filteredProducts);
+        }
     });
 }
 
@@ -540,6 +554,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
