@@ -566,30 +566,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============ TEMPORARY DEBUGGING ============
 console.log('=== DEBUG: Checking if everything is working ===');
 
-// Test if products are loading
-function testProducts() {
-    console.log('Products array:', products);
-    console.log('Products length:', products.length);
-    console.log('First product:', products[0]);
-}
 
-// Test if updatePrice works manually
-function testUpdatePrice() {
-    console.log('=== MANUAL TEST: updatePrice ===');
-    const itemInput = document.getElementById('item');
-    const unitSelect = document.getElementById('unit');
-    
-    console.log('Item input exists:', !!itemInput);
-    console.log('Unit select exists:', !!unitSelect);
-    console.log('Current item value:', itemInput.value);
-    console.log('Current unit value:', unitSelect.value);
-    
-    updatePrice();
-}
-
-// Make test functions available in console
-window.testProducts = testProducts;
-window.testUpdatePrice = testUpdatePrice;
 
 // Test event listeners are working
 document.addEventListener('DOMContentLoaded', function() {
@@ -614,4 +591,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Event listeners added');
 });
+
 
