@@ -517,7 +517,6 @@ function populateStockTable(products) {
     
     setupStockSearch();
 }
-
 function setupStockSearch() {
     const searchInput = document.getElementById('stock-search');
     if (!searchInput) {
@@ -529,22 +528,30 @@ function setupStockSearch() {
     
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
-        console.log('Searching for:', searchTerm);
+        console.log('Searching for:', searchTerm, '| Length:', searchTerm.length);
+        
+        // Check if we have products to search through
+        if (!allStoreProducts || allStoreProducts.length === 0) {
+            console.log('No products available to search');
+            return;
+        }
         
         if (searchTerm === '') {
             // If search is empty, show all products
+            console.log('Showing all products');
             populateStockTable(allStoreProducts);
         } else {
             // Filter products that match the search term
             const filteredProducts = allStoreProducts.filter(function(product) {
-                return product.name.toLowerCase().includes(searchTerm);
+                const match = product.name.toLowerCase().includes(searchTerm);
+                console.log('Checking:', product.name, 'against:', searchTerm, 'Match:', match);
+                return match;
             });
-            console.log('Filtered products:', filteredProducts);
+            console.log('Found', filteredProducts.length, 'matching products');
             populateStockTable(filteredProducts);
         }
     });
 }
-
 document.getElementById('stock-modal').addEventListener('click', function(e) {
     if (e.target === this) {
         hideStockLevels();
@@ -555,6 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
