@@ -20,7 +20,9 @@ function parseCSVLine(line) {
     }
     result.push(current);
     
-    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
+    return result.map(function(cell) {
+        return cell.trim().replace(/^"|"$/g, '');
+    });
 }
 
 // Store configurations
@@ -48,7 +50,7 @@ async function loadProductsFromGoogleSheets() {
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         const csvText = await response.text();
         const products = parseCSVToProducts(csvText);
-        console.log(`Loaded ${products.length} products from Google Sheets for store: ${currentStore}`);
+        console.log('Loaded ' + products.length + ' products from Google Sheets for store: ' + currentStore);
         return products;
     } catch (error) {
         console.error('Google Sheets error:', error);
@@ -57,14 +59,18 @@ async function loadProductsFromGoogleSheets() {
 }
 
 function parseCSVToProducts(csvText) {
-    const lines = csvText.split('\n').filter(line => line.trim());
+    const lines = csvText.split('\n').filter(function(line) {
+        return line.trim();
+    });
     const products = [];
     
     console.log('Current store:', currentStore);
 
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i];
-        const cells = line.split(',').map(cell => cell.trim());
+        const cells = line.split(',').map(function(cell) {
+            return cell.trim();
+        });
         
         if (cells.length >= 6) {
             let stock = 0;
@@ -120,7 +126,8 @@ function checkLogin() {
 
     let validStore = null;
     
-    for (const [storeId, store] of Object.entries(stores)) {
+    for (const storeId in stores) {
+        const store = stores[storeId];
         if (store.users[username] && store.users[username] === password) {
             validStore = storeId;
             break;
@@ -132,7 +139,10 @@ function checkLogin() {
         currentUser = username;
         document.getElementById("login-container").style.display = "none";
         document.getElementById("store-selection").style.display = "block";
-        document.querySelector(`button[onclick="selectStore('${currentStore}')"]`).classList.add('active-store');
+        var storeButton = document.querySelector('button[onclick="selectStore(\'' + currentStore + '\')"]');
+        if (storeButton) {
+            storeButton.classList.add('active-store');
+        }
         console.log('Login successful!');
     } else {
         error.textContent = "Invalid username or password";
@@ -152,12 +162,12 @@ function selectStore(storeId) {
 
 function loadProducts() {
     loadProductsFromGoogleSheets()
-        .then(data => {
+        .then(function(data) {
             products = data;
             populateDatalist();
-            console.log(`Loaded ${products.length} products for ${stores[currentStore].name}`);
+            console.log('Loaded ' + products.length + ' products for ' + stores[currentStore].name);
         })
-        .catch(err => {
+        .catch(function(err) {
             console.error('Error loading products:', err);
             alert('Failed to load product data.');
         });
@@ -166,7 +176,7 @@ function loadProducts() {
 function populateDatalist() {
     const datalist = document.getElementById('item-list');
     datalist.innerHTML = '';
-    products.forEach(p => {
+    products.forEach(function(p) {
         const option = document.createElement('option');
         option.value = p.name;
         datalist.appendChild(option);
@@ -176,7 +186,9 @@ function populateDatalist() {
 function updatePrice() {
   const itemName = document.getElementById('item').value.trim();
   const unit = document.getElementById('unit').value;
-  const product = products.find(p => p.name.toLowerCase() === itemName.toLowerCase());
+  const product = products.find(function(p) {
+    return p.name.toLowerCase() === itemName.toLowerCase();
+  });
   if (product) {
     const price = product.prices[unit];
     document.getElementById('price').value = price;
@@ -199,7 +211,7 @@ function calculateTotal() {
 }
 
 // Event listeners
-['quantity', 'price', 'discount', 'extra'].forEach(id => {
+['quantity', 'price', 'discount', 'extra'].forEach(function(id) {
   document.getElementById(id).addEventListener('input', calculateTotal);
 });
 
@@ -221,7 +233,14 @@ document.getElementById('sale-form').addEventListener('submit', function(e) {
   const total = calculateTotal();
 
   const sale = {
-    item, unit, quantity, price, discount, extra, paymentMethod, total,
+    item: item,
+    unit: unit,
+    quantity: quantity,
+    price: price,
+    discount: discount,
+    extra: extra,
+    paymentMethod: paymentMethod,
+    total: total,
     timestamp: new Date().toLocaleTimeString(),
     store: currentStore
   };
@@ -244,7 +263,7 @@ function updateSalesTable() {
   
   let grandTotal = 0;
   
-  currentSales.forEach((sale, index) => {
+  currentSales.forEach(function(sale, index) {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${index + 1}</td>
@@ -307,18 +326,18 @@ function submitAllSales() {
   const progress = document.createElement('div');
   progress.style.margin = '10px 0';
   progress.style.fontWeight = 'bold';
-  progress.innerHTML = `Submitting 0/${currentSales.length} items...`;
+  progress.innerHTML = 'Submitting 0/' + currentSales.length + ' items...';
   submitBtn.parentNode.appendChild(progress);
 
   let successCount = 0;
   const errors = [];
   
-  const submitNext = (index) => {
+  function submitNext(index) {
     if (index >= currentSales.length) {
-      progress.innerHTML = `Completed: ${successCount}/${currentSales.length} items submitted successfully`;
+      progress.innerHTML = 'Completed: ' + successCount + '/' + currentSales.length + ' items submitted successfully';
       
       if (errors.length > 0) {
-        progress.innerHTML += `<br>${errors.length} items failed`;
+        progress.innerHTML += '<br>' + errors.length + ' items failed';
         console.error('Failed submissions:', errors);
       }
       
@@ -330,25 +349,25 @@ function submitAllSales() {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit All Items';
       
-      setTimeout(() => {
+      setTimeout(function() {
         progress.remove();
       }, 5000);
       
       return;
     }
 
-    progress.innerHTML = `Submitting ${index + 1}/${currentSales.length} items...`;
+    progress.innerHTML = 'Submitting ' + (index + 1) + '/' + currentSales.length + ' items...';
     
     submitSaleToGoogleForm(currentSales[index])
-      .then(() => {
+      .then(function() {
         successCount++;
         submitNext(index + 1);
       })
-      .catch(err => {
-        errors.push({ index, error: err });
+      .catch(function(err) {
+        errors.push({ index: index, error: err });
         submitNext(index + 1);
       });
-  };
+  }
 
   submitNext(0);
 }
@@ -361,11 +380,11 @@ function submitSaleToGoogleForm(sale) {
   formData.append("pageHistory", "0");
   formData.append("entry.902078713", sale.item);
   formData.append("entry.448082825", sale.unit);
-  formData.append("entry.617272247", sale.quantity);
-  formData.append("entry.591650069", sale.price);
-  formData.append("entry.209491416", sale.discount);
-  formData.append("entry.1362215713", sale.extra);
-  formData.append("entry.492804547", sale.total);
+  formData.append("entry.617272247", sale.quantity.toString());
+  formData.append("entry.591650069", sale.price.toString());
+  formData.append("entry.209491416", sale.discount.toString());
+  formData.append("entry.1362215713", sale.extra.toString());
+  formData.append("entry.492804547", sale.total.toString());
   formData.append("entry.197957478", sale.paymentMethod);
   formData.append("entry.370318910", stores[currentStore].name);
 
@@ -388,7 +407,9 @@ async function loadAllStoreProducts() {
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         const csvText = await response.text();
         
-        const lines = csvText.split('\n').filter(line => line.trim());
+        const lines = csvText.split('\n').filter(function(line) {
+            return line.trim();
+        });
         allStoreProducts = [];
         
         for (let i = 1; i < lines.length; i++) {
@@ -396,7 +417,7 @@ async function loadAllStoreProducts() {
             
             if (cells.length >= 6) {
                 const product = {
-                    name: cells[0]?.trim() || 'Unknown',
+                    name: (cells[0] && cells[0].trim()) || 'Unknown',
                     prices: {
                         ct: parseFloat(cells[1]) || 0,
                         dz: parseFloat(cells[2]) || 0, 
@@ -422,7 +443,7 @@ async function loadAllStoreProducts() {
 }
 
 function showStockLevels() {
-    loadAllStoreProducts().then(products => {
+    loadAllStoreProducts().then(function(products) {
         populateStockTable(products);
         document.getElementById('stock-modal').style.display = 'flex';
     });
@@ -443,7 +464,7 @@ function populateStockTable(products) {
     let outOfStockCount = 0;
     let lowStockCount = 0;
     
-    products.forEach(product => {
+    products.forEach(function(product) {
         const totalStock = product.stockStore1 + product.stockStore2;
         totalStore1 += product.stockStore1;
         totalStore2 += product.stockStore2;
@@ -497,9 +518,9 @@ function setupStockSearch() {
     
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
-        const filteredProducts = allStoreProducts.filter(product => 
-            product.name.toLowerCase().includes(searchTerm)
-        );
+        const filteredProducts = allStoreProducts.filter(function(product) {
+            return product.name.toLowerCase().includes(searchTerm);
+        });
         populateStockTable(filteredProducts);
     });
 }
