@@ -540,34 +540,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
-// ============ TEMPORARY DEBUGGING ============
-console.log('=== DEBUG: Checking if everything is working ===');
 
 
-
-// Test event listeners are working
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== DEBUG: Page loaded ===');
-    
-    const itemInput = document.getElementById('item');
-    const unitSelect = document.getElementById('unit');
-    
-    if (itemInput) {
-        itemInput.addEventListener('input', function() {
-            console.log('Item input changed to:', this.value);
-            updatePrice();
-        });
-    }
-    
-    if (unitSelect) {
-        unitSelect.addEventListener('change', function() {
-            console.log('Unit changed to:', this.value);
-            updatePrice();
-        });
-    }
-    
-    console.log('Event listeners added');
-});
 
 
 
