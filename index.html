@@ -101,7 +101,45 @@
       <button id="clear-all-btn" onclick="clearAllSales()" style="display: none;">Clear All Items</button>
     </div>
   </div>
+<!-- Stock Display Button - Add this to your POS interface -->
+<button onclick="showStockLevels()" style="margin: 10px; background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+    📦 View Stock Levels
+</button>
 
+<!-- Stock Display Modal -->
+<div id="stock-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Stock Levels - All Stores</h2>
+            <button onclick="hideStockLevels()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+        
+        <!-- Search Box -->
+        <input type="text" id="stock-search" placeholder="Search products..." style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+        
+        <!-- Stock Table -->
+        <div id="stock-table-container">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #34495e; color: white;">
+                        <th style="padding: 12px; text-align: left;">Product</th>
+                        <th style="padding: 12px; text-align: center;">One Stop</th>
+                        <th style="padding: 12px; text-align: center;">Golden</th>
+                        <th style="padding: 12px; text-align: center;">Total</th>
+                        <th style="padding: 12px; text-align: center;">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="stock-table-body">
+                    <!-- Stock data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Summary -->
+        <div id="stock-summary" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>
+    </div>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
+
