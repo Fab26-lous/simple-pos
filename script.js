@@ -87,6 +87,28 @@ async function loadProductsFromJSON() {
         return [];
     }
 }
+// Add this function - it's used by loadAllStoreProducts but wasn't defined
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    result.push(current);
+    
+    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
+}
 // ============ END GOOGLE SHEETS ============
 // Your existing variables
 let currentStore = null;
@@ -178,6 +200,7 @@ function updatePrice() {
   } else {
     document.getElementById('price').value = '';
   }
+}
 
 function calculateTotal() {
   const quantity = parseFloat(document.getElementById('quantity').value) || 0;
@@ -555,6 +578,7 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
 
 
 
