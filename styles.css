@@ -140,3 +140,36 @@ th {
 #clear-all-btn:hover {
   background: #d35400;
 }
+#stock-modal table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#stock-modal th {
+    background: #34495e;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+#stock-modal td {
+    padding: 10px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+#stock-modal tr:hover {
+    background: #f8f9fa;
+}
+
+#stock-search {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#stock-search:focus {
+    outline: none;
+    border-color: #3498db;
+}
