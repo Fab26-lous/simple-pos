@@ -459,6 +459,7 @@ function hideStockLevels() {
 }
 
 function populateStockTable(products) {
+    console.log('populateStockTable called with:', products.length, 'products');
     const tbody = document.getElementById('stock-table-body');
     const summary = document.getElementById('stock-summary');
     
@@ -554,6 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
