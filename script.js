@@ -73,25 +73,49 @@ async function loadAllStoreProducts() {
         console.log('Loading products for both stores...');
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         const csvText = await response.text();
+        
+        console.log('=== RAW CSV FROM YOUR SHEET ===');
+        console.log(csvText);
+        
         const lines = csvText.split('\n').filter(line => line.trim());
+        
+        // Show the header row to understand column structure
+        if (lines.length > 0) {
+            console.log('=== HEADER ROW (Column Names) ===');
+            const headers = parseCSVLine(lines[0]);
+            headers.forEach((header, index) => {
+                console.log(`Column ${index}: "${header}"`);
+            });
+        }
         
         allStoreProducts = [];
         
         // Skip header row
         for (let i = 1; i < lines.length; i++) {
-            const cells = lines[i].split(',').map(cell => cell.trim());
+            const cells = parseCSVLine(lines[i]);
             
-            if (cells.length >= 6) {
+            console.log(`=== Processing Row ${i} ===`);
+            console.log('All cells:', cells);
+            
+            if (cells.length >= 4) {
                 const product = {
-                    name: cells[0],
+                    name: cells[0]?.trim() || 'Unknown',
+                    // Try different column mappings
                     prices: {
                         ct: parseFloat(cells[1]) || 0,
-                        dz: parseFloat(cells[2]) || 0,
+                        dz: parseFloat(cells[2]) || 0, 
                         pc: parseFloat(cells[3]) || 0
                     },
-                    stockStore1: parseInt(cells[4]) || 0, // One Stop
-                    stockStore2: parseInt(cells[5]) || 0  // Golden
+                    // STOCK COLUMNS - These might be in different positions
+                    stockStore1: parseInt(cells[4]) || 0, // Try column 4 for Store1
+                    stockStore2: parseInt(cells[5]) || 0  // Try column 5 for Store2
                 };
+                
+                console.log(`Product "${product.name}":`, {
+                    'Store1 stock': product.stockStore1,
+                    'Store2 stock': product.stockStore2,
+                    'All cells available': cells
+                });
                 
                 if (product.name && product.name !== 'Product Name') {
                     allStoreProducts.push(product);
@@ -99,15 +123,18 @@ async function loadAllStoreProducts() {
             }
         }
         
-        console.log('Loaded products for both stores:', allStoreProducts);
+        console.log('=== FINAL PRODUCTS ===');
+        allStoreProducts.forEach(p => {
+            console.log(`${p.name}: Store1=${p.stockStore1}, Store2=${p.stockStore2}`);
+        });
+        
         return allStoreProducts;
         
     } catch (error) {
-        console.error('Error loading all store products:', error);
+        console.error('Error:', error);
         return [];
     }
 }
-
 function showStockLevels() {
     // Load products for both stores
     loadAllStoreProducts().then(products => {
@@ -201,3 +228,4 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
