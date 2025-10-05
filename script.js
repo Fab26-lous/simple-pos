@@ -184,17 +184,43 @@ function populateDatalist() {
 }
 
 function updatePrice() {
-  const itemName = document.getElementById('item').value.trim();
-  const unit = document.getElementById('unit').value;
-  const product = products.find(function(p) {
-    return p.name.toLowerCase() === itemName.toLowerCase();
-  });
-  if (product) {
-    const price = product.prices[unit];
-    document.getElementById('price').value = price;
-  } else {
-    document.getElementById('price').value = '';
-  }
+    console.log('=== UPDATE PRICE FUNCTION CALLED ===');
+    
+    const itemName = document.getElementById('item').value.trim();
+    const unit = document.getElementById('unit').value;
+    
+    console.log('1. Item input value:', itemName);
+    console.log('2. Selected unit:', unit);
+    console.log('3. Products array length:', products.length);
+    console.log('4. Products available:', products);
+    
+    if (products.length === 0) {
+        console.log('❌ ERROR: Products array is empty!');
+        document.getElementById('price').value = '';
+        return;
+    }
+    
+    // Find the product
+    const product = products.find(function(p) {
+        const match = p.name.toLowerCase() === itemName.toLowerCase();
+        console.log('Checking product:', p.name, 'vs input:', itemName, 'Match:', match);
+        return match;
+    });
+    
+    if (product) {
+        console.log('5. ✅ Product found:', product);
+        console.log('6. Product prices:', product.prices);
+        console.log('7. Price for unit', unit + ':', product.prices[unit]);
+        
+        const price = product.prices[unit];
+        document.getElementById('price').value = price;
+        console.log('8. ✅ Price field set to:', price);
+    } else {
+        console.log('5. ❌ Product not found for:', itemName);
+        document.getElementById('price').value = '';
+    }
+    
+    calculateTotal();
 }
 
 function calculateTotal() {
@@ -537,3 +563,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+// Temporary test function - add this anywhere in your code
+function testPriceUpdate() {
+    console.log('=== MANUAL TEST ===');
+    console.log('Calling updatePrice directly...');
+    updatePrice();
+}
+
+// Make it available in console
+window.testPriceUpdate = testPriceUpdate;
