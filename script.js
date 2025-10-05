@@ -214,6 +214,8 @@ function calculateTotal() {
 ['quantity', 'price', 'discount', 'extra'].forEach(function(id) {
   document.getElementById(id).addEventListener('input', calculateTotal);
 });
+document.getElementById('item').addEventListener('input', updatePrice);
+document.getElementById('unit').addEventListener('change', updatePrice);
 
 document.getElementById('sale-form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -529,4 +531,9 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
     if (e.target === this) {
         hideStockLevels();
     }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, setting up price updates...');
+    // Set up initial price update after a short delay
+    setTimeout(updatePrice, 500);
 });
