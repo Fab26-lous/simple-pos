@@ -1,3 +1,7 @@
+console.log('=== POS SYSTEM LOADED ===');
+console.log('checkLogin function exists:', typeof checkLogin);
+console.log('selectStore function exists:', typeof selectStore);
+console.log('loadProducts function exists:', typeof loadProducts);
 // Store configurations
 const stores = {
   store1: {
@@ -228,4 +232,5 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
 
