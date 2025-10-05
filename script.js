@@ -20,7 +20,28 @@ const stores = {
 
   // ============ GOOGLE SHEETS WITH STORE-SPECIFIC STOCKS ============
 const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMoJA4uj6dsPvt0LjS5wiqPb18u7TRdmuXa4NVht_lbM58Auqxb_JOPld2sIqOcLb7wyzx0KJaTCsM/pub?gid=0&single=true&output=csv';
-
+// Add this function - it's used by loadAllStoreProducts but wasn't defined
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    result.push(current);
+    
+    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
+}
 async function loadProductsFromGoogleSheets() {
     try {
         console.log('Loading from Google Sheets...');
@@ -87,28 +108,7 @@ async function loadProductsFromJSON() {
         return [];
     }
 }
-// Add this function - it's used by loadAllStoreProducts but wasn't defined
-function parseCSVLine(line) {
-    const result = [];
-    let current = '';
-    let inQuotes = false;
-    
-    for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        
-        if (char === '"') {
-            inQuotes = !inQuotes;
-        } else if (char === ',' && !inQuotes) {
-            result.push(current);
-            current = '';
-        } else {
-            current += char;
-        }
-    }
-    result.push(current);
-    
-    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
-}
+
 // ============ END GOOGLE SHEETS ============
 // Your existing variables
 let currentStore = null;
@@ -578,6 +578,7 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
 
 
 
