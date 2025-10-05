@@ -1,5 +1,4 @@
 console.log('=== POS SYSTEM LOADED ===');
-console.log('=== POS SYSTEM LOADED ===');
 
 // CSV PARSING FUNCTION - PUT THIS AT THE VERY TOP
 function parseCSVLine(line) {
@@ -32,24 +31,13 @@ const stores = {
       "Cashier": "Glam2025"
     }
   },
-console.log('checkLogin function exists:', typeof checkLogin);
-console.log('selectStore function exists:', typeof selectStore);
-console.log('loadProducts function exists:', typeof loadProducts);
-// Store configurations
-const stores = {
-  store1: {
-    name: "One Stop",
-    users: {
-      "Cashier": "Glam2025"
-    }
-  },
   store2: {
     name: "Golden", 
     users: {
       "Cashier2": "Glam2025"
     }
   }
-};
+}; // <-- THIS SEMICOLON ENDS THE stores OBJECT
 
   // ============ GOOGLE SHEETS WITH STORE-SPECIFIC STOCKS ============
 const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMoJA4uj6dsPvt0LjS5wiqPb18u7TRdmuXa4NVht_lbM58Auqxb_JOPld2sIqOcLb7wyzx0KJaTCsM/pub?gid=0&single=true&output=csv';
@@ -591,6 +579,7 @@ document.getElementById('stock-modal').addEventListener('click', function(e) {
         hideStockLevels();
     }
 });
+
 
 
 
