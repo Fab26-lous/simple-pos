@@ -118,15 +118,18 @@ function checkLogin() {
 }
 
 function selectStore(storeId) {
-  if (storeId === currentStore) {
-    // User selected their authorized store
-    document.getElementById("store-selection").style.display = "none";
-    document.getElementById("pos-container").style.display = "block";
-    document.getElementById("store-name").textContent = stores[storeId].name;
-    loadProducts();
-  } else {
-    alert("You are not authorized for this store");
-  }
+    if (storeId === currentStore) {
+        // User selected their authorized store
+        document.getElementById("store-selection").style.display = "none";
+        document.getElementById("pos-container").style.display = "block";
+        document.getElementById("store-name").textContent = stores[storeId].name;
+        
+        // RELOAD products for this specific store to get correct stock levels
+        loadProducts();
+        
+    } else {
+        alert("You are not authorized for this store");
+    }
 }
 
 function loadProducts() {
@@ -396,6 +399,7 @@ function testGoogleSheetsLoad() {
 window.testGoogleSheetsLoad = testGoogleSheetsLoad;
 console.log('Test function ready. Run testGoogleSheetsLoad() in console.');
 // ============ END TEMPORARY TEST CODE ============
+
 
 
 
