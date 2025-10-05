@@ -13,51 +13,45 @@ const stores = {
     }
   }
 };
-// ============ STEP 1: BASIC GOOGLE SHEETS LOADING ============
-// Use your direct CSV URL - no need for Sheet ID!
+// ============ GOOGLE SHEETS WITH STORE-SPECIFIC STOCKS ============
 const GOOGLE_SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMoJA4uj6dsPvt0LjS5wiqPb18u7TRdmuXa4NVht_lbM58Auqxb_JOPld2sIqOcLb7wyzx0KJaTCsM/pub?gid=0&single=true&output=csv';
 
-// New function to load from Google Sheets
 async function loadProductsFromGoogleSheets() {
     try {
-        console.log('Trying to load from Google Sheets CSV...');
-        
+        console.log('Loading from Google Sheets...');
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch from Google Sheets: ${response.status}`);
-        }
-        
         const csvText = await response.text();
-        console.log('Raw CSV data:', csvText);
-        
         const products = parseCSVToProducts(csvText);
-        console.log(`Successfully loaded ${products.length} products from Google Sheets`);
+        console.log(`Loaded ${products.length} products from Google Sheets for store: ${currentStore}`);
         return products;
-        
     } catch (error) {
-        console.error('Error loading from Google Sheets:', error);
-        // Fallback to local JSON
+        console.error('Google Sheets error:', error);
         return await loadProductsFromJSON();
     }
 }
 
-// Parse CSV data
 function parseCSVToProducts(csvText) {
     const lines = csvText.split('\n').filter(line => line.trim());
     const products = [];
     
-    console.log('CSV lines:', lines);
-    
-    // Skip header row (assuming first row has column names)
+    console.log('Current store:', currentStore);
+
+    // Skip header row
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i];
+        
         // Simple CSV parsing
         const cells = line.split(',').map(cell => cell.trim());
         
-        console.log(`Parsing line ${i}:`, cells);
-        
-        if (cells.length >= 5) {
+        if (cells.length >= 6) {
+            // Determine which stock column to use based on current store
+            let stock = 0;
+            if (currentStore === 'store1') {
+                stock = parseInt(cells[4]) || 0; // Stock One Stop (column E)
+            } else if (currentStore === 'store2') {
+                stock = parseInt(cells[5]) || 0; // Stock Golden (column F)
+            }
+            
             const product = {
                 name: cells[0],
                 prices: {
@@ -65,11 +59,10 @@ function parseCSVToProducts(csvText) {
                     dz: parseFloat(cells[2]) || 0,
                     pc: parseFloat(cells[3]) || 0
                 },
-                stock: parseInt(cells[4]) || 0
+                stock: stock
             };
             
-            // Only add valid products
-            if (product.name) {
+            if (product.name && product.name !== 'Product Name') {
                 products.push(product);
             }
         }
@@ -78,20 +71,19 @@ function parseCSVToProducts(csvText) {
     return products;
 }
 
-// Fallback to local JSON
 async function loadProductsFromJSON() {
     try {
         const response = await fetch('products.json');
-        if (!response.ok) throw new Error('Failed to load local JSON');
         const data = await response.json();
         console.log('Loaded products from local JSON fallback');
         return data;
     } catch (error) {
-        console.error('Error loading from JSON fallback:', error);
+        console.error('Error loading from JSON:', error);
         return [];
     }
 }
-// ============ END STEP 1 ============
+// ============ END GOOGLE SHEETS ============
+
 let currentStore = null;
 let currentUser = null;
 let products = [];
@@ -406,5 +398,6 @@ function testGoogleSheetsLoad() {
 window.testGoogleSheetsLoad = testGoogleSheetsLoad;
 console.log('Test function ready. Run testGoogleSheetsLoad() in console.');
 // ============ END TEMPORARY TEST CODE ============
+
 
 
