@@ -420,7 +420,7 @@ async function loadAllStoreProducts() {
         for (let i = 1; i < lines.length; i++) {
             const cells = parseCSVLine(lines[i]);
             
-            if (cells.length >= 6) {
+            if (cells.length >= 7) { // Now we need 7 columns
                 const product = {
                     name: (cells[0] && cells[0].trim()) || 'Unknown',
                     prices: {
@@ -429,7 +429,8 @@ async function loadAllStoreProducts() {
                         pc: parseFloat(cells[3]) || 0
                     },
                     stockStore1: parseInt(cells[4]) || 0,
-                    stockStore2: parseInt(cells[5]) || 0
+                    stockStore2: parseInt(cells[5]) || 0,
+                    countingUnit: cells[6] || 'pc' // New column - default to 'pc'
                 };
                 
                 if (product.name && product.name !== 'Product Name') {
@@ -492,6 +493,22 @@ function populateStockTable(products) {
             lowStockCount++;
         }
         
+        // Format counting unit for display
+        let countingUnitDisplay = '';
+        switch(product.countingUnit) {
+            case 'ct':
+                countingUnitDisplay = 'Carton';
+                break;
+            case 'dz':
+                countingUnitDisplay = 'Dozen';
+                break;
+            case 'pc':
+                countingUnitDisplay = 'Piece';
+                break;
+            default:
+                countingUnitDisplay = product.countingUnit || 'Piece';
+        }
+        
         const row = document.createElement('tr');
         row.style.borderBottom = '1px solid #eee';
         row.innerHTML = `
@@ -505,6 +522,7 @@ function populateStockTable(products) {
                 ${product.stockStore2 === 0 ? '❌' : ''}
             </td>
             <td style="padding: 10px; text-align: center; font-weight: bold;">${totalStock}</td>
+            <td style="padding: 10px; text-align: center;">${countingUnitDisplay}</td>
             <td style="padding: 10px; text-align: center; color: ${statusColor}">${status}</td>
         `;
         tbody.appendChild(row);
@@ -554,3 +572,4 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
+
