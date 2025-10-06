@@ -451,6 +451,7 @@ function showStockLevels() {
     loadAllStoreProducts().then(function(products) {
         populateStockTable(products);
         document.getElementById('stock-modal').style.display = 'flex';
+    setupStockSearch();
     });
 }
 
@@ -518,61 +519,31 @@ function populateStockTable(products) {
     setupStockSearch();
 }
 function setupStockSearch() {
-    console.log('=== Setting up stock search ===');
-    
     const searchInput = document.getElementById('stock-search');
-    console.log('Search input element:', searchInput);
     
     if (!searchInput) {
-        console.error('❌ Stock search input not found!');
-        // Let's check all inputs on the page
-        const allInputs = document.querySelectorAll('input');
-        console.log('All inputs on page:', allInputs);
+        console.log('Search input not found yet - will try again later');
         return;
     }
     
-    console.log('Search input properties:');
-    console.log('- ID:', searchInput.id);
-    console.log('- Type:', searchInput.type);
-    console.log('- Placeholder:', searchInput.placeholder);
-    console.log('- Current value:', searchInput.value);
-    
-    searchInput.value = ''; // Clear previous search
-    
-    // Test if we can manually set and get values
-    searchInput.value = 'test';
-    console.log('After setting value to "test":', searchInput.value);
-    searchInput.value = ''; // Clear it again
-    
     searchInput.addEventListener('input', function() {
-        console.log('=== INPUT EVENT FIRED ===');
-        console.log('Event target:', this);
-        console.log('Event target value:', this.value);
-        console.log('Event target ID:', this.id);
-        
         const searchTerm = this.value.toLowerCase().trim();
-        console.log('Search term:', searchTerm, '| Length:', searchTerm.length);
-        
-        // Test if we can read the value directly
-        const directValue = document.getElementById('stock-search').value;
-        console.log('Direct value read:', directValue);
         
         if (!allStoreProducts || allStoreProducts.length === 0) {
-            console.log('No products available to search');
             return;
         }
         
         if (searchTerm === '') {
-            console.log('Showing all', allStoreProducts.length, 'products');
             populateStockTable(allStoreProducts);
         } else {
             const filteredProducts = allStoreProducts.filter(function(product) {
                 return product.name.toLowerCase().includes(searchTerm);
             });
-            console.log('Found', filteredProducts.length, 'matching products');
             populateStockTable(filteredProducts);
         }
     });
+}
+  
     
     // Also try keyup event as backup
     searchInput.addEventListener('keyup', function() {
@@ -591,6 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
