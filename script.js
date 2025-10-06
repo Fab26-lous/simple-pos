@@ -456,7 +456,6 @@ function showStockLevels() {
         // Set up search only once
         setupStockSearch();
     });
-
 }
 
 function hideStockLevels() {
@@ -557,28 +556,6 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
-  
-    
-    // Also try keyup event as backup
-    searchInput.addEventListener('keyup', function() {
-        console.log('=== KEYUP EVENT === Value:', this.value);
-    });
-    
-    console.log('✅ Search event listeners added');
-}
-document.getElementById('stock-modal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        hideStockLevels();
-    }
-});
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded, setting up price updates...');
-    // Set up initial price update after a short delay
-    setTimeout(updatePrice, 500);
-});
-
-
-
 
 
 
