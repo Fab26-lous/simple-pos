@@ -448,11 +448,15 @@ async function loadAllStoreProducts() {
 }
 
 function showStockLevels() {
+    // Load products for both stores
     loadAllStoreProducts().then(function(products) {
         populateStockTable(products);
         document.getElementById('stock-modal').style.display = 'flex';
-    setupStockSearch();
+        
+        // Set up search only once
+        setupStockSearch();
     });
+
 }
 
 function hideStockLevels() {
@@ -518,16 +522,23 @@ function populateStockTable(products) {
     
     setupStockSearch();
 }
+
 function setupStockSearch() {
     const searchInput = document.getElementById('stock-search');
     
     if (!searchInput) {
-        console.log('Search input not found yet - will try again later');
         return;
     }
     
-    searchInput.addEventListener('input', function() {
+    // Remove any existing event listeners to prevent duplicates
+    searchInput.replaceWith(searchInput.cloneNode(true));
+    
+    // Get the fresh element after clone
+    const freshInput = document.getElementById('stock-search');
+    
+    freshInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
+        console.log('Searching for:', searchTerm);
         
         if (!allStoreProducts || allStoreProducts.length === 0) {
             return;
@@ -542,6 +553,9 @@ function setupStockSearch() {
             populateStockTable(filteredProducts);
         }
     });
+    
+    // Clear the input
+    freshInput.value = '';
 }
   
     
@@ -562,6 +576,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up initial price update after a short delay
     setTimeout(updatePrice, 500);
 });
+
 
 
 
