@@ -518,8 +518,6 @@ function populateStockTable(products) {
         Out of Stock: <span style="color: #e74c3c">${outOfStockCount}</span> | 
         Low Stock: <span style="color: #f39c12">${lowStockCount}</span>
     `;
-    
-    setupStockSearch();
 }
 
 function setupStockSearch() {
@@ -556,11 +554,3 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
-
-
-
-
-
-
-
-
