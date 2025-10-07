@@ -412,15 +412,25 @@ async function loadAllStoreProducts() {
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         const csvText = await response.text();
         
+        console.log('=== RAW CSV DATA ===');
+        console.log(csvText);
+        
         const lines = csvText.split('\n').filter(function(line) {
             return line.trim();
         });
+        
+        console.log('=== CSV LINES ===');
+        console.log(lines);
+        
         allStoreProducts = [];
         
         for (let i = 1; i < lines.length; i++) {
             const cells = parseCSVLine(lines[i]);
             
-            if (cells.length >= 6) {
+            console.log('=== PROCESSING ROW ' + i + ' ===');
+            console.log('All cells:', cells);
+            
+            if (cells.length >= 4) {
                 const product = {
                     name: (cells[0] && cells[0].trim()) || 'Unknown',
                     prices: {
@@ -428,9 +438,12 @@ async function loadAllStoreProducts() {
                         dz: parseFloat(cells[2]) || 0, 
                         pc: parseFloat(cells[3]) || 0
                     },
-                    stockStore1: cells[4] || '0', // Stock One Stop as text
-                    stockStore2: cells[5] || '0'  // Stock Golden as text
+                    // Try different column positions for stock
+                    stockStore1: cells[4] || '0', // Try column 5
+                    stockStore2: cells[5] || '0'  // Try column 6
                 };
+                
+                console.log('Product created:', product);
                 
                 if (product.name && product.name !== 'Product Name') {
                     allStoreProducts.push(product);
@@ -438,7 +451,8 @@ async function loadAllStoreProducts() {
             }
         }
         
-        console.log('Loaded products for stock display:', allStoreProducts);
+        console.log('=== FINAL PRODUCTS ===');
+        console.log(allStoreProducts);
         return allStoreProducts;
         
     } catch (error) {
@@ -548,5 +562,6 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
+
 
 
