@@ -420,7 +420,7 @@ async function loadAllStoreProducts() {
         for (let i = 1; i < lines.length; i++) {
             const cells = parseCSVLine(lines[i]);
             
-            if (cells.length >= 7) { // Now we need 7 columns
+            if (cells.length >= 6) {
                 const product = {
                     name: (cells[0] && cells[0].trim()) || 'Unknown',
                     prices: {
@@ -428,9 +428,8 @@ async function loadAllStoreProducts() {
                         dz: parseFloat(cells[2]) || 0, 
                         pc: parseFloat(cells[3]) || 0
                     },
-                    stockStore1: parseInt(cells[4]) || 0,
-                    stockStore2: parseInt(cells[5]) || 0,
-                    countingUnit: cells[6] || 'pc' // New column - default to 'pc'
+                    stockStore1: cells[4] || '0', // Stock One Stop as text
+                    stockStore2: cells[5] || '0'  // Stock Golden as text
                 };
                 
                 if (product.name && product.name !== 'Product Name') {
@@ -447,7 +446,6 @@ async function loadAllStoreProducts() {
         return [];
     }
 }
-
 function showStockLevels() {
     // Load products for both stores
     loadAllStoreProducts().then(function(products) {
@@ -470,59 +468,40 @@ function populateStockTable(products) {
     
     tbody.innerHTML = '';
     
-    let totalStore1 = 0;
-    let totalStore2 = 0;
     let outOfStockCount = 0;
     let lowStockCount = 0;
     
     products.forEach(function(product) {
-        const totalStock = product.stockStore1 + product.stockStore2;
-        totalStore1 += product.stockStore1;
-        totalStore2 += product.stockStore2;
+        // Simple status check based on stock text
+        const isStore1Out = product.stockStore1 === '0' || product.stockStore1 === '0 pc' || product.stockStore1 === '';
+        const isStore2Out = product.stockStore2 === '0' || product.stockStore2 === '0 pc' || product.stockStore2 === '';
+        const isOutOfStock = isStore1Out && isStore2Out;
         
         let status = '✅ In Stock';
         let statusColor = '#27ae60';
         
-        if (totalStock === 0) {
+        if (isOutOfStock) {
             status = '❌ Out of Stock';
             statusColor = '#e74c3c';
             outOfStockCount++;
-        } else if (totalStock < 5) {
+        } else if (isStore1Out || isStore2Out) {
             status = '⚠️ Low Stock';
             statusColor = '#f39c12';
             lowStockCount++;
-        }
-        
-        // Format counting unit for display
-        let countingUnitDisplay = '';
-        switch(product.countingUnit) {
-            case 'ct':
-                countingUnitDisplay = 'Carton';
-                break;
-            case 'dz':
-                countingUnitDisplay = 'Dozen';
-                break;
-            case 'pc':
-                countingUnitDisplay = 'Piece';
-                break;
-            default:
-                countingUnitDisplay = product.countingUnit || 'Piece';
         }
         
         const row = document.createElement('tr');
         row.style.borderBottom = '1px solid #eee';
         row.innerHTML = `
             <td style="padding: 10px; font-weight: bold;">${product.name}</td>
-            <td style="padding: 10px; text-align: center; color: ${product.stockStore1 === 0 ? '#e74c3c' : '#2c3e50'}">
+            <td style="padding: 10px; text-align: center; color: ${isStore1Out ? '#e74c3c' : '#2c3e50'}">
                 ${product.stockStore1}
-                ${product.stockStore1 === 0 ? '❌' : ''}
+                ${isStore1Out ? '❌' : ''}
             </td>
-            <td style="padding: 10px; text-align: center; color: ${product.stockStore2 === 0 ? '#e74c3c' : '#2c3e50'}">
+            <td style="padding: 10px; text-align: center; color: ${isStore2Out ? '#e74c3c' : '#2c3e50'}">
                 ${product.stockStore2}
-                ${product.stockStore2 === 0 ? '❌' : ''}
+                ${isStore2Out ? '❌' : ''}
             </td>
-            <td style="padding: 10px; text-align: center; font-weight: bold;">${totalStock}</td>
-            <td style="padding: 10px; text-align: center;">${countingUnitDisplay}</td>
             <td style="padding: 10px; text-align: center; color: ${statusColor}">${status}</td>
         `;
         tbody.appendChild(row);
@@ -531,13 +510,10 @@ function populateStockTable(products) {
     summary.innerHTML = `
         <strong>Summary:</strong> 
         Total Products: ${products.length} | 
-        One Stop Total: ${totalStore1} | 
-        Golden Total: ${totalStore2} | 
         Out of Stock: <span style="color: #e74c3c">${outOfStockCount}</span> | 
         Low Stock: <span style="color: #f39c12">${lowStockCount}</span>
     `;
 }
-
 function setupStockSearch() {
     const searchInput = document.getElementById('stock-search');
     
@@ -572,4 +548,5 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
+
 
