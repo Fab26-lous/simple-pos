@@ -412,25 +412,25 @@ async function loadAllStoreProducts() {
         const response = await fetch(GOOGLE_SHEETS_CSV_URL);
         const csvText = await response.text();
         
-        console.log('=== RAW CSV DATA ===');
-        console.log(csvText);
-        
         const lines = csvText.split('\n').filter(function(line) {
             return line.trim();
         });
         
-        console.log('=== CSV LINES ===');
-        console.log(lines);
+        // Check the header row to see column names
+        if (lines.length > 0) {
+            const headers = parseCSVLine(lines[0]);
+            console.log('=== COLUMN HEADERS ===');
+            headers.forEach((header, index) => {
+                console.log(`Column ${index}: "${header}"`);
+            });
+        }
         
         allStoreProducts = [];
         
         for (let i = 1; i < lines.length; i++) {
             const cells = parseCSVLine(lines[i]);
             
-            console.log('=== PROCESSING ROW ' + i + ' ===');
-            console.log('All cells:', cells);
-            
-            if (cells.length >= 4) {
+            if (cells.length >= 6) {
                 const product = {
                     name: (cells[0] && cells[0].trim()) || 'Unknown',
                     prices: {
@@ -438,12 +438,22 @@ async function loadAllStoreProducts() {
                         dz: parseFloat(cells[2]) || 0, 
                         pc: parseFloat(cells[3]) || 0
                     },
-                    // Try different column positions for stock
-                    stockStore1: cells[4] || '0', // Try column 5
-                    stockStore2: cells[5] || '0'  // Try column 6
+                    // Try different column combinations for stock
+                    stockStore1: cells[4] || '0', // Current guess
+                    stockStore2: cells[5] || '0'  // Current guess
                 };
                 
-                console.log('Product created:', product);
+                // Log the first few products to see where stock data is
+                if (i <= 3) {
+                    console.log('=== SAMPLE PRODUCT ' + i + ' ===');
+                    console.log('All cells:', cells);
+                    console.log('Product stock data:', {
+                        'Column 4 (stockStore1)': cells[4],
+                        'Column 5 (stockStore2)': cells[5],
+                        'Column 6': cells[6],
+                        'Column 7': cells[7]
+                    });
+                }
                 
                 if (product.name && product.name !== 'Product Name') {
                     allStoreProducts.push(product);
@@ -451,8 +461,6 @@ async function loadAllStoreProducts() {
             }
         }
         
-        console.log('=== FINAL PRODUCTS ===');
-        console.log(allStoreProducts);
         return allStoreProducts;
         
     } catch (error) {
@@ -562,6 +570,7 @@ function setupStockSearch() {
     // Clear the input
     freshInput.value = '';
 }
+
 
 
 
