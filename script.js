@@ -87,7 +87,9 @@ function parseCSVToProducts(csvText) {
                     dz: parseFloat(cells[2]) || 0,
                     pc: parseFloat(cells[3]) || 0
                 },
-                stock: stock
+                stock: stock,
+                stockStore1: parseInt(cells[4]) || 0,
+                stockStore2: parseInt(cells[5]) || 0
             };
             
             if (product.name && product.name !== 'Product Name') {
@@ -402,6 +404,79 @@ function submitSaleToGoogleForm(sale) {
   });
 }
 
+// ============ STOCK LEVELS FUNCTIONS ============
+function showStockLevels() {
+    console.log('Showing stock levels...');
+    const modal = document.getElementById('stock-modal');
+    const tbody = document.getElementById('stock-table-body');
+    const summary = document.getElementById('stock-summary');
+    
+    if (!modal || !tbody) {
+        console.error('Stock modal elements not found');
+        return;
+    }
+    
+    modal.style.display = 'flex';
+    tbody.innerHTML = '';
+    
+    if (products.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">No products loaded</td></tr>';
+        return;
+    }
+    
+    let totalProducts = 0;
+    let lowStockCount = 0;
+    
+    products.forEach(product => {
+        const row = document.createElement('tr');
+        const store1Stock = product.stockStore1 || 0;
+        const store2Stock = product.stockStore2 || 0;
+        
+        let status = '🟢 Good';
+        if (store1Stock < 10 || store2Stock < 10) {
+            status = '🟡 Low';
+            lowStockCount++;
+        }
+        if (store1Stock === 0 && store2Stock === 0) {
+            status = '🔴 Out of Stock';
+        }
+        
+        row.innerHTML = `
+            <td style="padding: 10px;">${product.name}</td>
+            <td style="padding: 10px; text-align: center;">${store1Stock}</td>
+            <td style="padding: 10px; text-align: center;">${store2Stock}</td>
+            <td style="padding: 10px; text-align: center;">${status}</td>
+        `;
+        tbody.appendChild(row);
+        totalProducts++;
+    });
+    
+    if (summary) {
+        summary.innerHTML = `Total Products: ${totalProducts} | Low Stock: ${lowStockCount}`;
+    }
+    
+    // Add search functionality
+    const searchInput = document.getElementById('stock-search');
+    if (searchInput) {
+        searchInput.oninput = function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = tbody.getElementsByTagName('tr');
+            
+            for (let row of rows) {
+                const productName = row.cells[0].textContent.toLowerCase();
+                row.style.display = productName.includes(searchTerm) ? '' : 'none';
+            }
+        };
+    }
+}
+
+function hideStockLevels() {
+    const modal = document.getElementById('stock-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 // ============ STOCK ADJUSTMENT FUNCTIONS ============
 function showStockAdjustment() {
     adjustmentItems = [];
@@ -687,28 +762,23 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        // Make it look EXACTLY like a sale but with $0.01 price (so it's visible but negligible)
-        const itemName = `${adjustment.name}`; // No [STOCK] marker
+        // Make it VISIBLE - use emojis and clear text
+        const itemName = `📊 STOCK: ${adjustment.name} (${adjustment.adjustmentType.toUpperCase()} ${adjustment.quantity} ${adjustment.unit})`;
         
-        console.log('🔄 Submitting as regular sale:', {
-            product: adjustment.name,
-            unit: adjustment.unit,
-            quantity: adjustment.quantity,
-            type: adjustment.adjustmentType
-        });
+        console.log('🔄 Submitting VISIBLE stock adjustment:', itemName);
 
-        // Submit as a regular sale but with $0.01 price
+        // Use the same field IDs as sales
         formData.append("entry.902078713", itemName);
         formData.append("entry.448082825", adjustment.unit);
         formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0.01"); // Small price instead of 0
+        formData.append("entry.591650069", "0.01"); // Small amount to make it visible
         formData.append("entry.209491416", "0");
         formData.append("entry.1362215713", "0");
-        formData.append("entry.492804547", "0.01"); // Small total instead of 0
-        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
+        formData.append("entry.492804547", "0.01"); // Small amount to make it visible
+        formData.append("entry.197957478", "STOCK_ADJUSTMENT");
         formData.append("entry.370318910", stores[currentStore].name);
 
-        console.log('📤 Form data (as sale):', Object.fromEntries(formData));
+        console.log('📤 Form data:', Object.fromEntries(formData));
 
         fetch(formUrl, {
             method: "POST",
@@ -719,12 +789,12 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
             body: formData.toString()
         })
         .then(() => {
-            console.log('✅ Stock adjustment submitted as sale');
-            console.log('🔍 Look for:', adjustment.name, 'with Payment Method starting with "STOCK_"');
+            console.log('✅ Stock adjustment submitted');
+            console.log('🔍 Look for item starting with "📊 STOCK:" in your Google Sheets');
             resolve();
         })
         .catch(error => {
-            console.error('❌ Submission failed:', error);
+            console.error('❌ Stock adjustment submission failed:', error);
             reject(error);
         });
     });
