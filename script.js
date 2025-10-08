@@ -402,175 +402,272 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
+// ============ STOCK ADJUSTMENT FUNCTIONS ============
+let adjustmentItems = [];
 
-// ============ STOCK DISPLAY FUNCTIONS ============
-let allStoreProducts = [];
+function showStockAdjustment() {
+    adjustmentItems = []; // Reset adjustments
+    document.getElementById('stock-adjustment-modal').style.display = 'flex';
+    updateAdjustmentTable();
+    setupAdjustmentSearch();
+}
 
-async function loadAllStoreProducts() {
-    try {
-        console.log('Loading products for both stores...');
-        const response = await fetch(GOOGLE_SHEETS_CSV_URL);
-        const csvText = await response.text();
-        
-        const lines = csvText.split('\n').filter(function(line) {
-            return line.trim();
-        });
-        
-        // Check the header row to see column names
-        if (lines.length > 0) {
-            const headers = parseCSVLine(lines[0]);
-            console.log('=== COLUMN HEADERS ===');
-            headers.forEach((header, index) => {
-                console.log(`Column ${index}: "${header}"`);
-            });
-        }
-        
-        allStoreProducts = [];
-        
-        for (let i = 1; i < lines.length; i++) {
-            const cells = parseCSVLine(lines[i]);
-            
-            if (cells.length >= 6) {
-                const product = {
-                    name: (cells[0] && cells[0].trim()) || 'Unknown',
-                    prices: {
-                        ct: parseFloat(cells[1]) || 0,
-                        dz: parseFloat(cells[2]) || 0, 
-                        pc: parseFloat(cells[3]) || 0
-                    },
-                    // Try different column combinations for stock
-                    stockStore1: cells[4] || '0', // Current guess
-                    stockStore2: cells[5] || '0'  // Current guess
-                };
-                
-                // Log the first few products to see where stock data is
-                if (i <= 3) {
-                    console.log('=== SAMPLE PRODUCT ' + i + ' ===');
-                    console.log('All cells:', cells);
-                    console.log('Product stock data:', {
-                        'Column 4 (stockStore1)': cells[4],
-                        'Column 5 (stockStore2)': cells[5],
-                        'Column 6': cells[6],
-                        'Column 7': cells[7]
-                    });
-                }
-                
-                if (product.name && product.name !== 'Product Name') {
-                    allStoreProducts.push(product);
-                }
-            }
-        }
-        
-        return allStoreProducts;
-        
-    } catch (error) {
-        console.error('Error:', error);
-        return [];
+function hideStockAdjustment() {
+    document.getElementById('stock-adjustment-modal').style.display = 'none';
+}
+
+function setupAdjustmentSearch() {
+    const searchInput = document.getElementById('adjustment-search');
+    // Datalist will handle autocomplete
+}
+
+function addItemToAdjustment() {
+    const searchInput = document.getElementById('adjustment-search');
+    const itemName = searchInput.value.trim();
+    
+    if (!itemName) {
+        alert('Please enter a product name');
+        return;
     }
-}
-function showStockLevels() {
-    // Load products for both stores
-    loadAllStoreProducts().then(function(products) {
-        populateStockTable(products);
-        document.getElementById('stock-modal').style.display = 'flex';
-        
-        // Set up search only once
-        setupStockSearch();
+    
+    // Find the product
+    const product = products.find(p => p.name.toLowerCase() === itemName.toLowerCase());
+    if (!product) {
+        alert('Product not found');
+        return;
+    }
+    
+    // Check if item already in adjustments
+    const existingItem = adjustmentItems.find(item => item.name === product.name);
+    if (existingItem) {
+        alert('Item already in adjustment list');
+        return;
+    }
+    
+    // Get current stock text for the current store
+    let currentStockText = '';
+    if (currentStore === 'store1') {
+        currentStockText = product.stockStore1 || '0 pc';
+    } else {
+        currentStockText = product.stockStore2 || '0 pc';
+    }
+    
+    // Add to adjustments
+    adjustmentItems.push({
+        name: product.name,
+        currentStock: currentStockText,
+        addedPieces: 0,
+        addedDozens: 0,
+        addedCartons: 0,
+        removedPieces: 0,
+        removedDozens: 0,
+        removedCartons: 0,
+        store: currentStore
     });
+    
+    searchInput.value = ''; // Clear search
+    updateAdjustmentTable();
 }
 
-function hideStockLevels() {
-    document.getElementById('stock-modal').style.display = 'none';
-}
-
-function populateStockTable(products) {
-    console.log('populateStockTable called with:', products.length, 'products');
-    const tbody = document.getElementById('stock-table-body');
-    const summary = document.getElementById('stock-summary');
+function updateAdjustmentTable() {
+    const tbody = document.getElementById('adjustment-table-body');
+    const summary = document.getElementById('adjustment-summary');
     
     tbody.innerHTML = '';
     
-    let outOfStockCount = 0;
-    let lowStockCount = 0;
+    if (adjustmentItems.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 20px; color: #777;">No items added for adjustment</td></tr>';
+        summary.innerHTML = '';
+        return;
+    }
     
-    products.forEach(function(product) {
-        // Simple status check based on stock text
-        const isStore1Out = product.stockStore1 === '0' || product.stockStore1 === '0 pc' || product.stockStore1 === '';
-        const isStore2Out = product.stockStore2 === '0' || product.stockStore2 === '0 pc' || product.stockStore2 === '';
-        const isOutOfStock = isStore1Out && isStore2Out;
-        
-        let status = '✅ In Stock';
-        let statusColor = '#27ae60';
-        
-        if (isOutOfStock) {
-            status = '❌ Out of Stock';
-            statusColor = '#e74c3c';
-            outOfStockCount++;
-        } else if (isStore1Out || isStore2Out) {
-            status = '⚠️ Low Stock';
-            statusColor = '#f39c12';
-            lowStockCount++;
-        }
-        
+    adjustmentItems.forEach((item, index) => {
         const row = document.createElement('tr');
-        row.style.borderBottom = '1px solid #eee';
         row.innerHTML = `
-            <td style="padding: 10px; font-weight: bold;">${product.name}</td>
-            <td style="padding: 10px; text-align: center; color: ${isStore1Out ? '#e74c3c' : '#2c3e50'}">
-                ${product.stockStore1}
-                ${isStore1Out ? '❌' : ''}
+            <td style="padding: 10px; font-weight: bold;">${item.name}</td>
+            <td style="padding: 10px; text-align: center;">${item.currentStock}</td>
+            
+            <!-- Added Columns -->
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.addedPieces}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'addedPieces', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Pieces</div>
             </td>
-            <td style="padding: 10px; text-align: center; color: ${isStore2Out ? '#e74c3c' : '#2c3e50'}">
-                ${product.stockStore2}
-                ${isStore2Out ? '❌' : ''}
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.addedDozens}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'addedDozens', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Dozens</div>
             </td>
-            <td style="padding: 10px; text-align: center; color: ${statusColor}">${status}</td>
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.addedCartons}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'addedCartons', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Cartons</div>
+            </td>
+            
+            <!-- Removed Columns -->
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.removedPieces}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'removedPieces', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Pieces</div>
+            </td>
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.removedDozens}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'removedDozens', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Dozens</div>
+            </td>
+            <td style="padding: 10px; text-align: center;">
+                <input type="number" value="${item.removedCartons}" min="0" 
+                       onchange="updateAdjustmentValue(${index}, 'removedCartons', this.value)" 
+                       style="width: 60px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                <div style="font-size: 12px; color: #666;">Cartons</div>
+            </td>
+            
+            <td style="padding: 10px; text-align: center;">
+                <button onclick="removeAdjustmentItem(${index})" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Remove</button>
+            </td>
         `;
         tbody.appendChild(row);
     });
     
-    summary.innerHTML = `
-        <strong>Summary:</strong> 
-        Total Products: ${products.length} | 
-        Out of Stock: <span style="color: #e74c3c">${outOfStockCount}</span> | 
-        Low Stock: <span style="color: #f39c12">${lowStockCount}</span>
-    `;
+    summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
-function setupStockSearch() {
-    const searchInput = document.getElementById('stock-search');
-    
-    if (!searchInput) {
+
+function updateAdjustmentValue(index, field, value) {
+    adjustmentItems[index][field] = parseInt(value) || 0;
+}
+
+function removeAdjustmentItem(index) {
+    adjustmentItems.splice(index, 1);
+    updateAdjustmentTable();
+}
+
+function clearAdjustments() {
+    if (confirm('Are you sure you want to clear all adjustments?')) {
+        adjustmentItems = [];
+        updateAdjustmentTable();
+    }
+}
+
+function submitStockAdjustment() {
+    if (adjustmentItems.length === 0) {
+        alert('No adjustments to submit');
         return;
     }
-    
-    // Remove any existing event listeners to prevent duplicates
-    searchInput.replaceWith(searchInput.cloneNode(true));
-    
-    // Get the fresh element after clone
-    const freshInput = document.getElementById('stock-search');
-    
-    freshInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        console.log('Searching for:', searchTerm);
-        
-        if (!allStoreProducts || allStoreProducts.length === 0) {
+
+    const submitBtn = document.querySelector('#stock-adjustment-modal button[onclick="submitStockAdjustment()"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    let successCount = 0;
+    const errors = [];
+
+    // Submit each adjustment to Google Form
+    function submitNext(index) {
+        if (index >= adjustmentItems.length) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Adjustments';
+            
+            if (successCount > 0) {
+                alert(`Successfully submitted ${successCount} stock adjustment(s)!`);
+                adjustmentItems = [];
+                hideStockAdjustment();
+            }
+            
+            if (errors.length > 0) {
+                console.error('Failed submissions:', errors);
+                alert(`${errors.length} adjustment(s) failed. Check console for details.`);
+            }
+            
             return;
         }
+
+        const adjustment = adjustmentItems[index];
         
-        if (searchTerm === '') {
-            populateStockTable(allStoreProducts);
-        } else {
-            const filteredProducts = allStoreProducts.filter(function(product) {
-                return product.name.toLowerCase().includes(searchTerm);
+        // Submit to Google Form
+        submitStockAdjustmentToGoogleForm(adjustment)
+            .then(() => {
+                successCount++;
+                submitNext(index + 1);
+            })
+            .catch(err => {
+                errors.push({ item: adjustment.name, error: err });
+                submitNext(index + 1);
             });
-            populateStockTable(filteredProducts);
-        }
-    });
-    
-    // Clear the input
-    freshInput.value = '';
+    }
+
+    submitNext(0);
 }
 
+function submitStockAdjustmentToGoogleForm(adjustment) {
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
+    const formData = new URLSearchParams();
+    
+    let successCount = 0;
+    
+    // Submit ADDED items as separate entries
+    if (adjustment.addedPieces > 0) {
+        submitSingleAdjustment(adjustment, 'pc', adjustment.addedPieces, 'add');
+        successCount++;
+    }
+    if (adjustment.addedDozens > 0) {
+        submitSingleAdjustment(adjustment, 'dz', adjustment.addedDozens, 'add');
+        successCount++;
+    }
+    if (adjustment.addedCartons > 0) {
+        submitSingleAdjustment(adjustment, 'ct', adjustment.addedCartons, 'add');
+        successCount++;
+    }
+    
+    // Submit REMOVED items as separate entries  
+    if (adjustment.removedPieces > 0) {
+        submitSingleAdjustment(adjustment, 'pc', adjustment.removedPieces, 'remove');
+        successCount++;
+    }
+    if (adjustment.removedDozens > 0) {
+        submitSingleAdjustment(adjustment, 'dz', adjustment.removedDozens, 'remove');
+        successCount++;
+    }
+    if (adjustment.removedCartons > 0) {
+        submitSingleAdjustment(adjustment, 'ct', adjustment.removedCartons, 'remove');
+        successCount++;
+    }
+    
+    // Return a promise that resolves immediately since we're using no-cors
+    return Promise.resolve();
+}
 
+function submitSingleAdjustment(adjustment, unit, quantity, type) {
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
+    const formData = new URLSearchParams();
+    
+    // Format item name to indicate stock adjustment
+    const itemName = `${adjustment.name} [STOCK ${type.toUpperCase()}]`;
+    
+    // Use the same form fields as sales
+    formData.append("fvv", "1");
+    formData.append("pageHistory", "0");
+    formData.append("entry.902078713", itemName); // Item with [STOCK ADD/REMOVE]
+    formData.append("entry.448082825", unit); // Unit (pc, dz, ct)
+    formData.append("entry.617272247", quantity.toString()); // Quantity
+    formData.append("entry.591650069", "0"); // Price = 0
+    formData.append("entry.209491416", "0"); // Discount = 0
+    formData.append("entry.1362215713", "0"); // Extra = 0
+    formData.append("entry.492804547", "0"); // Total = 0
+    formData.append("entry.197957478", "STOCK_ADJUST"); // Payment Method = "STOCK_ADJUST"
+    formData.append("entry.370318910", stores[adjustment.store].name); // Store name
 
-
+    // Submit to Google Form (no-cors so we can't check response)
+    fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData.toString()
+    });
+}
