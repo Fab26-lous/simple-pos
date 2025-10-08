@@ -87,9 +87,7 @@ function parseCSVToProducts(csvText) {
                     dz: parseFloat(cells[2]) || 0,
                     pc: parseFloat(cells[3]) || 0
                 },
-                stock: stock,
-                stockStore1: parseInt(cells[4]) || 0,
-                stockStore2: parseInt(cells[5]) || 0
+                stock: stock
             };
             
             if (product.name && product.name !== 'Product Name') {
@@ -118,7 +116,6 @@ let currentStore = null;
 let currentUser = null;
 let products = [];
 let currentSales = [];
-let adjustmentItems = [];
 
 // ============ CORE POS FUNCTIONS ============
 function checkLogin() {
@@ -381,9 +378,11 @@ function submitAllSales() {
 }
 
 function submitSaleToGoogleForm(sale) {
-  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
   const formData = new URLSearchParams();
   
+  formData.append("fvv", "1");
+  formData.append("pageHistory", "0");
   formData.append("entry.902078713", sale.item);
   formData.append("entry.448082825", sale.unit);
   formData.append("entry.617272247", sale.quantity.toString());
@@ -404,80 +403,150 @@ function submitSaleToGoogleForm(sale) {
   });
 }
 
-// ============ STOCK LEVELS FUNCTIONS ============
-function showStockLevels() {
-    console.log('Showing stock levels...');
-    const modal = document.getElementById('stock-modal');
-    const tbody = document.getElementById('stock-table-body');
-    const summary = document.getElementById('stock-summary');
-    
-    if (!modal || !tbody) {
-        console.error('Stock modal elements not found');
-        return;
-    }
-    
-    modal.style.display = 'flex';
-    tbody.innerHTML = '';
-    
-    if (products.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">No products loaded</td></tr>';
-        return;
-    }
-    
-    let totalProducts = 0;
-    let lowStockCount = 0;
-    
-    products.forEach(product => {
-        const row = document.createElement('tr');
-        const store1Stock = product.stockStore1 || 0;
-        const store2Stock = product.stockStore2 || 0;
+// ============ STOCK DISPLAY FUNCTIONS ============
+let allStoreProducts = [];
+
+async function loadAllStoreProducts() {
+    try {
+        console.log('Loading products for both stores...');
+        const response = await fetch(GOOGLE_SHEETS_CSV_URL);
+        const csvText = await response.text();
         
-        let status = '🟢 Good';
-        if (store1Stock < 10 || store2Stock < 10) {
-            status = '🟡 Low';
-            lowStockCount++;
-        }
-        if (store1Stock === 0 && store2Stock === 0) {
-            status = '🔴 Out of Stock';
-        }
+        const lines = csvText.split('\n').filter(function(line) {
+            return line.trim();
+        });
+        allStoreProducts = [];
         
-        row.innerHTML = `
-            <td style="padding: 10px;">${product.name}</td>
-            <td style="padding: 10px; text-align: center;">${store1Stock}</td>
-            <td style="padding: 10px; text-align: center;">${store2Stock}</td>
-            <td style="padding: 10px; text-align: center;">${status}</td>
-        `;
-        tbody.appendChild(row);
-        totalProducts++;
-    });
-    
-    if (summary) {
-        summary.innerHTML = `Total Products: ${totalProducts} | Low Stock: ${lowStockCount}`;
-    }
-    
-    // Add search functionality
-    const searchInput = document.getElementById('stock-search');
-    if (searchInput) {
-        searchInput.oninput = function() {
-            const searchTerm = this.value.toLowerCase();
-            const rows = tbody.getElementsByTagName('tr');
+        for (let i = 1; i < lines.length; i++) {
+            const cells = parseCSVLine(lines[i]);
             
-            for (let row of rows) {
-                const productName = row.cells[0].textContent.toLowerCase();
-                row.style.display = productName.includes(searchTerm) ? '' : 'none';
+            if (cells.length >= 6) {
+                const product = {
+                    name: (cells[0] && cells[0].trim()) || 'Unknown',
+                    prices: {
+                        ct: parseFloat(cells[1]) || 0,
+                        dz: parseFloat(cells[2]) || 0, 
+                        pc: parseFloat(cells[3]) || 0
+                    },
+                    stockStore1: cells[4] || '0',
+                    stockStore2: cells[5] || '0'
+                };
+                
+                if (product.name && product.name !== 'Product Name') {
+                    allStoreProducts.push(product);
+                }
             }
-        };
+        }
+        
+        console.log('Loaded products for stock display:', allStoreProducts);
+        return allStoreProducts;
+        
+    } catch (error) {
+        console.error('Error:', error);
+        return [];
     }
+}
+
+function showStockLevels() {
+    loadAllStoreProducts().then(function(products) {
+        populateStockTable(products);
+        document.getElementById('stock-modal').style.display = 'flex';
+        setupStockSearch();
+    });
 }
 
 function hideStockLevels() {
-    const modal = document.getElementById('stock-modal');
-    if (modal) {
-        modal.style.display = 'none';
+    document.getElementById('stock-modal').style.display = 'none';
+}
+
+function populateStockTable(products) {
+    console.log('populateStockTable called with:', products.length, 'products');
+    const tbody = document.getElementById('stock-table-body');
+    const summary = document.getElementById('stock-summary');
+    
+    tbody.innerHTML = '';
+    
+    let outOfStockCount = 0;
+    let lowStockCount = 0;
+    
+    products.forEach(function(product) {
+        const isStore1Out = product.stockStore1 === '0' || product.stockStore1 === '0 pc' || product.stockStore1 === '';
+        const isStore2Out = product.stockStore2 === '0' || product.stockStore2 === '0 pc' || product.stockStore2 === '';
+        const isOutOfStock = isStore1Out && isStore2Out;
+        
+        let status = '✅ In Stock';
+        let statusColor = '#27ae60';
+        
+        if (isOutOfStock) {
+            status = '❌ Out of Stock';
+            statusColor = '#e74c3c';
+            outOfStockCount++;
+        } else if (isStore1Out || isStore2Out) {
+            status = '⚠️ Low Stock';
+            statusColor = '#f39c12';
+            lowStockCount++;
+        }
+        
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid #eee';
+        row.innerHTML = `
+            <td style="padding: 10px; font-weight: bold;">${product.name}</td>
+            <td style="padding: 10px; text-align: center; color: ${isStore1Out ? '#e74c3c' : '#2c3e50'}">
+                ${product.stockStore1}
+                ${isStore1Out ? '❌' : ''}
+            </td>
+            <td style="padding: 10px; text-align: center; color: ${isStore2Out ? '#e74c3c' : '#2c3e50'}">
+                ${product.stockStore2}
+                ${isStore2Out ? '❌' : ''}
+            </td>
+            <td style="padding: 10px; text-align: center; color: ${statusColor}">${status}</td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    summary.innerHTML = `
+        <strong>Summary:</strong> 
+        Total Products: ${products.length} | 
+        Out of Stock: <span style="color: #e74c3c">${outOfStockCount}</span> | 
+        Low Stock: <span style="color: #f39c12">${lowStockCount}</span>
+    `;
+}
+
+function setupStockSearch() {
+    const searchInput = document.getElementById('stock-search');
+    
+    if (!searchInput) {
+        return;
     }
+    
+    searchInput.replaceWith(searchInput.cloneNode(true));
+    
+    const freshInput = document.getElementById('stock-search');
+    
+    freshInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        console.log('Searching for:', searchTerm);
+        
+        if (!allStoreProducts || allStoreProducts.length === 0) {
+            return;
+        }
+        
+        if (searchTerm === '') {
+            populateStockTable(allStoreProducts);
+        } else {
+            const filteredProducts = allStoreProducts.filter(function(product) {
+                return product.name.toLowerCase().includes(searchTerm);
+            });
+            populateStockTable(filteredProducts);
+        }
+    });
+    
+    freshInput.value = '';
 }
 
 // ============ STOCK ADJUSTMENT FUNCTIONS ============
+let adjustmentItems = [];
+
 function showStockAdjustment() {
     adjustmentItems = [];
     document.getElementById('stock-adjustment-modal').style.display = 'flex';
@@ -762,19 +831,17 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        // Make it VISIBLE - use emojis and clear text
         const itemName = `📊 STOCK: ${adjustment.name} (${adjustment.adjustmentType.toUpperCase()} ${adjustment.quantity} ${adjustment.unit})`;
         
         console.log('🔄 Submitting VISIBLE stock adjustment:', itemName);
 
-        // Use the same field IDs as sales
         formData.append("entry.902078713", itemName);
         formData.append("entry.448082825", adjustment.unit);
         formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0.01"); // Small amount to make it visible
+        formData.append("entry.591650069", "0.01");
         formData.append("entry.209491416", "0");
         formData.append("entry.1362215713", "0");
-        formData.append("entry.492804547", "0.01"); // Small amount to make it visible
+        formData.append("entry.492804547", "0.01");
         formData.append("entry.197957478", "STOCK_ADJUSTMENT");
         formData.append("entry.370318910", stores[currentStore].name);
 
