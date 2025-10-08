@@ -828,7 +828,7 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
         const formData = new URLSearchParams();
         
         const itemName = `📊 STOCK: ${adjustment.name} (${adjustment.adjustmentType.toUpperCase()} ${adjustment.quantity} ${adjustment.unit})`;
@@ -866,3 +866,4 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
+
