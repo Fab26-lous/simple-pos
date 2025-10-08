@@ -681,8 +681,7 @@ function submitStockAdjustment() {
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
         // Replace this URL with your NEW stock adjustment form URL
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse
-";
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
         const formData = new URLSearchParams();
         
         // Simplified fields for stock adjustments only
@@ -718,3 +717,4 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
+
