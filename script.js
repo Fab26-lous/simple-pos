@@ -616,6 +616,8 @@ function clearAdjustments() {
 }
 
 function submitStockAdjustment() {
+    console.log('=== STOCK ADJUSTMENT SUBMISSION STARTED ===');
+    
     if (adjustmentItems.length === 0) {
         alert('No items to adjust');
         return;
@@ -630,6 +632,8 @@ function submitStockAdjustment() {
         return;
     }
 
+    console.log('Adjustment items to submit:', adjustmentItems);
+
     const submitBtn = document.querySelector('#stock-adjustment-modal button[onclick="submitStockAdjustment()"]');
     const originalText = submitBtn ? submitBtn.textContent : 'Submit Adjustments';
     
@@ -643,39 +647,94 @@ function submitStockAdjustment() {
 
     function submitNext(index) {
         if (index >= adjustmentItems.length) {
+            console.log('=== SUBMISSION COMPLETE ===');
+            console.log('Successfully submitted:', successCount, 'items');
+            console.log('Errors:', errors);
+            
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
             
             if (successCount > 0) {
-                alert(`Successfully submitted ${successCount} stock adjustment(s) to the dedicated adjustments sheet!`);
+                alert(`✅ Successfully submitted ${successCount} stock adjustment(s)! Check your Google Sheets.`);
                 adjustmentItems = [];
                 hideStockAdjustment();
-            }
-            
-            if (errors.length > 0) {
-                console.error('Failed submissions:', errors);
-                alert(`${errors.length} adjustment(s) failed. Check console for details.`);
+            } else {
+                alert('❌ No adjustments were submitted. Check browser console for errors.');
             }
             
             return;
         }
 
         const adjustment = adjustmentItems[index];
+        console.log(`Submitting item ${index + 1}:`, adjustment);
         
+        // Submit to Google Form
         submitStockAdjustmentToGoogleForm(adjustment)
             .then(() => {
+                console.log(`✅ Success: ${adjustment.name}`);
                 successCount++;
                 submitNext(index + 1);
             })
             .catch(err => {
+                console.error(`❌ Failed: ${adjustment.name}`, err);
                 errors.push({ item: adjustment.name, error: err });
                 submitNext(index + 1);
             });
     }
 
     submitNext(0);
+}
+
+function submitStockAdjustmentToGoogleForm(adjustment) {
+    return new Promise((resolve, reject) => {
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
+        const formData = new URLSearchParams();
+        
+        // Format the item name to show it's a stock adjustment
+        const itemName = `${adjustment.name} [STOCK ${adjustment.adjustmentType.toUpperCase()}]`;
+        
+        console.log('Form data being submitted:', {
+            item: itemName,
+            unit: adjustment.unit,
+            quantity: adjustment.quantity,
+            price: 0,
+            total: 0,
+            paymentMethod: `STOCK_${adjustment.adjustmentType.toUpperCase()}`,
+            store: stores[currentStore].name
+        });
+
+        // Use the same field IDs as your sales form
+        formData.append("entry.902078713", itemName);
+        formData.append("entry.448082825", adjustment.unit);
+        formData.append("entry.617272247", adjustment.quantity.toString());
+        formData.append("entry.591650069", "0");
+        formData.append("entry.209491416", "0");
+        formData.append("entry.1362215713", "0");
+        formData.append("entry.492804547", "0");
+        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
+        formData.append("entry.370318910", stores[currentStore].name);
+
+        console.log('Final form data string:', formData.toString());
+
+        fetch(formUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        })
+        .then(() => {
+            console.log('✅ Form submission request completed for:', adjustment.name);
+            resolve();
+        })
+        .catch(error => {
+            console.error('❌ Form submission failed for:', adjustment.name, error);
+            reject(error);
+        });
+    });
 }
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
@@ -724,3 +783,4 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
+
