@@ -408,6 +408,7 @@ let adjustmentItems = [];
 function showStockAdjustment() {
     adjustmentItems = []; // Reset adjustments
     document.getElementById('stock-adjustment-modal').style.display = 'flex';
+    document.getElementById('adjustment-store-name').textContent = stores[currentStore].name;
     updateAdjustmentTable();
     setupAdjustmentSearch();
 }
@@ -735,3 +736,4 @@ function showAdjustmentNotification(message, type) {
         notification.style.display = 'none';
     }, 3000);
 }
+
