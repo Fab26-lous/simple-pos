@@ -680,17 +680,25 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        const formUrl = STOCK_ADJUSTMENT_FORM_URL;
+        // Use the SAME form as sales but mark as stock adjustment
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        // FIXED: Using the correct form field IDs for your stock adjustment form
-        formData.append("entry.1351663693", adjustment.name); // Product Name
-        formData.append("entry.2099316372", adjustment.unit); // Unit
-        formData.append("entry.1838734272", adjustment.quantity.toString()); // Quantity
-        formData.append("entry.1785029976", adjustment.adjustmentType); // Adjustment Type
-        formData.append("entry.1678851527", stores[currentStore].name); // Store Name
+        // Format the item name to show it's a stock adjustment
+        const itemName = `${adjustment.name} [STOCK ${adjustment.adjustmentType.toUpperCase()}]`;
+        
+        // Use the same field IDs as your sales form
+        formData.append("entry.902078713", itemName); // Item name with stock type
+        formData.append("entry.448082825", adjustment.unit); // Unit
+        formData.append("entry.617272247", adjustment.quantity.toString()); // Quantity
+        formData.append("entry.591650069", "0"); // Price = 0
+        formData.append("entry.209491416", "0"); // Discount = 0
+        formData.append("entry.1362215713", "0"); // Extra = 0
+        formData.append("entry.492804547", "0"); // Total = 0
+        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`); // Payment Method shows stock type
+        formData.append("entry.370318910", stores[currentStore].name); // Store name
 
-        console.log('Submitting stock adjustment:', {
+        console.log('Submitting stock adjustment to MAIN form:', {
             product: adjustment.name,
             unit: adjustment.unit,
             quantity: adjustment.quantity,
@@ -707,7 +715,7 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
             body: formData.toString()
         })
         .then(() => {
-            console.log('✅ Stock adjustment submitted to dedicated sheet:', adjustment.name);
+            console.log('✅ Stock adjustment submitted to MAIN sheet:', adjustment.name);
             resolve();
         })
         .catch(error => {
