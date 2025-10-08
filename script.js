@@ -421,11 +421,16 @@ function setupAdjustmentSearch() {
     const searchInput = document.getElementById('adjustment-search');
     const suggestions = document.getElementById('adjustment-suggestions');
     
+    if (!searchInput || !suggestions) {
+        console.error('Search elements not found');
+        return;
+    }
+    
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         suggestions.innerHTML = '';
         
-        if (searchTerm.length < 2) {
+        if (searchTerm.length < 1) {
             suggestions.style.display = 'none';
             return;
         }
@@ -439,6 +444,7 @@ function setupAdjustmentSearch() {
                 const suggestionItem = document.createElement('div');
                 suggestionItem.className = 'suggestion-item';
                 suggestionItem.textContent = product.name;
+                suggestionItem.style.cssText = 'padding: 10px 15px; cursor: pointer; border-bottom: 1px solid #f1f1f1;';
                 suggestionItem.addEventListener('click', () => {
                     searchInput.value = product.name;
                     suggestions.style.display = 'none';
@@ -464,86 +470,103 @@ function addItemToAdjustment() {
     const itemName = searchInput.value.trim();
     
     if (!itemName) {
-        showAdjustmentNotification('Please enter a product name', 'error');
+        alert('Please enter a product name');
         return;
     }
     
     // Find the product
     const product = products.find(p => p.name.toLowerCase() === itemName.toLowerCase());
     if (!product) {
-        showAdjustmentNotification('Product not found', 'error');
+        alert('Product not found');
         return;
     }
     
     // Check if item already in adjustments
     const existingItem = adjustmentItems.find(item => item.name === product.name);
     if (existingItem) {
-        showAdjustmentNotification('Item already in adjustment list', 'error');
+        alert('Item already in adjustment list');
         return;
     }
     
     // Add to adjustments with improved structure
     adjustmentItems.push({
-        id: product.name, // Using name as ID since your products don't have IDs
+        id: product.name,
         name: product.name,
         currentStock: product.stock || 0,
+        unit: 'pc', // Default unit
         adjustmentType: 'add',
         quantity: 0,
-        newStock: product.stock || 0,
-        unit: 'pc' // Default unit
+        newStock: product.stock || 0
     });
     
     searchInput.value = ''; // Clear search
-    document.getElementById('adjustment-suggestions').style.display = 'none';
+    const suggestions = document.getElementById('adjustment-suggestions');
+    if (suggestions) suggestions.style.display = 'none';
     updateAdjustmentTable();
-    showAdjustmentNotification('Product added to adjustment list', 'success');
 }
 
 function updateAdjustmentTable() {
     const tbody = document.getElementById('adjustment-table-body');
     const summary = document.getElementById('adjustment-summary');
     
+    if (!tbody) {
+        console.error('Adjustment table body not found');
+        return;
+    }
+    
     tbody.innerHTML = '';
     
     if (adjustmentItems.length === 0) {
         tbody.innerHTML = `
             <tr class="empty-state-row">
-                <td colspan="6">
-                    <div class="empty-state">
-                        <h3>No items added yet</h3>
-                        <p>Search for products above and click "Add Item" to start adjusting stock</p>
-                    </div>
+                <td colspan="7" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                    <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
+                    <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
                 </td>
             </tr>
         `;
-        summary.innerHTML = 'Items to adjust: 0';
+        if (summary) summary.innerHTML = 'Items to adjust: 0';
         return;
     }
     
     adjustmentItems.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td class="product-name">${item.name}</td>
-            <td class="stock-info">${item.currentStock} ${item.unit}</td>
-            <td class="adjustment-type">
-                <select class="adjustment-select" data-index="${index}">
+            <td style="padding: 12px 15px; font-weight: 600; color: #2c3e50;">${item.name}</td>
+            <td style="padding: 12px 15px; color: #7f8c8d;">${item.currentStock}</td>
+            <td style="padding: 12px 15px;">
+                <select class="unit-select" data-index="${index}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="pc" ${item.unit === 'pc' ? 'selected' : ''}>Pieces</option>
+                    <option value="dz" ${item.unit === 'dz' ? 'selected' : ''}>Dozens</option>
+                    <option value="ct" ${item.unit === 'ct' ? 'selected' : ''}>Cartons</option>
+                </select>
+            </td>
+            <td style="padding: 12px 15px;">
+                <select class="adjustment-select" data-index="${index}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
                     <option value="add" ${item.adjustmentType === 'add' ? 'selected' : ''}>Add Stock</option>
                     <option value="remove" ${item.adjustmentType === 'remove' ? 'selected' : ''}>Remove Stock</option>
                     <option value="set" ${item.adjustmentType === 'set' ? 'selected' : ''}>Set Stock</option>
                 </select>
             </td>
-            <td>
-                <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="0">
+            <td style="padding: 12px 15px;">
+                <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="0" style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
-            <td class="new-stock">${item.newStock} ${item.unit}</td>
-            <td>
-                <button class="remove-btn" data-index="${index}">Remove</button>
+            <td style="padding: 12px 15px; font-weight: 600; color: #27ae60;">${item.newStock}</td>
+            <td style="padding: 12px 15px;">
+                <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
             </td>
         `;
         tbody.appendChild(row);
     });
     
-    // Add event listeners to the new elements
+    // Add event listeners
+    document.querySelectorAll('.unit-select').forEach(select => {
+        select.addEventListener('change', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            updateAdjustmentItem(index, 'unit', this.value);
+        });
+    });
+    
     document.querySelectorAll('.adjustment-select').forEach(select => {
         select.addEventListener('change', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -565,7 +588,7 @@ function updateAdjustmentTable() {
         });
     });
     
-    summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
+    if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
 
 function updateAdjustmentItem(index, field, value) {
@@ -577,6 +600,8 @@ function updateAdjustmentItem(index, field, value) {
         item.adjustmentType = value;
     } else if (field === 'quantity') {
         item.quantity = value;
+    } else if (field === 'unit') {
+        item.unit = value;
     }
     
     // Calculate new stock
@@ -597,25 +622,25 @@ function removeAdjustmentItem(index) {
     const itemName = adjustmentItems[index].name;
     adjustmentItems.splice(index, 1);
     updateAdjustmentTable();
-    showAdjustmentNotification(`"${itemName}" removed from adjustment list`, 'success');
+    alert(`"${itemName}" removed from adjustment list`);
 }
 
 function clearAdjustments() {
     if (adjustmentItems.length === 0) {
-        showAdjustmentNotification('No items to clear', 'error');
+        alert('No items to clear');
         return;
     }
     
     if (confirm('Are you sure you want to clear all items?')) {
         adjustmentItems = [];
         updateAdjustmentTable();
-        showAdjustmentNotification('All items cleared', 'success');
+        alert('All items cleared');
     }
 }
 
 function submitStockAdjustment() {
     if (adjustmentItems.length === 0) {
-        showAdjustmentNotification('No items to adjust', 'error');
+        alert('No items to adjust');
         return;
     }
     
@@ -625,13 +650,15 @@ function submitStockAdjustment() {
     );
     
     if (invalidItems.length > 0) {
-        showAdjustmentNotification('Please set valid quantities for all items', 'error');
+        alert('Please set valid quantities for all items');
         return;
     }
 
-    const submitBtn = document.querySelector('#stock-adjustment-modal .submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
+    const submitBtn = document.querySelector('#stock-adjustment-modal button[onclick="submitStockAdjustment()"]');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+    }
 
     let successCount = 0;
     const errors = [];
@@ -639,20 +666,20 @@ function submitStockAdjustment() {
     // Submit each adjustment to Google Form
     function submitNext(index) {
         if (index >= adjustmentItems.length) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Adjustments';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Adjustments';
+            }
             
             if (successCount > 0) {
-                showAdjustmentNotification(`Successfully submitted ${successCount} stock adjustment(s)!`, 'success');
-                setTimeout(() => {
-                    adjustmentItems = [];
-                    hideStockAdjustment();
-                }, 2000);
+                alert(`Successfully submitted ${successCount} stock adjustment(s)!`);
+                adjustmentItems = [];
+                hideStockAdjustment();
             }
             
             if (errors.length > 0) {
                 console.error('Failed submissions:', errors);
-                showAdjustmentNotification(`${errors.length} adjustment(s) failed. Check console for details.`, 'error');
+                alert(`${errors.length} adjustment(s) failed. Check console for details.`);
             }
             
             return;
@@ -676,26 +703,22 @@ function submitStockAdjustment() {
 }
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
     const formData = new URLSearchParams();
     
     // Format item name to indicate stock adjustment
     const itemName = `${adjustment.name} [STOCK ${adjustment.adjustmentType.toUpperCase()}]`;
     
-    // Use the same form fields as sales
-    formData.append("fvv", "1");
-    formData.append("pageHistory", "0");
     formData.append("entry.902078713", itemName);
     formData.append("entry.448082825", adjustment.unit);
     formData.append("entry.617272247", adjustment.quantity.toString());
-    formData.append("entry.591650069", "0"); // Price = 0
-    formData.append("entry.209491416", "0"); // Discount = 0
-    formData.append("entry.1362215713", "0"); // Extra = 0
-    formData.append("entry.492804547", "0"); // Total = 0
+    formData.append("entry.591650069", "0");
+    formData.append("entry.209491416", "0");
+    formData.append("entry.1362215713", "0");
+    formData.append("entry.492804547", "0");
     formData.append("entry.197957478", "STOCK_ADJUST");
-    formData.append("entry.370318910", stores[adjustment.store || currentStore].name);
+    formData.append("entry.370318910", stores[currentStore].name);
 
-    // Submit to Google Form (no-cors so we can't check response)
     return fetch(formUrl, {
         method: "POST",
         mode: "no-cors",
@@ -706,34 +729,4 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
     });
 }
 
-function showAdjustmentNotification(message, type) {
-    // Create notification element if it doesn't exist
-    let notification = document.getElementById('adjustment-notification');
-    if (!notification) {
-        notification = document.createElement('div');
-        notification.id = 'adjustment-notification';
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 6px;
-            color: white;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            display: none;
-        `;
-        document.body.appendChild(notification);
-    }
-    
-    notification.textContent = message;
-    notification.className = type === 'success' ? 'success' : 'error';
-    notification.style.display = 'block';
-    notification.style.backgroundColor = type === 'success' ? '#27ae60' : '#e74c3c';
-    
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 3000);
-}
 
