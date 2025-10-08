@@ -116,6 +116,7 @@ let currentStore = null;
 let currentUser = null;
 let products = [];
 let currentSales = [];
+let adjustmentItems = [];
 
 // ============ CORE POS FUNCTIONS ============
 function checkLogin() {
@@ -402,8 +403,6 @@ function submitSaleToGoogleForm(sale) {
 }
 
 // ============ STOCK ADJUSTMENT FUNCTIONS ============
-let adjustmentItems = [];
-
 function showStockAdjustment() {
     adjustmentItems = [];
     document.getElementById('stock-adjustment-modal').style.display = 'flex';
@@ -667,7 +666,6 @@ function submitStockAdjustment() {
         const adjustment = adjustmentItems[index];
         console.log(`Submitting item ${index + 1}:`, adjustment);
         
-        // Submit to Google Form
         submitStockAdjustmentToGoogleForm(adjustment)
             .then(() => {
                 console.log(`✅ Success: ${adjustment.name}`);
@@ -686,31 +684,22 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        // Use the SAME form as sales but mark as stock adjustment
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        // Format the item name to show it's a stock adjustment
         const itemName = `${adjustment.name} [STOCK ${adjustment.adjustmentType.toUpperCase()}]`;
         
-        // Use the same field IDs as your sales form
-        formData.append("entry.902078713", itemName); // Item name with stock type
-        formData.append("entry.448082825", adjustment.unit); // Unit
-        formData.append("entry.617272247", adjustment.quantity.toString()); // Quantity
-        formData.append("entry.591650069", "0"); // Price = 0
-        formData.append("entry.209491416", "0"); // Discount = 0
-        formData.append("entry.1362215713", "0"); // Extra = 0
-        formData.append("entry.492804547", "0"); // Total = 0
-        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`); // Payment Method shows stock type
-        formData.append("entry.370318910", stores[currentStore].name); // Store name
+        formData.append("entry.902078713", itemName);
+        formData.append("entry.448082825", adjustment.unit);
+        formData.append("entry.617272247", adjustment.quantity.toString());
+        formData.append("entry.591650069", "0");
+        formData.append("entry.209491416", "0");
+        formData.append("entry.1362215713", "0");
+        formData.append("entry.492804547", "0");
+        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
+        formData.append("entry.370318910", stores[currentStore].name);
 
-        console.log('Submitting stock adjustment to MAIN form:', {
-            product: adjustment.name,
-            unit: adjustment.unit,
-            quantity: adjustment.quantity,
-            type: adjustment.adjustmentType,
-            store: stores[currentStore].name
-        });
+        console.log('Submitting stock adjustment:', adjustment.name);
 
         fetch(formUrl, {
             method: "POST",
@@ -721,7 +710,7 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
             body: formData.toString()
         })
         .then(() => {
-            console.log('✅ Stock adjustment submitted to MAIN sheet:', adjustment.name);
+            console.log('✅ Stock adjustment submitted:', adjustment.name);
             resolve();
         })
         .catch(error => {
@@ -730,6 +719,3 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
-
-
-
