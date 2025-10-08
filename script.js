@@ -687,19 +687,28 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        const itemName = `${adjustment.name} [STOCK ${adjustment.adjustmentType.toUpperCase()}]`;
+        // Make it look EXACTLY like a sale but with $0.01 price (so it's visible but negligible)
+        const itemName = `${adjustment.name}`; // No [STOCK] marker
         
+        console.log('🔄 Submitting as regular sale:', {
+            product: adjustment.name,
+            unit: adjustment.unit,
+            quantity: adjustment.quantity,
+            type: adjustment.adjustmentType
+        });
+
+        // Submit as a regular sale but with $0.01 price
         formData.append("entry.902078713", itemName);
         formData.append("entry.448082825", adjustment.unit);
         formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0");
+        formData.append("entry.591650069", "0.01"); // Small price instead of 0
         formData.append("entry.209491416", "0");
         formData.append("entry.1362215713", "0");
-        formData.append("entry.492804547", "0");
+        formData.append("entry.492804547", "0.01"); // Small total instead of 0
         formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
         formData.append("entry.370318910", stores[currentStore].name);
 
-        console.log('Submitting stock adjustment:', adjustment.name);
+        console.log('📤 Form data (as sale):', Object.fromEntries(formData));
 
         fetch(formUrl, {
             method: "POST",
@@ -710,11 +719,12 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
             body: formData.toString()
         })
         .then(() => {
-            console.log('✅ Stock adjustment submitted:', adjustment.name);
+            console.log('✅ Stock adjustment submitted as sale');
+            console.log('🔍 Look for:', adjustment.name, 'with Payment Method starting with "STOCK_"');
             resolve();
         })
         .catch(error => {
-            console.error('❌ Stock adjustment submission failed:', error);
+            console.error('❌ Submission failed:', error);
             reject(error);
         });
     });
