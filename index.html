@@ -157,31 +157,29 @@
             <button onclick="addItemToAdjustment()" style="background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 15px;">Add Item</button>
         </div>
         
-       <!-- Adjustment Items Table -->
-<div id="adjustment-table-container">
-    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <thead>
-            <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Product</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Current Stock</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Unit</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Adjustment Type</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Quantity</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">New Stock</th>
-                <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Action</th>
-            </tr>
-        </thead>
-        <tbody id="adjustment-table-body">
-            <!-- Adjustment items will be populated here -->
-            <tr class="empty-state-row">
-                <td colspan="7" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
-                    <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
-                    <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+        <!-- Adjustment Items Table -->
+        <div id="adjustment-table-container">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Product</th>
+                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Unit</th>
+                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Adjustment Type</th>
+                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Quantity</th>
+                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adjustment-table-body">
+                    <!-- Adjustment items will be populated here -->
+                    <tr class="empty-state-row">
+                        <td colspan="5" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                            <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
+                            <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         
         <!-- Summary and Submit -->
         <div style="margin-top: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
@@ -193,9 +191,7 @@
         </div>
     </div>
 </div>
-  <script src="script.js"></script>
-</body>
-</html>
+       
 
 
 
