@@ -828,26 +828,26 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        // Use the EXACT same URL format as sales - with ?submit=Submit
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
         const formData = new URLSearchParams();
-        
-        // Use simpler, more visible format
-        const itemName = `STOCK ADJUST: ${adjustment.name}`;
-        
-        console.log('🔄 Submitting stock adjustment:', itemName);
 
-        // Use the EXACT same field structure as sales
+        const itemName = `STOCK ADJUST: ${adjustment.name}`;
+
         formData.append("fvv", "1");
         formData.append("pageHistory", "0");
         formData.append("entry.902078713", itemName);
         formData.append("entry.448082825", adjustment.unit);
         formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0"); // Price = 0
-        formData.append("entry.209491416", "0"); // Discount = 0
-        formData.append("entry.1362215713", "0"); // Extra = 0
-        formData.append("entry.492804547", "0"); // Total = 0
-        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
+        formData.append("entry.591650069", "0"); // Price
+        formData.append("entry.209491416", "0"); // Discount
+        formData.append("entry.1362215713", "0"); // Extra
+        formData.append("entry.492804547", "0"); // Total
+
+        // <<--- IMPORTANT: send a value the form WILL accept in this field (e.g. "Cash")
+        // your form likely validates this question (multiple-choice). Adjust to one of its allowed values.
+        formData.append("entry.197957478", "Cash");
+
+        // Keep store as before
         formData.append("entry.370318910", stores[currentStore].name);
 
         console.log('📤 Stock adjustment form data:', Object.fromEntries(formData));
@@ -862,7 +862,6 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         })
         .then(() => {
             console.log('✅ Stock adjustment submitted successfully');
-            console.log('🔍 Look for "STOCK ADJUST:" in your Google Sheets');
             resolve();
         })
         .catch(error => {
@@ -871,56 +870,3 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
-// Temporary debug function - add this to test stock adjustments
-function testStockAdjustment() {
-    console.log('=== TESTING STOCK ADJUSTMENT ===');
-    
-    // Create a test adjustment
-    const testAdjustment = {
-        name: "Test Product",
-        unit: "pc",
-        adjustmentType: "add",
-        quantity: 5
-    };
-    
-    console.log('Test adjustment:', testAdjustment);
-    
-    submitStockAdjustmentToGoogleForm(testAdjustment)
-        .then(() => {
-            console.log('✅ Test stock adjustment submitted successfully');
-            alert('Test stock adjustment submitted! Check your Google Sheets for "STOCK ADJUST: Test Product"');
-        })
-        .catch(error => {
-            console.error('❌ Test stock adjustment failed:', error);
-            alert('Test stock adjustment failed. Check console for errors.');
-        });
-}
-// Temporary debug function - add this to test stock adjustments
-function testStockAdjustment() {
-    console.log('=== TESTING STOCK ADJUSTMENT ===');
-    
-    // Create a test adjustment
-    const testAdjustment = {
-        name: "Test Product",
-        unit: "pc",
-        adjustmentType: "add",
-        quantity: 5
-    };
-    
-    console.log('Test adjustment:', testAdjustment);
-    
-    submitStockAdjustmentToGoogleForm(testAdjustment)
-        .then(() => {
-            console.log('✅ Test stock adjustment submitted successfully');
-            alert('Test stock adjustment submitted! Check your Google Sheets for "STOCK ADJUST: Test Product"');
-        })
-        .catch(error => {
-            console.error('❌ Test stock adjustment failed:', error);
-            alert('Test stock adjustment failed. Check console for errors.');
-        });
-}
-
-// Make it available in console
-window.testStockAdjustment = testStockAdjustment;
-
-
