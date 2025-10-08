@@ -405,7 +405,7 @@ function submitSaleToGoogleForm(sale) {
 let adjustmentItems = [];
 
 // FIXED: Properly closed form URL string
-const STOCK_ADJUSTMENT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse';
+const STOCK_ADJUSTMENT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse';
 
 function showStockAdjustment() {
     adjustmentItems = [];
@@ -783,4 +783,5 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
+
 
