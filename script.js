@@ -378,11 +378,9 @@ function submitAllSales() {
 }
 
 function submitSaleToGoogleForm(sale) {
-  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
   const formData = new URLSearchParams();
   
-  formData.append("fvv", "1");
-  formData.append("pageHistory", "0");
   formData.append("entry.902078713", sale.item);
   formData.append("entry.448082825", sale.unit);
   formData.append("entry.617272247", sale.quantity.toString());
@@ -402,11 +400,12 @@ function submitSaleToGoogleForm(sale) {
     body: formData.toString()
   });
 }
-// ============ IMPROVED STOCK ADJUSTMENT FUNCTIONS ============
+
+// ============ STOCK ADJUSTMENT FUNCTIONS ============
 let adjustmentItems = [];
 
 function showStockAdjustment() {
-    adjustmentItems = []; // Reset adjustments
+    adjustmentItems = [];
     document.getElementById('stock-adjustment-modal').style.display = 'flex';
     document.getElementById('adjustment-store-name').textContent = stores[currentStore].name;
     updateAdjustmentTable();
@@ -421,10 +420,7 @@ function setupAdjustmentSearch() {
     const searchInput = document.getElementById('adjustment-search');
     const suggestions = document.getElementById('adjustment-suggestions');
     
-    if (!searchInput || !suggestions) {
-        console.error('Search elements not found');
-        return;
-    }
+    if (!searchInput || !suggestions) return;
     
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
@@ -442,9 +438,8 @@ function setupAdjustmentSearch() {
         if (filteredProducts.length > 0) {
             filteredProducts.forEach(product => {
                 const suggestionItem = document.createElement('div');
-                suggestionItem.className = 'suggestion-item';
-                suggestionItem.textContent = product.name;
                 suggestionItem.style.cssText = 'padding: 10px 15px; cursor: pointer; border-bottom: 1px solid #f1f1f1;';
+                suggestionItem.textContent = product.name;
                 suggestionItem.addEventListener('click', () => {
                     searchInput.value = product.name;
                     suggestions.style.display = 'none';
@@ -457,7 +452,6 @@ function setupAdjustmentSearch() {
         }
     });
     
-    // Hide suggestions when clicking outside
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
             suggestions.style.display = 'none';
@@ -474,32 +468,29 @@ function addItemToAdjustment() {
         return;
     }
     
-    // Find the product
     const product = products.find(p => p.name.toLowerCase() === itemName.toLowerCase());
     if (!product) {
         alert('Product not found');
         return;
     }
     
-    // Check if item already in adjustments
     const existingItem = adjustmentItems.find(item => item.name === product.name);
     if (existingItem) {
         alert('Item already in adjustment list');
         return;
     }
     
-    // Add to adjustments with improved structure
     adjustmentItems.push({
         id: product.name,
         name: product.name,
         currentStock: product.stock || 0,
-        unit: 'pc', // Default unit
+        unit: 'pc',
         adjustmentType: 'add',
         quantity: 0,
         newStock: product.stock || 0
     });
     
-    searchInput.value = ''; // Clear search
+    searchInput.value = '';
     const suggestions = document.getElementById('adjustment-suggestions');
     if (suggestions) suggestions.style.display = 'none';
     updateAdjustmentTable();
@@ -509,10 +500,7 @@ function updateAdjustmentTable() {
     const tbody = document.getElementById('adjustment-table-body');
     const summary = document.getElementById('adjustment-summary');
     
-    if (!tbody) {
-        console.error('Adjustment table body not found');
-        return;
-    }
+    if (!tbody) return;
     
     tbody.innerHTML = '';
     
@@ -533,12 +521,12 @@ function updateAdjustmentTable() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="padding: 12px 15px; font-weight: 600; color: #2c3e50;">${item.name}</td>
-            <td style="padding: 12px 15px; color: #7f8c8d;">${item.currentStock} ${item.unit || 'pc'}</td>
+            <td style="padding: 12px 15px; color: #7f8c8d;">${item.currentStock} ${item.unit}</td>
             <td style="padding: 12px 15px;">
                 <select class="unit-select" data-index="${index}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                    <option value="pc" ${(item.unit === 'pc') ? 'selected' : ''}>Pieces (pc)</option>
-                    <option value="dz" ${(item.unit === 'dz') ? 'selected' : ''}>Dozens (dz)</option>
-                    <option value="ct" ${(item.unit === 'ct') ? 'selected' : ''}>Cartons (ct)</option>
+                    <option value="pc" ${item.unit === 'pc' ? 'selected' : ''}>Pieces (pc)</option>
+                    <option value="dz" ${item.unit === 'dz' ? 'selected' : ''}>Dozens (dz)</option>
+                    <option value="ct" ${item.unit === 'ct' ? 'selected' : ''}>Cartons (ct)</option>
                 </select>
             </td>
             <td style="padding: 12px 15px;">
@@ -551,7 +539,7 @@ function updateAdjustmentTable() {
             <td style="padding: 12px 15px;">
                 <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="0" style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
-            <td style="padding: 12px 15px; font-weight: 600; color: #27ae60;">${item.newStock} ${item.unit || 'pc'}</td>
+            <td style="padding: 12px 15px; font-weight: 600; color: #27ae60;">${item.newStock} ${item.unit}</td>
             <td style="padding: 12px 15px;">
                 <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
             </td>
@@ -559,7 +547,6 @@ function updateAdjustmentTable() {
         tbody.appendChild(row);
     });
     
-    // Add event listeners
     document.querySelectorAll('.unit-select').forEach(select => {
         select.addEventListener('change', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -590,6 +577,7 @@ function updateAdjustmentTable() {
     
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
+
 function updateAdjustmentItem(index, field, value) {
     if (index < 0 || index >= adjustmentItems.length) return;
     
@@ -603,7 +591,6 @@ function updateAdjustmentItem(index, field, value) {
         item.unit = value;
     }
     
-    // Calculate new stock
     if (item.adjustmentType === 'add') {
         item.newStock = item.currentStock + item.quantity;
     } else if (item.adjustmentType === 'remove') {
@@ -638,14 +625,11 @@ function clearAdjustments() {
 }
 
 function submitStockAdjustment() {
-    console.log('=== SUBMIT STOCK ADJUSTMENT STARTED ===');
-    
     if (adjustmentItems.length === 0) {
         alert('No items to adjust');
         return;
     }
     
-    // Validate all items have a quantity
     const invalidItems = adjustmentItems.filter(item => 
         item.quantity <= 0 || (item.adjustmentType === 'set' && item.quantity < 0)
     );
@@ -654,8 +638,6 @@ function submitStockAdjustment() {
         alert('Please set valid quantities for all items');
         return;
     }
-
-    console.log('Submitting adjustments:', adjustmentItems);
 
     const submitBtn = document.querySelector('#stock-adjustment-modal button[onclick="submitStockAdjustment()"]');
     const originalText = submitBtn ? submitBtn.textContent : 'Submit Adjustments';
@@ -668,58 +650,11 @@ function submitStockAdjustment() {
     let successCount = 0;
     const errors = [];
 
-    // Submit each adjustment to Google Form
     function submitNext(index) {
         if (index >= adjustmentItems.length) {
-            console.log('=== SUBMISSION COMPLETE ===');
-            console.log('Successfully submitted:', successCount);
-            console.log('Errors:', errors);
-            
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
-            }
-            
-            if (successCount > 0) {
-                alert(`Successfully submitted ${successCount} stock adjustment(s)!`);
-                adjustmentItems = [];
-                hideStockAdjustment();
-            } else {
-                alert('No adjustments were submitted successfully. Check console for errors.');
-            }
-            
-            if (errors.length > 0) {
-                console.error('Failed submissions:', errors);
-            }
-            
-            return;
-        }
-
-        const adjustment = adjustmentItems[index];
-        console.log(`Submitting item ${index + 1}/${adjustmentItems.length}:`, adjustment);
-        
-        // Submit to Google Form
-        submitStockAdjustmentToGoogleForm(adjustment)
-            .then(() => {
-                console.log(`Successfully submitted: ${adjustment.name}`);
-                successCount++;
-                submitNext(index + 1);
-            })
-            .catch(err => {
-                console.error(`Failed to submit: ${adjustment.name}`, err);
-                errors.push({ item: adjustment.name, error: err });
-                submitNext(index + 1);
-            });
-    }
-
-    submitNext(0);
-}
-    // Submit each adjustment to Google Form
-    function submitNext(index) {
-        if (index >= adjustmentItems.length) {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Adjustments';
             }
             
             if (successCount > 0) {
@@ -738,7 +673,6 @@ function submitStockAdjustment() {
 
         const adjustment = adjustmentItems[index];
         
-        // Submit to Google Form
         submitStockAdjustmentToGoogleForm(adjustment)
             .then(() => {
                 successCount++;
@@ -758,45 +692,31 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
         const formData = new URLSearchParams();
         
-        console.log('Submitting stock adjustment:', adjustment);
+        formData.append("entry.902078713", adjustment.name);
+        formData.append("entry.448082825", adjustment.unit);
+        formData.append("entry.617272247", adjustment.quantity.toString());
+        formData.append("entry.591650069", "0");
+        formData.append("entry.209491416", "0");
+        formData.append("entry.1362215713", "0");
+        formData.append("entry.492804547", "0");
+        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
+        formData.append("entry.370318910", stores[currentStore].name);
 
-        // Use the SAME form fields as your sales, but mark as stock adjustment
-        formData.append("entry.902078713", adjustment.name); // Item name
-        formData.append("entry.448082825", adjustment.unit); // Unit
-        formData.append("entry.617272247", adjustment.quantity.toString()); // Quantity
-        formData.append("entry.591650069", "0"); // Price = 0 (so it doesn't affect sales totals)
-        formData.append("entry.209491416", "0"); // Discount = 0
-        formData.append("entry.1362215713", "0"); // Extra = 0
-        formData.append("entry.492804547", "0"); // Total = 0
-        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`); // Payment Method shows adjustment type
-        formData.append("entry.370318910", stores[currentStore].name); // Store name
-
-        console.log('Form data prepared:', {
-            item: adjustment.name,
-            unit: adjustment.unit,
-            quantity: adjustment.quantity,
-            type: adjustment.adjustmentType,
-            store: stores[currentStore].name
-        });
-
-        // Submit to Google Form (same as sales)
         fetch(formUrl, {
             method: "POST",
-            mode: "no-cors", // Important: no-cors mode
+            mode: "no-cors",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body: formData.toString()
         })
         .then(() => {
-            console.log('✅ Stock adjustment submitted successfully');
+            console.log('Stock adjustment submitted:', adjustment.name);
             resolve();
         })
         .catch(error => {
-            console.error('❌ Stock adjustment submission failed:', error);
+            console.error('Stock adjustment failed:', error);
             reject(error);
         });
     });
 }
-
-
