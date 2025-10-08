@@ -138,9 +138,60 @@
         <div id="stock-summary" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>
     </div>
 </div>
+  <!-- Stock Adjustment Button -->
+<button onclick="showStockAdjustment()" style="margin: 10px; background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+    📊 Adjust Stock
+</button>
+
+<!-- Stock Adjustment Modal -->
+<div id="stock-adjustment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Stock Adjustment - ${stores[currentStore].name}</h2>
+            <button onclick="hideStockAdjustment()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+        
+        <!-- Search and Add Item -->
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="adjustment-search" placeholder="Search products to add..." style="width: 70%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            <button onclick="addItemToAdjustment()" style="margin-left: 10px; padding: 10px 15px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Item</button>
+        </div>
+        
+        <!-- Adjustment Items Table -->
+        <div id="adjustment-table-container">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #34495e; color: white;">
+                        <th style="padding: 12px; text-align: left;">Product</th>
+                        <th style="padding: 12px; text-align: center;">Current Stock</th>
+                        <th style="padding: 12px; text-align: center;">Adjustment Type</th>
+                        <th style="padding: 12px; text-align: center;">Unit</th>
+                        <th style="padding: 12px; text-align: center;">Quantity</th>
+                        <th style="padding: 12px; text-align: center;">New Stock</th>
+                        <th style="padding: 12px; text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adjustment-table-body">
+                    <!-- Adjustment items will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Summary and Submit -->
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div id="adjustment-summary" style="font-weight: bold;"></div>
+            <div>
+                <button onclick="submitStockAdjustment()" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">Submit Adjustments</button>
+                <button onclick="clearAdjustments()" style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Clear All</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
