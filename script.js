@@ -895,5 +895,32 @@ function testStockAdjustment() {
             alert('Test stock adjustment failed. Check console for errors.');
         });
 }
+// Temporary debug function - add this to test stock adjustments
+function testStockAdjustment() {
+    console.log('=== TESTING STOCK ADJUSTMENT ===');
+    
+    // Create a test adjustment
+    const testAdjustment = {
+        name: "Test Product",
+        unit: "pc",
+        adjustmentType: "add",
+        quantity: 5
+    };
+    
+    console.log('Test adjustment:', testAdjustment);
+    
+    submitStockAdjustmentToGoogleForm(testAdjustment)
+        .then(() => {
+            console.log('✅ Test stock adjustment submitted successfully');
+            alert('Test stock adjustment submitted! Check your Google Sheets for "STOCK ADJUST: Test Product"');
+        })
+        .catch(error => {
+            console.error('❌ Test stock adjustment failed:', error);
+            alert('Test stock adjustment failed. Check console for errors.');
+        });
+}
+
+// Make it available in console
+window.testStockAdjustment = testStockAdjustment;
 
 
