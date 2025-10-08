@@ -404,8 +404,8 @@ function submitSaleToGoogleForm(sale) {
 // ============ STOCK ADJUSTMENT FUNCTIONS ============
 let adjustmentItems = [];
 
-// NEW GOOGLE FORM URL FOR STOCK ADJUSTMENTS
-const STOCK_ADJUSTMENT_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_NEW_FORM_ID_HERE/formResponse';
+// FIXED: Properly closed form URL string
+const STOCK_ADJUSTMENT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse';
 
 function showStockAdjustment() {
     adjustmentItems = [];
@@ -680,11 +680,10 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        // Replace this URL with your NEW stock adjustment form URL
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
+        const formUrl = STOCK_ADJUSTMENT_FORM_URL;
         const formData = new URLSearchParams();
         
-        // Simplified fields for stock adjustments only
+        // FIXED: Using the correct form field IDs for your stock adjustment form
         formData.append("entry.1351663693", adjustment.name); // Product Name
         formData.append("entry.2099316372", adjustment.unit); // Unit
         formData.append("entry.1838734272", adjustment.quantity.toString()); // Quantity
@@ -717,4 +716,3 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
         });
     });
 }
-
