@@ -404,6 +404,9 @@ function submitSaleToGoogleForm(sale) {
 // ============ STOCK ADJUSTMENT FUNCTIONS ============
 let adjustmentItems = [];
 
+// NEW GOOGLE FORM URL FOR STOCK ADJUSTMENTS
+const STOCK_ADJUSTMENT_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_NEW_FORM_ID_HERE/formResponse';
+
 function showStockAdjustment() {
     adjustmentItems = [];
     document.getElementById('stock-adjustment-modal').style.display = 'flex';
@@ -483,11 +486,9 @@ function addItemToAdjustment() {
     adjustmentItems.push({
         id: product.name,
         name: product.name,
-        currentStock: product.stock || 0,
         unit: 'pc',
         adjustmentType: 'add',
-        quantity: 0,
-        newStock: product.stock || 0
+        quantity: 0
     });
     
     searchInput.value = '';
@@ -507,7 +508,7 @@ function updateAdjustmentTable() {
     if (adjustmentItems.length === 0) {
         tbody.innerHTML = `
             <tr class="empty-state-row">
-                <td colspan="7" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                <td colspan="6" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
                     <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
                     <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
                 </td>
@@ -521,7 +522,6 @@ function updateAdjustmentTable() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="padding: 12px 15px; font-weight: 600; color: #2c3e50;">${item.name}</td>
-            <td style="padding: 12px 15px; color: #7f8c8d;">${item.currentStock} ${item.unit}</td>
             <td style="padding: 12px 15px;">
                 <select class="unit-select" data-index="${index}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
                     <option value="pc" ${item.unit === 'pc' ? 'selected' : ''}>Pieces (pc)</option>
@@ -539,7 +539,6 @@ function updateAdjustmentTable() {
             <td style="padding: 12px 15px;">
                 <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="0" style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
-            <td style="padding: 12px 15px; font-weight: 600; color: #27ae60;">${item.newStock} ${item.unit}</td>
             <td style="padding: 12px 15px;">
                 <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
             </td>
@@ -589,14 +588,6 @@ function updateAdjustmentItem(index, field, value) {
         item.quantity = value;
     } else if (field === 'unit') {
         item.unit = value;
-    }
-    
-    if (item.adjustmentType === 'add') {
-        item.newStock = item.currentStock + item.quantity;
-    } else if (item.adjustmentType === 'remove') {
-        item.newStock = Math.max(0, item.currentStock - item.quantity);
-    } else if (item.adjustmentType === 'set') {
-        item.newStock = item.quantity;
     }
     
     updateAdjustmentTable();
@@ -658,7 +649,7 @@ function submitStockAdjustment() {
             }
             
             if (successCount > 0) {
-                alert(`Successfully submitted ${successCount} stock adjustment(s)!`);
+                alert(`Successfully submitted ${successCount} stock adjustment(s) to the dedicated adjustments sheet!`);
                 adjustmentItems = [];
                 hideStockAdjustment();
             }
@@ -689,18 +680,25 @@ function submitStockAdjustment() {
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
     return new Promise((resolve, reject) => {
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse";
+        // Replace this URL with your NEW stock adjustment form URL
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse
+";
         const formData = new URLSearchParams();
         
-        formData.append("entry.902078713", adjustment.name);
-        formData.append("entry.448082825", adjustment.unit);
-        formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0");
-        formData.append("entry.209491416", "0");
-        formData.append("entry.1362215713", "0");
-        formData.append("entry.492804547", "0");
-        formData.append("entry.197957478", `STOCK_${adjustment.adjustmentType.toUpperCase()}`);
-        formData.append("entry.370318910", stores[currentStore].name);
+        // Simplified fields for stock adjustments only
+        formData.append("entry.1351663693", adjustment.name); // Product Name
+        formData.append("entry.2099316372", adjustment.unit); // Unit
+        formData.append("entry.1838734272", adjustment.quantity.toString()); // Quantity
+        formData.append("entry.1785029976", adjustment.adjustmentType); // Adjustment Type
+        formData.append("entry.1678851527", stores[currentStore].name); // Store Name
+
+        console.log('Submitting stock adjustment:', {
+            product: adjustment.name,
+            unit: adjustment.unit,
+            quantity: adjustment.quantity,
+            type: adjustment.adjustmentType,
+            store: stores[currentStore].name
+        });
 
         fetch(formUrl, {
             method: "POST",
@@ -711,11 +709,11 @@ function submitStockAdjustmentToGoogleForm(adjustment) {
             body: formData.toString()
         })
         .then(() => {
-            console.log('Stock adjustment submitted:', adjustment.name);
+            console.log('✅ Stock adjustment submitted to dedicated sheet:', adjustment.name);
             resolve();
         })
         .catch(error => {
-            console.error('Stock adjustment failed:', error);
+            console.error('❌ Stock adjustment submission failed:', error);
             reject(error);
         });
     });
