@@ -827,46 +827,87 @@ function submitStockAdjustment() {
 }
 
 function submitStockAdjustmentToGoogleForm(adjustment) {
-    return new Promise((resolve, reject) => {
-        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdjXVJj4HT31S5NU6-7KUBQz7xyU_d9YuZN4BzaD1T5Mg7Bjg/formResponse?submit=Submit";
-        const formData = new URLSearchParams();
+  return new Promise((resolve, reject) => {
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
 
-        const itemName = `STOCK ADJUST: ${adjustment.name}`;
+    // These maps let you translate internal values to exact Google Form dropdown labels.
+    // Update them to match your Form’s exact labels.
+    const UNIT_MAP = {
+      pc: 'Pieces',
+      dz: 'Dozen',
+      ct: 'Carton'
+    };
 
-        formData.append("fvv", "1");
-        formData.append("pageHistory", "0");
-        formData.append("entry.902078713", itemName);
-        formData.append("entry.448082825", adjustment.unit);
-        formData.append("entry.617272247", adjustment.quantity.toString());
-        formData.append("entry.591650069", "0"); // Price
-        formData.append("entry.209491416", "0"); // Discount
-        formData.append("entry.1362215713", "0"); // Extra
-        formData.append("entry.492804547", "0"); // Total
+    const TYPE_MAP = {
+      add: 'Add',
+      remove: 'Remove',
+      set: 'Set'
+    };
 
-        // <<--- IMPORTANT: send a value the form WILL accept in this field (e.g. "Cash")
-        // your form likely validates this question (multiple-choice). Adjust to one of its allowed values.
-        formData.append("entry.197957478", "Cash");
+    // Build mapped values (fallback to raw if not found)
+    const unitValue = UNIT_MAP[(adjustment.unit || '').toLowerCase()] || adjustment.unit || '';
+    const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
+    const storeValue = stores[currentStore].name || '';
 
-        // Keep store as before
-        formData.append("entry.370318910", stores[currentStore].name);
+    // Build payload
+    const formData = new URLSearchParams();
+    formData.append('entry.1351663693', adjustment.name || '');       // Item name
+    formData.append('entry.2099316372', unitValue);                  // Unit (dropdown)
+    formData.append('entry.1838734272', String(adjustment.quantity || 0)); // Quantity
+    formData.append('entry.1785029976', typeValue);                  // Adjustment type (dropdown)
+    formData.append('entry.1678851527', storeValue);                 // Store (short answer)
 
-        console.log('📤 Stock adjustment form data:', Object.fromEntries(formData));
+    console.log('📤 Submitting stock adjustment:', Object.fromEntries(formData));
 
-        fetch(formUrl, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: formData.toString()
-        })
-        .then(() => {
-            console.log('✅ Stock adjustment submitted successfully');
-            resolve();
-        })
-        .catch(error => {
-            console.error('❌ Stock adjustment submission failed:', error);
-            reject(error);
-        });
+    // Try fetch submission first
+    fetch(formUrl, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response && response.ok) {
+        console.log('✅ Submission successful for', adjustment.name);
+        resolve({ status: 'ok', method: 'fetch' });
+      } else {
+        console.warn('⚠️ Fetch response not ok (possibly opaque). Assuming success.');
+        resolve({ status: 'maybe-ok', method: 'fetch' });
+      }
+    })
+    .catch(fetchErr => {
+      console.warn('⚠️ Fetch blocked (CORS). Using hidden form fallback.', fetchErr);
+
+      // Fallback: hidden HTML form
+      try {
+        const form = document.createElement('form');
+        form.action = formUrl;
+        form.method = 'POST';
+        form.style.display = 'none';
+
+        const fields = {
+          'entry.1351663693': adjustment.name || '',
+          'entry.2099316372': unitValue,
+          'entry.1838734272': String(adjustment.quantity || 0),
+          'entry.1785029976': typeValue,
+          'entry.1678851527': storeValue
+        };
+
+        for (const key in fields) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = fields[key];
+          form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(() => form.remove(), 2000);
+        console.log('🔁 Submitted via hidden form fallback for', adjustment.name);
+        resolve({ status: 'ok', method: 'form-fallback' });
+      } catch (err) {
+        console.error('❌ Hidden form fallback failed:', err);
+        reject(err);
+      }
     });
+  });
 }
