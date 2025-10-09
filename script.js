@@ -688,7 +688,6 @@ function updateAdjustmentTable() {
         tbody.appendChild(row);
     });
     
-    // Add event listeners after creating the elements
     document.querySelectorAll('.unit-select').forEach(select => {
         select.addEventListener('change', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -704,18 +703,16 @@ function updateAdjustmentTable() {
     });
     
     document.querySelectorAll('.quantity-input').forEach(input => {
+        // Remove any existing event listeners and add fresh ones
+        input.replaceWith(input.cloneNode(true));
+    });
+    
+    // Re-select all quantity inputs after cloning
+    document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
             const index = parseInt(this.getAttribute('data-index'));
             const value = parseFloat(this.value) || 0;
             updateAdjustmentItem(index, 'quantity', value);
-        });
-        
-        // Also allow direct keyboard input of decimals
-        input.addEventListener('keydown', function(e) {
-            // Allow decimal point
-            if (e.key === '.' || e.key === ',') {
-                return true;
-            }
         });
     });
     
@@ -939,4 +936,5 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
