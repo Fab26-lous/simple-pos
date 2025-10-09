@@ -678,7 +678,7 @@ function updateAdjustmentTable() {
             </td>
             <td style="padding: 12px 15px;">
                 <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" 
-                       step="any" min="0" 
+                       step="0.01" min="0" 
                        style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
             <td style="padding: 12px 15px;">
@@ -688,6 +688,7 @@ function updateAdjustmentTable() {
         tbody.appendChild(row);
     });
     
+    // Add event listeners after creating the elements
     document.querySelectorAll('.unit-select').forEach(select => {
         select.addEventListener('change', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -708,6 +709,14 @@ function updateAdjustmentTable() {
             const value = parseFloat(this.value) || 0;
             updateAdjustmentItem(index, 'quantity', value);
         });
+        
+        // Also allow direct keyboard input of decimals
+        input.addEventListener('keydown', function(e) {
+            // Allow decimal point
+            if (e.key === '.' || e.key === ',') {
+                return true;
+            }
+        });
     });
     
     document.querySelectorAll('.remove-btn').forEach(button => {
@@ -719,7 +728,6 @@ function updateAdjustmentTable() {
     
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
-
 function updateAdjustmentItem(index, field, value) {
     if (index < 0 || index >= adjustmentItems.length) return;
     
@@ -931,3 +939,4 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
