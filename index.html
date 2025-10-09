@@ -100,11 +100,17 @@
       <button id="submit-all-btn" onclick="submitAllSales()" style="display: none;">Submit All Items</button>
       <button id="clear-all-btn" onclick="clearAllSales()" style="display: none;">Clear All Items</button>
     </div>
+
+    <!-- Stock Display Button -->
+    <button onclick="showStockLevels()" style="margin: 10px; background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+        📦 View Stock Levels
+    </button>
+
+    <!-- Stock Adjustment Button -->
+    <button onclick="showStockAdjustment()" style="margin: 10px; background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+        📊 Adjust Stock
+    </button>
   </div>
-<!-- Stock Display Button - Add this to your POS interface -->
-<button onclick="showStockLevels()" style="margin: 10px; background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
-    📦 View Stock Levels
-</button>
 
 <!-- Stock Display Modal -->
 <div id="stock-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
@@ -138,10 +144,7 @@
         <div id="stock-summary" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>
     </div>
 </div>
-  <!-- Stock Adjustment Button -->
-<button onclick="showStockAdjustment()" style="margin: 10px; background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
-    📊 Adjust Stock
-</button>
+
 <!-- Stock Adjustment Modal -->
 <div id="stock-adjustment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
     <div style="background: white; padding: 25px; border-radius: 10px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto;">
@@ -170,7 +173,7 @@
                     </tr>
                 </thead>
                 <tbody id="adjustment-table-body">
-                    <!-- Adjustment items will be populated here -->
+                    <!-- Adjustment items will be populated here by JavaScript -->
                     <tr class="empty-state-row">
                         <td colspan="5" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
                             <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
@@ -192,18 +195,7 @@
     </div>
 </div>
 
-  <!-- Add this line - make sure the filename matches your JavaScript file -->
+  <!-- Make sure the JavaScript file has the updated code with decimal support -->
   <script src="script.js"></script>
 </body>
 </html>
-       
-
-
-
-
-
-
-
-
-
-
