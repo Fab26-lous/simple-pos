@@ -786,28 +786,26 @@ function submitStockAdjustment() {
     const errors = [];
 
     function submitNext(index) {
-    if (index >= adjustmentItems.length) {
-        console.log('=== SUBMISSION COMPLETE ===');
-        console.log('Successfully submitted:', successCount, 'items');
-        console.log('Errors:', errors);
-        
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
+        if (index >= adjustmentItems.length) {
+            console.log('=== SUBMISSION COMPLETE ===');
+            console.log('Successfully submitted:', successCount, 'items');
+            console.log('Errors:', errors);
+            
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+            
+            if (successCount > 0) {
+                alert(`✅ Successfully submitted ${successCount} stock adjustment(s)!`);
+                adjustmentItems = [];
+                hideStockAdjustment();
+            } else {
+                alert('❌ No adjustments were submitted. Check browser console for errors.');
+            }
+            
+            return;
         }
-        
-        if (successCount > 0) {
-            alert(`✅ Successfully submitted ${successCount} stock adjustment(s)!`);
-            adjustmentItems = [];
-            hideStockAdjustment();
-        } else {
-            alert('❌ No adjustments were submitted. Check browser console for errors.');
-        }
-        
-        return;
-    }
-    // ... rest of the function remains the same
-}
 
         const adjustment = adjustmentItems[index];
         console.log(`Submitting item ${index + 1}:`, adjustment);
@@ -823,11 +821,10 @@ function submitStockAdjustment() {
                 errors.push({ item: adjustment.name, error: err });
                 submitNext(index + 1);
             });
-    }
+    } // <-- THIS CLOSING BRACE WAS MISSING!
 
     submitNext(0);
 }
-
 // Ensure a hidden iframe exists (so hidden form submits don't navigate the main window)
 function ensureHiddenIframe() {
   const iframeId = 'google-forms-hidden-iframe';
@@ -930,4 +927,5 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
