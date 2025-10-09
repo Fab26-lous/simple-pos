@@ -796,16 +796,16 @@ function submitStockAdjustment() {
                 submitBtn.textContent = originalText;
             }
             
-            if (successCount > 0) {
-                alert(`✅ Successfully submitted ${successCount} stock adjustment(s)! Check your Google Sheets.`);
-                adjustmentItems = [];
-                hideStockAdjustment();
-            } else {
-                alert('❌ No adjustments were submitted. Check browser console for errors.');
-            }
+          //  if (successCount > 0) {
+          //      alert(`✅ Successfully submitted ${successCount} stock adjustment(s)! Check your Google Sheets.`);
+         //       adjustmentItems = [];
+         //       hideStockAdjustment();
+          //  } else {
+          //      alert('❌ No adjustments were submitted. Check browser console for errors.');
+         //   }
             
-            return;
-        }
+         //   return;
+       // }
 
         const adjustment = adjustmentItems[index];
         console.log(`Submitting item ${index + 1}:`, adjustment);
@@ -826,88 +826,105 @@ function submitStockAdjustment() {
     submitNext(0);
 }
 
-function submitStockAdjustmentToGoogleForm(adjustment) {
-  return new Promise((resolve, reject) => {
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
+// Ensure a hidden iframe exists (so hidden form submits don't navigate the main window)
+function ensureHiddenIframe() {
+  const iframeId = 'google-forms-hidden-iframe';
+  if (!document.getElementById(iframeId)) {
+    const iframe = document.createElement('iframe');
+    iframe.id = iframeId;
+    iframe.name = iframeId;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+  }
+  return 'google-forms-hidden-iframe';
+}
 
-    // These maps let you translate internal values to exact Google Form dropdown labels.
-    // Update them to match your Form’s exact labels.
-    const UNIT_MAP = {
-      pc: 'Pieces',
-      dz: 'Dozen',
-      ct: 'Carton'
-    };
+// Robust submit function: fetch first, fallback to hidden-form-only on real error.
+// Prevents duplicate fallback and avoids navigation by targeting an invisible iframe.
+async function submitStockAdjustmentToGoogleForm(adjustment) {
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
 
-    const TYPE_MAP = {
-      add: 'Add',
-      remove: 'Remove',
-      set: 'Set'
-    };
+  // Map values if you need (or send raw). Keep consistent with your maps.
+  const UNIT_MAP = { pc: 'Pieces', dz: 'Dozen', ct: 'Carton' };
+  const TYPE_MAP = { add: 'Add', remove: 'Remove', adjust: 'Adjust' };
 
-    // Build mapped values (fallback to raw if not found)
-    const unitValue = UNIT_MAP[(adjustment.unit || '').toLowerCase()] || adjustment.unit || '';
-    const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
-    const storeValue = stores[currentStore].name || '';
+  const unitValue = UNIT_MAP[(adjustment.unit || '').toLowerCase()] || adjustment.unit || '';
+  const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
+  const storeValue = stores[currentStore].name || '';
 
-    // Build payload
-    const formData = new URLSearchParams();
-    formData.append('entry.1351663693', adjustment.name || '');       // Item name
-    formData.append('entry.2099316372', unitValue);                  // Unit (dropdown)
-    formData.append('entry.1838734272', String(adjustment.quantity || 0)); // Quantity
-    formData.append('entry.1785029976', typeValue);                  // Adjustment type (dropdown)
-    formData.append('entry.1678851527', storeValue);                 // Store (short answer)
+  // Build payload
+  const payload = new URLSearchParams();
+  payload.append('entry.1351663693', adjustment.name || '');
+  payload.append('entry.2099316372', unitValue);
+  payload.append('entry.1838734272', String(adjustment.quantity || 0));
+  payload.append('entry.1785029976', typeValue);
+  payload.append('entry.1678851527', storeValue);
 
-    console.log('📤 Submitting stock adjustment:', Object.fromEntries(formData));
+  console.log('📤 submitStockAdjustment: attempting fetch for', adjustment.name, Object.fromEntries(payload));
 
-    // Try fetch submission first
-    fetch(formUrl, {
+  // Avoid double-sending same adjustment: simple in-memory lock
+  if (adjustment._submitting) {
+    console.warn('⚠️ Adjustment already submitting, skipping duplicate:', adjustment.name);
+    return { status: 'skipped-duplicate' };
+  }
+  adjustment._submitting = true;
+
+  try {
+    // Do fetch; do NOT set custom headers (let browser set content-type for URLSearchParams)
+    const response = await fetch(formUrl, {
       method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response && response.ok) {
-        console.log('✅ Submission successful for', adjustment.name);
-        resolve({ status: 'ok', method: 'fetch' });
-      } else {
-        console.warn('⚠️ Fetch response not ok (possibly opaque). Assuming success.');
-        resolve({ status: 'maybe-ok', method: 'fetch' });
-      }
-    })
-    .catch(fetchErr => {
-      console.warn('⚠️ Fetch blocked (CORS). Using hidden form fallback.', fetchErr);
-
-      // Fallback: hidden HTML form
-      try {
-        const form = document.createElement('form');
-        form.action = formUrl;
-        form.method = 'POST';
-        form.style.display = 'none';
-
-        const fields = {
-          'entry.1351663693': adjustment.name || '',
-          'entry.2099316372': unitValue,
-          'entry.1838734272': String(adjustment.quantity || 0),
-          'entry.1785029976': typeValue,
-          'entry.1678851527': storeValue
-        };
-
-        for (const key in fields) {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = fields[key];
-          form.appendChild(input);
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-        setTimeout(() => form.remove(), 2000);
-        console.log('🔁 Submitted via hidden form fallback for', adjustment.name);
-        resolve({ status: 'ok', method: 'form-fallback' });
-      } catch (err) {
-        console.error('❌ Hidden form fallback failed:', err);
-        reject(err);
-      }
+      body: payload
     });
-  });
+
+    // If fetch succeeded (no network error), assume recorded. We don't run fallback.
+    // response.ok may be false for opaque responses; but we do NOT fallback in that case
+    // because fallback would create duplicates when fetch actually succeeded.
+    console.log('✅ fetch completed (may be opaque):', response);
+    adjustment._submitting = false;
+    return { status: 'ok', method: 'fetch', response };
+  } catch (fetchErr) {
+    console.warn('⚠️ fetch threw error (likely CORS). Proceeding to hidden-form fallback:', fetchErr);
+
+    // Hidden-form fallback: submit to invisible iframe so the main window does not navigate
+    try {
+      ensureHiddenIframe(); // creates iframe with name 'google-forms-hidden-iframe' if missing
+      const iframeName = 'google-forms-hidden-iframe';
+      const form = document.createElement('form');
+      form.action = formUrl;
+      form.method = 'POST';
+      form.target = iframeName; // important: prevents navigation of main window
+      form.style.display = 'none';
+
+      // add inputs
+      const fields = {
+        'entry.1351663693': adjustment.name || '',
+        'entry.2099316372': unitValue,
+        'entry.1838734272': String(adjustment.quantity || 0),
+        'entry.1785029976': typeValue,
+        'entry.1678851527': storeValue
+      };
+
+      for (const key in fields) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // remove form after short delay
+      setTimeout(() => form.remove(), 2000);
+
+      console.log('🔁 Hidden-form fallback submitted to iframe for', adjustment.name);
+      adjustment._submitting = false;
+      return { status: 'ok', method: 'form-fallback' };
+    } catch (formErr) {
+      console.error('❌ Hidden-form fallback failed:', formErr);
+      adjustment._submitting = false;
+      throw formErr;
+    }
+  }
 }
