@@ -696,8 +696,35 @@ function updateAdjustmentTable() {
         tbody.appendChild(row);
     });
     
-    // Add event listeners
-    attachAdjustmentEventListeners();
+    // Add simple event listeners
+    document.querySelectorAll('.unit-select').forEach(select => {
+        select.onchange = function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            updateAdjustmentItem(index, 'unit', this.value);
+        };
+    });
+    
+    document.querySelectorAll('.adjustment-select').forEach(select => {
+        select.onchange = function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            updateAdjustmentItem(index, 'type', this.value);
+        };
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.oninput = function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const value = parseFloat(this.value) || 0;
+            updateAdjustmentItem(index, 'quantity', value);
+        };
+    });
+    
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.onclick = function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            removeAdjustmentItem(index);
+        };
+    });
     
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
@@ -981,10 +1008,3 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
-
-
-
-
-
-
-
