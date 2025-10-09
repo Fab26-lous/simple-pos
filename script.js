@@ -821,10 +821,11 @@ function submitStockAdjustment() {
                 errors.push({ item: adjustment.name, error: err });
                 submitNext(index + 1);
             });
-    } // <-- THIS CLOSING BRACE WAS MISSING!
+    }
 
     submitNext(0);
 }
+
 // Ensure a hidden iframe exists (so hidden form submits don't navigate the main window)
 function ensureHiddenIframe() {
   const iframeId = 'google-forms-hidden-iframe';
@@ -927,5 +928,3 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
-
-
