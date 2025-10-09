@@ -851,15 +851,6 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
   const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
   const storeValue = stores[currentStore].name || '';
 
-  // EXTENSIVE DEBUGGING
-  console.log('🔍 DEBUG Adjustment Data:');
-  console.log(' - Raw adjustment:', adjustment);
-  console.log(' - Name:', adjustment.name);
-  console.log(' - Unit (raw):', adjustment.unit, '→ (mapped):', unitValue);
-  console.log(' - Type (raw):', adjustment.adjustmentType, '→ (mapped):', typeValue);
-  console.log(' - Quantity:', adjustment.quantity);
-  console.log(' - Store:', storeValue);
-
   // Build payload
   const payload = new URLSearchParams();
   payload.append('entry.1351663693', adjustment.name || '');
@@ -868,16 +859,9 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
   payload.append('entry.1785029976', typeValue);
   payload.append('entry.1678851527', storeValue);
 
-  console.log('📤 Final payload being sent:');
-  console.log(' - entry.1351663693 (name):', adjustment.name || '');
-  console.log(' - entry.2099316372 (unit):', unitValue);
-  console.log(' - entry.1838734272 (quantity):', String(adjustment.quantity || 0));
-  console.log(' - entry.1785029976 (type):', typeValue);
-  console.log(' - entry.1678851527 (store):', storeValue);
+  console.log('📤 Submitting adjustment for', adjustment.name, 'Type:', typeValue);
 
-  console.log('📤 submitStockAdjustment: attempting fetch for', adjustment.name, Object.fromEntries(payload));
-
-  // Avoid double-sending same adjustment: simple in-memory lock
+  // Avoid double-sending same adjustment
   if (adjustment._submitting) {
     console.warn('⚠️ Adjustment already submitting, skipping duplicate:', adjustment.name);
     return { status: 'skipped-duplicate' };
@@ -885,32 +869,28 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
   adjustment._submitting = true;
 
   try {
-    // Do fetch; do NOT set custom headers (let browser set content-type for URLSearchParams)
     const response = await fetch(formUrl, {
       method: 'POST',
       body: payload,
       mode: 'no-cors'
     });
 
-    // With no-cors mode, we won't get a readable response, but the submission should work
-    console.log('✅ fetch completed with no-cors mode - assuming success');
+    console.log('✅ Fetch completed for', adjustment.name);
     adjustment._submitting = false;
     return { status: 'ok', method: 'fetch' };
     
   } catch (fetchErr) {
-    console.warn('⚠️ fetch threw error. Proceeding to hidden-form fallback:', fetchErr);
+    console.warn('⚠️ Fetch failed, using form fallback for', adjustment.name);
 
-    // Hidden-form fallback: submit to invisible iframe so the main window does not navigate
     try {
-      ensureHiddenIframe(); // creates iframe with name 'google-forms-hidden-iframe' if missing
+      ensureHiddenIframe();
       const iframeName = 'google-forms-hidden-iframe';
       const form = document.createElement('form');
       form.action = formUrl;
       form.method = 'POST';
-      form.target = iframeName; // important: prevents navigation of main window
+      form.target = iframeName;
       form.style.display = 'none';
 
-      // add inputs
       const fields = {
         'entry.1351663693': adjustment.name || '',
         'entry.2099316372': unitValue,
@@ -918,8 +898,6 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
         'entry.1785029976': typeValue,
         'entry.1678851527': storeValue
       };
-
-      console.log('🔁 Creating hidden form with fields:', fields);
 
       for (const key in fields) {
         const input = document.createElement('input');
@@ -932,18 +910,17 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
       document.body.appendChild(form);
       form.submit();
 
-      // remove form after short delay
       setTimeout(() => {
         if (form.parentNode) {
           form.remove();
         }
       }, 3000);
 
-      console.log('🔁 Hidden-form fallback submitted to iframe for', adjustment.name);
+      console.log('🔁 Form fallback submitted for', adjustment.name);
       adjustment._submitting = false;
       return { status: 'ok', method: 'form-fallback' };
     } catch (formErr) {
-      console.error('❌ Hidden-form fallback failed:', formErr);
+      console.error('❌ Form fallback failed:', formErr);
       adjustment._submitting = false;
       throw formErr;
     }
