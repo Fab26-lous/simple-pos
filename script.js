@@ -75,9 +75,9 @@ function parseCSVToProducts(csvText) {
         if (cells.length >= 6) {
             let stock = 0;
             if (currentStore === 'store1') {
-                stock = parseInt(cells[4]) || 0;
+                stock = parseFloat(cells[4]) || 0;
             } else if (currentStore === 'store2') {
-                stock = parseInt(cells[5]) || 0;
+                stock = parseFloat(cells[5]) || 0;
             }
             
             const product = {
@@ -628,7 +628,7 @@ function addItemToAdjustment() {
         name: product.name,
         unit: 'pc',
         adjustmentType: 'add',
-        quantity: 0
+        quantity: 0.0
     });
     
     searchInput.value = '';
@@ -677,7 +677,9 @@ function updateAdjustmentTable() {
                 </select>
             </td>
             <td style="padding: 12px 15px;">
-                <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" min="0" style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
+                <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" 
+                       step="any" min="0" 
+                       style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
             <td style="padding: 12px 15px;">
                 <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
@@ -703,7 +705,8 @@ function updateAdjustmentTable() {
     document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
             const index = parseInt(this.getAttribute('data-index'));
-            updateAdjustmentItem(index, 'quantity', parseInt(this.value) || 0);
+            const value = parseFloat(this.value) || 0;
+            updateAdjustmentItem(index, 'quantity', value);
         });
     });
     
@@ -763,12 +766,14 @@ function submitStockAdjustment() {
         return;
     }
     
-    const invalidItems = adjustmentItems.filter(item => 
-        item.quantity <= 0 || (item.adjustmentType === 'set' && item.quantity < 0)
-    );
+    // Updated validation to allow decimals but prevent negative numbers
+    const invalidItems = adjustmentItems.filter(item => {
+        const quantity = parseFloat(item.quantity);
+        return isNaN(quantity) || quantity < 0 || (item.adjustmentType === 'set' && quantity < 0);
+    });
     
     if (invalidItems.length > 0) {
-        alert('Please set valid quantities for all items');
+        alert('Please set valid quantities for all items (must be 0 or greater)');
         return;
     }
 
