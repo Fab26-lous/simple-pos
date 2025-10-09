@@ -659,6 +659,10 @@ function updateAdjustmentTable() {
     
     adjustmentItems.forEach((item, index) => {
         const row = document.createElement('tr');
+        
+        // Format the quantity to show decimals properly
+        const displayQuantity = item.quantity === 0 ? '' : item.quantity.toString();
+        
         row.innerHTML = `
             <td style="padding: 12px 15px; font-weight: 600; color: #2c3e50;">${item.name}</td>
             <td style="padding: 12px 15px;">
@@ -676,9 +680,14 @@ function updateAdjustmentTable() {
                 </select>
             </td>
             <td style="padding: 12px 15px;">
-                <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" 
-                       step="0.01" min="0" 
-                       style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center; -moz-appearance: textfield; -webkit-appearance: none; appearance: none;">
+                <input type="number" 
+                       class="quantity-input" 
+                       data-index="${index}" 
+                       value="${displayQuantity}" 
+                       step="0.01" 
+                       min="0" 
+                       placeholder="0.00"
+                       style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
             <td style="padding: 12px 15px;">
                 <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
@@ -687,20 +696,31 @@ function updateAdjustmentTable() {
         tbody.appendChild(row);
     });
     
-    // Hide spinner buttons in Webkit browsers
-    const style = document.createElement('style');
-    style.textContent = `
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .quantity-input[type=number] {
-            -moz-appearance: textfield;
-        }
-    `;
-    document.head.appendChild(style);
+    // Add event listeners
+    attachAdjustmentEventListeners();
     
+    if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
+}
+
+function attachAdjustmentEventListeners() {
+    // Remove any existing listeners first
+    document.querySelectorAll('.unit-select').forEach(select => {
+        select.replaceWith(select.cloneNode(true));
+    });
+    
+    document.querySelectorAll('.adjustment-select').forEach(select => {
+        select.replaceWith(select.cloneNode(true));
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.replaceWith(input.cloneNode(true));
+    });
+    
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.replaceWith(button.cloneNode(true));
+    });
+    
+    // Attach fresh listeners
     document.querySelectorAll('.unit-select').forEach(select => {
         select.addEventListener('change', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -718,8 +738,28 @@ function updateAdjustmentTable() {
     document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
             const index = parseInt(this.getAttribute('data-index'));
-            const value = parseFloat(this.value) || 0;
-            updateAdjustmentItem(index, 'quantity', value);
+            let value = this.value;
+            
+            // Allow only numbers and decimal point
+            value = value.replace(/[^0-9.]/g, '');
+            
+            // Ensure only one decimal point
+            if ((value.match(/\./g) || []).length > 1) {
+                value = value.substring(0, value.lastIndexOf('.'));
+            }
+            
+            this.value = value;
+            const numericValue = parseFloat(value) || 0;
+            updateAdjustmentItem(index, 'quantity', numericValue);
+        });
+        
+        // Also handle blur to format the number
+        input.addEventListener('blur', function() {
+            if (this.value && !isNaN(parseFloat(this.value))) {
+                this.value = parseFloat(this.value).toFixed(2);
+                const index = parseInt(this.getAttribute('data-index'));
+                updateAdjustmentItem(index, 'quantity', parseFloat(this.value));
+            }
         });
     });
     
@@ -729,8 +769,6 @@ function updateAdjustmentTable() {
             removeAdjustmentItem(index);
         });
     });
-    
-    if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
 function updateAdjustmentItem(index, field, value) {
     if (index < 0 || index >= adjustmentItems.length) return;
@@ -943,6 +981,7 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
 
 
