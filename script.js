@@ -846,7 +846,7 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
 
   // Map values if you need (or send raw). Keep consistent with your maps.
   const UNIT_MAP = { pc: 'pc', dz: 'dz', ct: 'ct' };
-  const TYPE_MAP = { add: 'Add', remove: 'Remove', adjust: 'Adjust' };
+  const TYPE_MAP = { add: 'Add', remove: 'Remove', set: 'Set' };
 
   const unitValue = UNIT_MAP[(adjustment.unit || '').toLowerCase()] || adjustment.unit || '';
   const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
@@ -905,6 +905,7 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     throw formErr;
   }
 }
+
 
 
 
