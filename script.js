@@ -844,7 +844,6 @@ function ensureHiddenIframe() {
 async function submitStockAdjustmentToGoogleForm(adjustment) {
   const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeTdAktfy1tm486oSh64FA7L7pTTgxaWH01-fDUSbSpJ6QV2g/formResponse";
 
-  // Map values if you need (or send raw). Keep consistent with your maps.
   const UNIT_MAP = { pc: 'pc', dz: 'dz', ct: 'ct' };
   const TYPE_MAP = { add: 'Add', remove: 'Remove', set: 'Set' };
 
@@ -852,9 +851,33 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
   const typeValue = TYPE_MAP[(adjustment.adjustmentType || '').toLowerCase()] || adjustment.adjustmentType || '';
   const storeValue = stores[currentStore].name || '';
 
-  console.log('📤 Submitting stock adjustment for', adjustment.name);
+  // EXTENSIVE DEBUGGING
+  console.log('🔍 DEBUG Adjustment Data:');
+  console.log(' - Raw adjustment:', adjustment);
+  console.log(' - Name:', adjustment.name);
+  console.log(' - Unit (raw):', adjustment.unit, '→ (mapped):', unitValue);
+  console.log(' - Type (raw):', adjustment.adjustmentType, '→ (mapped):', typeValue);
+  console.log(' - Quantity:', adjustment.quantity);
+  console.log(' - Store:', storeValue);
 
-  // Avoid double-sending same adjustment
+  // Build payload
+  const payload = new URLSearchParams();
+  payload.append('entry.1351663693', adjustment.name || '');
+  payload.append('entry.2099316372', unitValue);
+  payload.append('entry.1838734272', String(adjustment.quantity || 0));
+  payload.append('entry.1785029976', typeValue);
+  payload.append('entry.1678851527', storeValue);
+
+  console.log('📤 Final payload being sent:');
+  console.log(' - entry.1351663693 (name):', adjustment.name || '');
+  console.log(' - entry.2099316372 (unit):', unitValue);
+  console.log(' - entry.1838734272 (quantity):', String(adjustment.quantity || 0));
+  console.log(' - entry.1785029976 (type):', typeValue);
+  console.log(' - entry.1678851527 (store):', storeValue);
+
+  console.log('📤 submitStockAdjustment: attempting fetch for', adjustment.name, Object.fromEntries(payload));
+
+  // Avoid double-sending same adjustment: simple in-memory lock
   if (adjustment._submitting) {
     console.warn('⚠️ Adjustment already submitting, skipping duplicate:', adjustment.name);
     return { status: 'skipped-duplicate' };
@@ -862,50 +885,67 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
   adjustment._submitting = true;
 
   try {
-    ensureHiddenIframe();
-    const iframeName = 'google-forms-hidden-iframe';
-    const form = document.createElement('form');
-    form.action = formUrl;
-    form.method = 'POST';
-    form.target = iframeName;
-    form.style.display = 'none';
+    // Do fetch; do NOT set custom headers (let browser set content-type for URLSearchParams)
+    const response = await fetch(formUrl, {
+      method: 'POST',
+      body: payload,
+      mode: 'no-cors'
+    });
 
-    const fields = {
-      'entry.1351663693': adjustment.name || '',
-      'entry.2099316372': unitValue,
-      'entry.1838734272': String(adjustment.quantity || 0),
-      'entry.1785029976': typeValue,
-      'entry.1678851527': storeValue
-    };
-
-    for (const key in fields) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = fields[key];
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-
-    setTimeout(() => {
-      if (form.parentNode) {
-        form.remove();
-      }
-    }, 3000);
-
-    console.log('✅ Form submitted for', adjustment.name);
+    // With no-cors mode, we won't get a readable response, but the submission should work
+    console.log('✅ fetch completed with no-cors mode - assuming success');
     adjustment._submitting = false;
-    return { status: 'ok', method: 'form' };
+    return { status: 'ok', method: 'fetch' };
     
-  } catch (formErr) {
-    console.error('❌ Form submission failed:', formErr);
-    adjustment._submitting = false;
-    throw formErr;
+  } catch (fetchErr) {
+    console.warn('⚠️ fetch threw error. Proceeding to hidden-form fallback:', fetchErr);
+
+    // Hidden-form fallback: submit to invisible iframe so the main window does not navigate
+    try {
+      ensureHiddenIframe(); // creates iframe with name 'google-forms-hidden-iframe' if missing
+      const iframeName = 'google-forms-hidden-iframe';
+      const form = document.createElement('form');
+      form.action = formUrl;
+      form.method = 'POST';
+      form.target = iframeName; // important: prevents navigation of main window
+      form.style.display = 'none';
+
+      // add inputs
+      const fields = {
+        'entry.1351663693': adjustment.name || '',
+        'entry.2099316372': unitValue,
+        'entry.1838734272': String(adjustment.quantity || 0),
+        'entry.1785029976': typeValue,
+        'entry.1678851527': storeValue
+      };
+
+      console.log('🔁 Creating hidden form with fields:', fields);
+
+      for (const key in fields) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // remove form after short delay
+      setTimeout(() => {
+        if (form.parentNode) {
+          form.remove();
+        }
+      }, 3000);
+
+      console.log('🔁 Hidden-form fallback submitted to iframe for', adjustment.name);
+      adjustment._submitting = false;
+      return { status: 'ok', method: 'form-fallback' };
+    } catch (formErr) {
+      console.error('❌ Hidden-form fallback failed:', formErr);
+      adjustment._submitting = false;
+      throw formErr;
+    }
   }
 }
-
-
-
-
