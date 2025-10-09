@@ -678,7 +678,7 @@ function updateAdjustmentTable() {
             <td style="padding: 12px 15px;">
                 <input type="number" class="quantity-input" data-index="${index}" value="${item.quantity}" 
                        step="0.01" min="0" 
-                       style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
+                       style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center; -moz-appearance: textfield; -webkit-appearance: none; appearance: none;">
             </td>
             <td style="padding: 12px 15px;">
                 <button class="remove-btn" data-index="${index}" style="background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
@@ -686,6 +686,20 @@ function updateAdjustmentTable() {
         `;
         tbody.appendChild(row);
     });
+    
+    // Hide spinner buttons in Webkit browsers
+    const style = document.createElement('style');
+    style.textContent = `
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .quantity-input[type=number] {
+            -moz-appearance: textfield;
+        }
+    `;
+    document.head.appendChild(style);
     
     document.querySelectorAll('.unit-select').forEach(select => {
         select.addEventListener('change', function() {
@@ -701,12 +715,6 @@ function updateAdjustmentTable() {
         });
     });
     
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        // Remove any existing event listeners and add fresh ones
-        input.replaceWith(input.cloneNode(true));
-    });
-    
-    // Re-select all quantity inputs after cloning
     document.querySelectorAll('.quantity-input').forEach(input => {
         input.addEventListener('input', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -935,6 +943,7 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
 
 
