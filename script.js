@@ -636,7 +636,6 @@ function addItemToAdjustment() {
     if (suggestions) suggestions.style.display = 'none';
     updateAdjustmentTable();
 }
-
 function updateAdjustmentTable() {
     const tbody = document.getElementById('adjustment-table-body');
     const summary = document.getElementById('adjustment-summary');
@@ -936,6 +935,7 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
 
 
