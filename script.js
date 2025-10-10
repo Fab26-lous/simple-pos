@@ -726,74 +726,6 @@ function updateAdjustmentTable() {
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
 
-function attachAdjustmentEventListeners() {
-    // Remove any existing listeners first
-    document.querySelectorAll('.unit-select').forEach(select => {
-        select.replaceWith(select.cloneNode(true));
-    });
-    
-    document.querySelectorAll('.adjustment-select').forEach(select => {
-        select.replaceWith(select.cloneNode(true));
-    });
-    
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.replaceWith(input.cloneNode(true));
-    });
-    
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.replaceWith(button.cloneNode(true));
-    });
-    
-    // Attach fresh listeners
-    document.querySelectorAll('.unit-select').forEach(select => {
-        select.addEventListener('change', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            updateAdjustmentItem(index, 'unit', this.value);
-        });
-    });
-    
-    document.querySelectorAll('.adjustment-select').forEach(select => {
-        select.addEventListener('change', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            updateAdjustmentItem(index, 'type', this.value);
-        });
-    });
-    
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.addEventListener('input', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            let value = this.value;
-            
-            // Allow only numbers and decimal point
-            value = value.replace(/[^0-9.]/g, '');
-            
-            // Ensure only one decimal point
-            if ((value.match(/\./g) || []).length > 1) {
-                value = value.substring(0, value.lastIndexOf('.'));
-            }
-            
-            this.value = value;
-            const numericValue = parseFloat(value) || 0;
-            updateAdjustmentItem(index, 'quantity', numericValue);
-        });
-        
-        // Also handle blur to format the number
-        input.addEventListener('blur', function() {
-            if (this.value && !isNaN(parseFloat(this.value))) {
-                this.value = parseFloat(this.value).toFixed(2);
-                const index = parseInt(this.getAttribute('data-index'));
-                updateAdjustmentItem(index, 'quantity', parseFloat(this.value));
-            }
-        });
-    });
-    
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            removeAdjustmentItem(index);
-        });
-    });
-}
 function updateAdjustmentItem(index, field, value) {
     if (index < 0 || index >= adjustmentItems.length) return;
     
@@ -1005,4 +937,5 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
 
