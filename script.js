@@ -660,7 +660,6 @@ function updateAdjustmentTable() {
     adjustmentItems.forEach((item, index) => {
         const row = document.createElement('tr');
         
-        // Format the quantity to show decimals properly
         const displayQuantity = item.quantity === 0 ? '' : item.quantity.toString();
         
         row.innerHTML = `
@@ -680,12 +679,10 @@ function updateAdjustmentTable() {
                 </select>
             </td>
             <td style="padding: 12px 15px;">
-                <input type="number" 
+                <input type="text" 
                        class="quantity-input" 
                        data-index="${index}" 
                        value="${displayQuantity}" 
-                       step="0.01" 
-                       min="0" 
                        placeholder="0.00"
                        style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
             </td>
@@ -694,36 +691,36 @@ function updateAdjustmentTable() {
             </td>
         `;
         tbody.appendChild(row);
-    });
-    
-    // Add simple event listeners
-    document.querySelectorAll('.unit-select').forEach(select => {
-        select.onchange = function() {
-            const index = parseInt(this.getAttribute('data-index'));
+        
+        // Add event listeners directly to each input
+        const quantityInput = row.querySelector('.quantity-input');
+        quantityInput.addEventListener('input', function() {
+            let value = this.value;
+            // Allow only numbers and decimal point
+            value = value.replace(/[^0-9.]/g, '');
+            // Ensure only one decimal point
+            if ((value.match(/\./g) || []).length > 1) {
+                value = value.substring(0, value.lastIndexOf('.'));
+            }
+            this.value = value;
+            const numericValue = parseFloat(value) || 0;
+            updateAdjustmentItem(index, 'quantity', numericValue);
+        });
+        
+        const unitSelect = row.querySelector('.unit-select');
+        unitSelect.addEventListener('change', function() {
             updateAdjustmentItem(index, 'unit', this.value);
-        };
-    });
-    
-    document.querySelectorAll('.adjustment-select').forEach(select => {
-        select.onchange = function() {
-            const index = parseInt(this.getAttribute('data-index'));
+        });
+        
+        const adjustmentSelect = row.querySelector('.adjustment-select');
+        adjustmentSelect.addEventListener('change', function() {
             updateAdjustmentItem(index, 'type', this.value);
-        };
-    });
-    
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.oninput = function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            const value = parseFloat(this.value) || 0;
-            updateAdjustmentItem(index, 'quantity', value);
-        };
-    });
-    
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.onclick = function() {
-            const index = parseInt(this.getAttribute('data-index'));
+        });
+        
+        const removeBtn = row.querySelector('.remove-btn');
+        removeBtn.addEventListener('click', function() {
             removeAdjustmentItem(index);
-        };
+        });
     });
     
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
@@ -1008,3 +1005,4 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+
