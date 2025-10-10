@@ -175,6 +175,7 @@ function loadProducts() {
 
 function populateDatalist() {
     const datalist = document.getElementById('item-list');
+    if (!datalist) return;
     datalist.innerHTML = '';
     products.forEach(function(p) {
         const option = document.createElement('option');
@@ -215,55 +216,66 @@ function calculateTotal() {
 
 // Event listeners
 ['quantity', 'price', 'discount', 'extra'].forEach(function(id) {
-  document.getElementById(id).addEventListener('input', calculateTotal);
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calculateTotal);
 });
-document.getElementById('item').addEventListener('input', updatePrice);
-document.getElementById('unit').addEventListener('change', updatePrice);
+const itemEl = document.getElementById('item');
+if (itemEl) itemEl.addEventListener('input', updatePrice);
+const unitEl = document.getElementById('unit');
+if (unitEl) unitEl.addEventListener('change', updatePrice);
 
-document.getElementById('sale-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+const saleForm = document.getElementById('sale-form');
+if (saleForm) {
+  saleForm.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  const item = document.getElementById('item').value;
-  if (!item) {
-    alert('Please select an item');
-    return;
-  }
+    const item = document.getElementById('item').value;
+    if (!item) {
+      alert('Please select an item');
+      return;
+    }
 
-  const unit = document.getElementById('unit').value;
-  const quantity = parseFloat(document.getElementById('quantity').value) || 0;
-  const price = parseFloat(document.getElementById('price').value) || 0;
-  const discount = parseFloat(document.getElementById('discount').value) || 0;
-  const extra = parseFloat(document.getElementById('extra').value) || 0;
-  const paymentMethod = document.getElementById('payment-method').value;
-  const total = calculateTotal();
+    const unit = document.getElementById('unit').value;
+    const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+    const price = parseFloat(document.getElementById('price').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    const extra = parseFloat(document.getElementById('extra').value) || 0;
+    const paymentMethod = document.getElementById('payment-method').value;
+    const total = calculateTotal();
 
-  const sale = {
-    item: item,
-    unit: unit,
-    quantity: quantity,
-    price: price,
-    discount: discount,
-    extra: extra,
-    paymentMethod: paymentMethod,
-    total: total,
-    timestamp: new Date().toLocaleTimeString(),
-    store: currentStore
-  };
-  
-  currentSales.push(sale);
-  updateSalesTable();
-  resetForm();
-});
+    const sale = {
+      item: item,
+      unit: unit,
+      quantity: quantity,
+      price: price,
+      discount: discount,
+      extra: extra,
+      paymentMethod: paymentMethod,
+      total: total,
+      timestamp: new Date().toLocaleTimeString(),
+      store: currentStore
+    };
+    
+    currentSales.push(sale);
+    updateSalesTable();
+    resetForm();
+  });
+}
 
 function resetForm() {
-  document.getElementById('sale-form').reset();
-  document.getElementById('price').value = '';
-  document.getElementById('total').value = '';
-  document.getElementById('item').focus();
+  const form = document.getElementById('sale-form');
+  if (form) form.reset();
+  const priceEl = document.getElementById('price');
+  const totalEl = document.getElementById('total');
+  if (priceEl) priceEl.value = '';
+  if (totalEl) totalEl.value = '';
+  const itemField = document.getElementById('item');
+  if (itemField) itemField.focus();
 }
 
 function updateSalesTable() {
   const tbody = document.querySelector('#sales-table tbody');
+  if (!tbody) return;
   tbody.innerHTML = '';
   
   let grandTotal = 0;
@@ -290,8 +302,8 @@ function updateSalesTable() {
   const clearBtn = document.getElementById('clear-all-btn');
   
   if (currentSales.length > 0) {
-    submitBtn.style.display = 'inline-block';
-    clearBtn.style.display = 'inline-block';
+    if (submitBtn) submitBtn.style.display = 'inline-block';
+    if (clearBtn) clearBtn.style.display = 'inline-block';
     
     const footerRow = document.createElement('tr');
     footerRow.innerHTML = `
@@ -301,8 +313,8 @@ function updateSalesTable() {
     `;
     tbody.appendChild(footerRow);
   } else {
-    submitBtn.style.display = 'none';
-    clearBtn.style.display = 'none';
+    if (submitBtn) submitBtn.style.display = 'none';
+    if (clearBtn) clearBtn.style.display = 'none';
   }
 }
 
@@ -325,14 +337,16 @@ function submitAllSales() {
   }
 
   const submitBtn = document.getElementById('submit-all-btn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting...';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+  }
 
   const progress = document.createElement('div');
   progress.style.margin = '10px 0';
   progress.style.fontWeight = 'bold';
   progress.innerHTML = 'Submitting 0/' + currentSales.length + ' items...';
-  submitBtn.parentNode.appendChild(progress);
+  if (submitBtn && submitBtn.parentNode) submitBtn.parentNode.appendChild(progress);
 
   let successCount = 0;
   const errors = [];
@@ -351,8 +365,10 @@ function submitAllSales() {
         updateSalesTable();
       }
       
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit All Items';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit All Items';
+      }
       
       setTimeout(function() {
         progress.remove();
@@ -464,6 +480,7 @@ function populateStockTable(products) {
     const tbody = document.getElementById('stock-table-body');
     const summary = document.getElementById('stock-summary');
     
+    if (!tbody) return;
     tbody.innerHTML = '';
     
     let outOfStockCount = 0;
@@ -504,12 +521,14 @@ function populateStockTable(products) {
         tbody.appendChild(row);
     });
     
-    summary.innerHTML = `
+    if (summary) {
+      summary.innerHTML = `
         <strong>Summary:</strong> 
         Total Products: ${products.length} | 
         Out of Stock: <span style="color: #e74c3c">${outOfStockCount}</span> | 
         Low Stock: <span style="color: #f39c12">${lowStockCount}</span>
-    `;
+      `;
+    }
 }
 
 function setupStockSearch() {
@@ -596,6 +615,7 @@ function setupAdjustmentSearch() {
     });
     
     document.addEventListener('click', function(e) {
+        // hide suggestions when clicking outside
         if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
             suggestions.style.display = 'none';
         }
@@ -628,7 +648,8 @@ function addItemToAdjustment() {
         name: product.name,
         unit: 'pc',
         adjustmentType: 'add',
-        quantity: 0.0
+        quantity: 0,
+        _userBlank: true // start blank so input shows empty
     });
     
     searchInput.value = '';
@@ -636,6 +657,7 @@ function addItemToAdjustment() {
     if (suggestions) suggestions.style.display = 'none';
     updateAdjustmentTable();
 }
+
 function updateAdjustmentTable() {
     const tbody = document.getElementById('adjustment-table-body');
     const summary = document.getElementById('adjustment-summary');
@@ -660,7 +682,7 @@ function updateAdjustmentTable() {
     adjustmentItems.forEach((item, index) => {
         const row = document.createElement('tr');
         
-        const displayQuantity = item.quantity === 0 ? '' : item.quantity.toString();
+        const displayQuantity = (item._userBlank || item.quantity === 0) ? '' : item.quantity.toString();
         
         row.innerHTML = `
             <td style="padding: 12px 15px; font-weight: 600; color: #2c3e50;">${item.name}</td>
@@ -694,39 +716,51 @@ function updateAdjustmentTable() {
         
         // Add event listeners directly to each input
         const quantityInput = row.querySelector('.quantity-input');
-        quantityInput.addEventListener('input', function() {
-            let value = this.value;
-            // Allow only numbers and decimal point
-            value = value.replace(/[^0-9.]/g, '');
-            // Ensure only one decimal point
-            if ((value.match(/\./g) || []).length > 1) {
-                value = value.substring(0, value.lastIndexOf('.'));
-            }
-            this.value = value;
-            const numericValue = parseFloat(value) || 0;
-            updateAdjustmentItem(index, 'quantity', numericValue);
-        });
+        if (quantityInput) {
+            quantityInput.addEventListener('input', function() {
+                let value = this.value;
+                // Allow only numbers and decimal point
+                value = value.replace(/[^0-9.]/g, '');
+                // Ensure only one decimal point
+                if ((value.match(/\./g) || []).length > 1) {
+                    const firstIndex = value.indexOf('.');
+                    value = value.slice(0, firstIndex + 1) + value.slice(firstIndex + 1).replace(/\./g, '');
+                }
+                this.value = value;
+
+                // Parse numeric value but keep empty as NaN to denote blank input
+                const numericValue = value === '' ? NaN : parseFloat(value);
+                // Update the model but skip re-render to avoid destroying the input while typing
+                updateAdjustmentItem(index, 'quantity', numericValue, true);
+            });
+        }
         
         const unitSelect = row.querySelector('.unit-select');
-        unitSelect.addEventListener('change', function() {
-            updateAdjustmentItem(index, 'unit', this.value);
-        });
+        if (unitSelect) {
+            unitSelect.addEventListener('change', function() {
+                updateAdjustmentItem(index, 'unit', this.value);
+            });
+        }
         
         const adjustmentSelect = row.querySelector('.adjustment-select');
-        adjustmentSelect.addEventListener('change', function() {
-            updateAdjustmentItem(index, 'type', this.value);
-        });
+        if (adjustmentSelect) {
+            adjustmentSelect.addEventListener('change', function() {
+                updateAdjustmentItem(index, 'type', this.value);
+            });
+        }
         
         const removeBtn = row.querySelector('.remove-btn');
-        removeBtn.addEventListener('click', function() {
-            removeAdjustmentItem(index);
-        });
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function() {
+                removeAdjustmentItem(index);
+            });
+        }
     });
     
     if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
 }
 
-function updateAdjustmentItem(index, field, value) {
+function updateAdjustmentItem(index, field, value, skipRender) {
     if (index < 0 || index >= adjustmentItems.length) return;
     
     const item = adjustmentItems[index];
@@ -734,12 +768,26 @@ function updateAdjustmentItem(index, field, value) {
     if (field === 'type') {
         item.adjustmentType = value;
     } else if (field === 'quantity') {
-        item.quantity = value;
+        if (isNaN(value)) {
+            // user cleared the input: keep numeric 0 but mark as blank so UI shows empty
+            item.quantity = 0;
+            item._userBlank = true;
+        } else {
+            item.quantity = value;
+            item._userBlank = false;
+        }
     } else if (field === 'unit') {
         item.unit = value;
     }
     
-    updateAdjustmentTable();
+    // Only re-render when not skipping (so typing doesn't lose focus)
+    if (!skipRender) {
+        updateAdjustmentTable();
+    } else {
+        // If skipping render, optionally update the summary element only
+        const summary = document.getElementById('adjustment-summary');
+        if (summary) summary.innerHTML = `Items to adjust: ${adjustmentItems.length}`;
+    }
 }
 
 function removeAdjustmentItem(index) {
@@ -937,5 +985,3 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
-
-
