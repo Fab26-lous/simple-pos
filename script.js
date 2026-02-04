@@ -148,6 +148,8 @@ function checkLogin() {
         error.textContent = "Invalid username or password";
     }
 }
+const expenseBtn = document.getElementById("expense-button-wrapper");
+if (expenseBtn) expenseBtn.style.display = "block";
 
 function selectStore(storeId) {
     if (storeId === currentStore) {
@@ -1075,5 +1077,6 @@ function submitExpense() {
   alert("Expense recorded successfully");
   hideExpenseModal();
 }
+
 
 
