@@ -985,3 +985,59 @@ async function submitStockAdjustmentToGoogleForm(adjustment) {
     }
   }
 }
+/* =========================
+   DAILY EXPENSE FUNCTIONS
+========================= */
+
+function showExpenseModal() {
+  document.getElementById("expense-modal").style.display = "flex";
+}
+
+function hideExpenseModal() {
+  document.getElementById("expense-modal").style.display = "none";
+  clearExpenseForm();
+}
+
+function clearExpenseForm() {
+  document.getElementById("expense-category").value = "";
+  document.getElementById("expense-description").value = "";
+  document.getElementById("expense-amount").value = "";
+  document.getElementById("expense-payment").value = "Cash";
+}
+
+function submitExpense() {
+  const category = document.getElementById("expense-category").value;
+  const description = document.getElementById("expense-description").value;
+  const amount = document.getElementById("expense-amount").value;
+  const payment = document.getElementById("expense-payment").value;
+
+  if (!category || !amount || Number(amount) <= 0) {
+    alert("Please enter a valid expense category and amount");
+    return;
+  }
+
+  const formUrl =
+    "https://docs.google.com/forms/d/e/YOUR_EXPENSE_FORM_ID/formResponse";
+
+  const data = new URLSearchParams();
+  data.append("fvv", "1");
+  data.append("draftResponse", "[]");
+  data.append("pageHistory", "0");
+
+  data.append("entry.1111111111", category);
+  data.append("entry.2222222222", description);
+  data.append("entry.3333333333", amount);
+  data.append("entry.4444444444", payment);
+  data.append("entry.5555555555", stores[currentStore]?.name || currentStore);
+
+  fetch(formUrl, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: data.toString()
+  });
+
+  alert("Expense recorded successfully");
+  hideExpenseModal();
+}
+
