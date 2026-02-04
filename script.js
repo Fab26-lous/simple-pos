@@ -1040,4 +1040,40 @@ function submitExpense() {
   alert("Expense recorded successfully");
   hideExpenseModal();
 }
+function submitExpense() {
+  const category = document.getElementById("expense-category").value;
+  const description = document.getElementById("expense-description").value;
+  const amount = document.getElementById("expense-amount").value;
+  const payment = document.getElementById("expense-payment").value;
+
+  if (!category || !amount) {
+    alert("Please enter category and amount");
+    return;
+  }
+
+  const formUrl =
+    "https://docs.google.com/forms/d/e/1FAIpQLSdc1y_vTzWLHTjADVfJTq7HbymTrHfd5x0UxQmobVMeWWCEfg/formResponse";
+
+  const data = new URLSearchParams();
+  data.append("fvv", "1");
+  data.append("draftResponse", "[]");
+  data.append("pageHistory", "0");
+
+  data.append("entry.1881319054", category);
+  data.append("entry.1827614721", description);
+  data.append("entry.1704637725", amount);
+  data.append("entry.475968685", payment);
+  data.append("entry.1181742489", stores[currentStore].name);
+
+  fetch(formUrl, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: data.toString()
+  });
+
+  alert("Expense recorded successfully");
+  hideExpenseModal();
+}
+
 
