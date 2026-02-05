@@ -6,6 +6,7 @@
   <title>Simple POS</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Login -->
   <div class="login-container" id="login-container">
@@ -104,204 +105,146 @@
 
     <!-- Stock Display Button -->
     <button onclick="showStockLevels()" style="margin: 10px; background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
-        📦 View Stock Levels
+      📦 View Stock Levels
     </button>
 
     <!-- Stock Adjustment Button -->
     <button onclick="showStockAdjustment()" style="margin: 10px; background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
-        📊 Adjust Stock
+      📊 Adjust Stock
     </button>
+
+    <!-- Daily Expense Button (hidden until store is selected) -->
+    <div id="expense-button-wrapper" style="display:none;">
+      <button onclick="showExpenseModal()" style="margin: 10px; background:#f59e0b; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">
+        💸 Record Daily Expense
+      </button>
+    </div>
   </div>
-  
-  <div id="expense-button-wrapper" style="display:none;">
-  <button onclick="showExpenseModal()"
-    style="margin:10px; background:#f59e0b; color:white; border:none; padding:10px 15px; border-radius:10px; cursor:pointer;">
-    💸 Record Daily Expense
-  </button>
-</div>
-  
-<!-- Stock Display Modal -->
-<div id="stock-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+
+  <!-- Stock Display Modal -->
+  <div id="stock-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
     <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
-        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 20px;">
-            <h2 style="margin: 0;">Stock Levels - All Stores</h2>
-            <button onclick="hideStockLevels()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
-        </div>
-        
-        <!-- Search Box -->
-        <input type="text" id="stock-search" placeholder="Search products..." style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
-        
-        <!-- Stock Table -->
-        <div id="stock-table-container">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background: #34495e; color: white;">
-                        <th style="padding: 12px; text-align: left;">Product</th>
-                        <th style="padding: 12px; text-align: center;">One Stop</th>
-                        <th style="padding: 12px; text-align: center;">Golden</th>
-                        <th style="padding: 12px; text-align: center;">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="stock-table-body">
-                    <!-- Stock data will be populated here -->
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Summary -->
-        <div id="stock-summary" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>
-    </div>
-</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Stock Levels - All Stores</h2>
+        <button onclick="hideStockLevels()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
+      </div>
 
-<!-- Stock Adjustment Modal -->
-<div id="stock-adjustment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+      <input type="text" id="stock-search" placeholder="Search products..." style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+
+      <div id="stock-table-container">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #34495e; color: white;">
+              <th style="padding: 12px; text-align: left;">Product</th>
+              <th style="padding: 12px; text-align: center;">One Stop</th>
+              <th style="padding: 12px; text-align: center;">Golden</th>
+              <th style="padding: 12px; text-align: center;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="stock-table-body"></tbody>
+        </table>
+      </div>
+
+      <div id="stock-summary" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>
+    </div>
+  </div>
+
+  <!-- Stock Adjustment Modal -->
+  <div id="stock-adjustment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
     <div style="background: white; padding: 25px; border-radius: 10px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h2 style="margin: 0;">Stock Adjustment - <span id="adjustment-store-name"></span></h2>
-            <button onclick="hideStockAdjustment()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Stock Adjustment - <span id="adjustment-store-name"></span></h2>
+        <button onclick="hideStockAdjustment()" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Close</button>
+      </div>
+
+      <div style="margin-bottom: 25px; position: relative;">
+        <input type="text" id="adjustment-search" placeholder="Search products to add..." style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+        <div id="adjustment-suggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 6px 6px; max-height: 200px; overflow-y: auto; z-index: 100; display: none;"></div>
+        <button onclick="addItemToAdjustment()" style="background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 15px;">Add Item</button>
+      </div>
+
+      <div id="adjustment-table-container">
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <thead>
+            <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+              <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Product</th>
+              <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Unit</th>
+              <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Adjustment Type</th>
+              <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Quantity</th>
+              <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="adjustment-table-body">
+            <tr class="empty-state-row">
+              <td colspan="5" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
+                <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+        <div id="adjustment-summary" style="font-weight: 600; color: #2c3e50;">Items to adjust: 0</div>
+        <div style="display: flex; gap: 10px;">
+          <button onclick="clearAdjustments()" style="background-color: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;">Clear All</button>
+          <button onclick="submitStockAdjustment()" style="background-color: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;">Submit Adjustments</button>
         </div>
-        
-        <!-- Search and Add Item -->
-        <div style="margin-bottom: 25px; position: relative;">
-            <input type="text" id="adjustment-search" placeholder="Search products to add..." style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
-            <div id="adjustment-suggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 6px 6px; max-height: 200px; overflow-y: auto; z-index: 100; display: none;"></div>
-            <button onclick="addItemToAdjustment()" style="background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 15px;">Add Item</button>
-        </div>
-        
-        <!-- Adjustment Items Table -->
-        <div id="adjustment-table-container">
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <thead>
-                    <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Product</th>
-                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Unit</th>
-                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Adjustment Type</th>
-                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Quantity</th>
-                        <th style="padding: 12px 15px; text-align: left; font-weight: 600; color: #495057;">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="adjustment-table-body">
-                    <!-- Adjustment items will be populated here by JavaScript -->
-                    <tr class="empty-state-row">
-                        <td colspan="5" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
-                            <h3 style="margin: 0 0 10px 0;">No items added yet</h3>
-                            <p style="margin: 0;">Search for products above and click "Add Item" to start adjusting stock</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Summary and Submit -->
-        <div style="margin-top: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
-            <div id="adjustment-summary" style="font-weight: 600; color: #2c3e50;">Items to adjust: 0</div>
-            <div style="display: flex; gap: 10px;">
-                <button onclick="clearAdjustments()" style="background-color: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;">Clear All</button>
-                <button onclick="submitStockAdjustment()" style="background-color: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;">Submit Adjustments</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="expense-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
-
-  <div style="background:white; padding:25px; border-radius:16px; width:90%; max-width:500px;">
-    <h2 style="margin-bottom:15px;">Daily Expense</h2>
-
-    <div class="form-row">
-      <label>Category</label>
-      <select id="expense-category">
-        <option value="">-- Select --</option>
-        <option>Waybill</option>
-        <option>Wabebaji</option>
-        <option>Chakul</option>
-        <option>Umeme</option>
-        <option>Maji</option>
-        <option>Salary</option>
-        <option>Posho</option>
-        <option>Ufundi</option>
-        <option>Manunuzi ya Vifaa</option>
-        <option>Mengineyo</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label>Description</label>
-      <input type="text" id="expense-description" placeholder="Optional notes">
-    </div>
-
-    <div class="form-row">
-      <label>Amount</label>
-      <input type="number" id="expense-amount" min="0" step="0.01">
-    </div>
-
-    <div class="form-row">
-      <label>Payment Method</label>
-      <select id="expense-payment">
-        <option>Cash</option>
-        <option>Mpesa</option>
-        <option>Bank</option>
-      </select>
-    </div>
-
-    <div style="display:flex; gap:10px; margin-top:20px;">
-      <button onclick="submitExpense()" style="background:#10b981;">Save Expense</button>
-      <button onclick="hideExpenseModal()" style="background:#ef4444;">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- Make sure the JavaScript file has the updated code with decimal support -->
-  <script src="script.js"></script>
+  <!-- Expense Modal (ONLY ONCE) -->
   <div id="expense-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+  background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
 
-  <div style="background:white; padding:25px; border-radius:16px; width:90%; max-width:500px;">
-    <h2 style="margin-bottom:15px;">Daily Expense</h2>
+    <div style="background:white; padding:25px; border-radius:16px; width:90%; max-width:500px;">
+      <h2 style="margin-bottom:15px;">Daily Expense</h2>
 
-    <div class="form-row">
-      <label>Category</label>
-      <select id="expense-category">
-        <option value="">-- Select --</option>
-        <option>Transport</option>
-        <option>Utilities</option>
-        <option>Stationery</option>
-        <option>Repairs & Maintenance</option>
-        <option>Staff Welfare</option>
-        <option>Other</option>
-      </select>
-    </div>
+      <div class="form-row">
+        <label>Category</label>
+        <select id="expense-category">
+          <option value="">-- Select --</option>
+          <option>Waybill</option>
+          <option>Wabebaji</option>
+          <option>Chakul</option>
+          <option>Umeme</option>
+          <option>Maji</option>
+          <option>Salary</option>
+          <option>Posho</option>
+          <option>Ufundi</option>
+          <option>Manunuzi ya Vifaa</option>
+          <option>Mengineyo</option>
+        </select>
+      </div>
 
-    <div class="form-row">
-      <label>Description</label>
-      <input type="text" id="expense-description" placeholder="Optional notes">
-    </div>
+      <div class="form-row">
+        <label>Description</label>
+        <input type="text" id="expense-description" placeholder="Optional notes">
+      </div>
 
-    <div class="form-row">
-      <label>Amount</label>
-      <input type="number" id="expense-amount" min="0" step="0.01">
-    </div>
+      <div class="form-row">
+        <label>Amount</label>
+        <input type="number" id="expense-amount" min="0" step="0.01">
+      </div>
 
-    <div class="form-row">
-      <label>Payment Method</label>
-      <select id="expense-payment">
-        <option>Cash</option>
-        <option>Mpesa</option>
-        <option>Bank</option>
-      </select>
-    </div>
+      <div class="form-row">
+        <label>Payment Method</label>
+        <select id="expense-payment">
+          <option>Cash</option>
+          <option>Mpesa</option>
+          <option>Bank</option>
+        </select>
+      </div>
 
-    <div style="display:flex; gap:10px; margin-top:20px;">
-      <button onclick="submitExpense()" style="background:#10b981;">Save Expense</button>
-      <button onclick="hideExpenseModal()" style="background:#ef4444;">Cancel</button>
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button onclick="submitExpense()" style="background:#10b981;">Save Expense</button>
+        <button onclick="hideExpenseModal()" style="background:#ef4444;">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
