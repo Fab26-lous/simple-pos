@@ -406,7 +406,7 @@ function submitAllSales() {
 /* ✅ YOUR WORKING SALES FORM */
 function submitSaleToGoogleForm(sale) {
   const formUrl =
-    "https://docs.google.com/forms/d/e/1FAIpQLSclmoUb_V44uk6AdT1bY9RDqJvRLvUeyMTCnRNRCXrz_KDkPQ/formResponse";
+    "https://docs.google.com/forms/d/e/1FAIpQLSeK11nQm9mHidEvv1nf-CYLRaWnK6L2PpCaNvpd3TjUh5kGyA/formResponse";
 
   const formData = new URLSearchParams();
   formData.append("fvv", "1");
@@ -985,3 +985,4 @@ function submitExpense() {
   alert("Expense recorded successfully");
   hideExpenseModal();
 }
+
