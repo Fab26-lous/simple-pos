@@ -682,4 +682,152 @@ function populateStockTable(list) {
     if (one <= 0 && two <= 0) { label = 'OUT'; cls = 'status-out'; outCount++; }
     else if (one <= 5 || two <= 5) { label = 'LOW'; cls = 'status-low'; lowCount++; }
     
-    const
+    const tr = document.createElement('tr');
+    tr.innerHTML = ` <td>${p.productName}</td><td>${formatMoney(one)}</td><td>${formatMoney(two)}</td><td class="${cls}">${label}</td> `;
+    tbody.appendChild(tr);
+  });
+  
+  const summary = document.getElementById('stock-summary');
+  if (summary) summary.textContent = `Products: ${list.length} | Out: ${outCount} | Low: ${lowCount}`;
+}
+
+function showStockAdjustment() {
+  adjustmentItems = [];
+  document.getElementById('adjustment-store-name').textContent = storeName();
+  updateAdjustmentTable();
+  document.getElementById('stock-adjustment-modal').style.display = 'flex';
+  const input = document.getElementById('adjustment-search');
+  if (input) { input.value = ''; input.focus(); }
+  const info = document.getElementById('adjustment-stock-info');
+  if (info) info.textContent = 'Search an item to view stock';
+}
+
+function hideStockAdjustment() {
+  document.getElementById('stock-adjustment-modal').style.display = 'none';
+}
+
+function addItemToAdjustment() {
+  const name = document.getElementById('adjustment-search').value.trim();
+  const p = products.find(x => x.name.toLowerCase() === name.toLowerCase());
+  if (!p) { setStatus('Product not found', 'error'); return; }
+  if (adjustmentItems.some(x => x.name === p.name)) { setStatus('Item already added', 'warning'); return; }
+  
+  adjustmentItems.push({ name: p.name, unit: 'pc', adjustmentType: 'add', quantity: 0 });
+  document.getElementById('adjustment-search').value = '';
+  updateAdjustmentTable();
+  setStatus('Item added to adjustment', 'success');
+}
+
+function updateAdjustmentTable() {
+  const tbody = document.getElementById('adjustment-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  
+  if (!adjustmentItems.length) {
+    tbody.innerHTML = ' <tr><td colspan="5" class="muted">No items added yet</td></tr> ';
+  } else {
+    adjustmentItems.forEach((item, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${item.name}</td>
+        <td><select onchange="updateAdjustmentUnit(${index}, this.value)">
+          <option value="pc" ${item.unit === 'pc' ? 'selected' : ''}>pc</option>
+          <option value="dz" ${item.unit === 'dz' ? 'selected' : ''}>dz</option>
+          <option value="ct" ${item.unit === 'ct' ? 'selected' : ''}>ct</option>
+        </select></td>
+        <td><select onchange="updateAdjustmentType(${index}, this.value)">
+          <option value="add" ${item.adjustmentType === 'add' ? 'selected' : ''}>Add Stock</option>
+          <option value="remove" ${item.adjustmentType === 'remove' ? 'selected' : ''}>Remove Stock</option>
+        </select></td>
+        <td><input type="number" value="${item.quantity}" onchange="updateAdjustmentQuantity(${index}, this.value)" placeholder="Quantity"></td>
+        <td><button class="btn-mini" onclick="removeAdjustmentItem(${index})">×</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+  
+  const summary = document.getElementById('adjustment-summary');
+  if (summary) summary.textContent = `Items to adjust: ${adjustmentItems.length}`;
+}
+
+function updateAdjustmentUnit(index, unit) { if (adjustmentItems[index]) adjustmentItems[index].unit = unit; }
+function updateAdjustmentType(index, type) { if (adjustmentItems[index]) adjustmentItems[index].adjustmentType = type; }
+function updateAdjustmentQuantity(index, quantity) { if (adjustmentItems[index]) adjustmentItems[index].quantity = parseFloat(quantity) || 0; }
+function removeAdjustmentItem(index) { adjustmentItems.splice(index, 1); updateAdjustmentTable(); }
+function clearAdjustments() { adjustmentItems = []; updateAdjustmentTable(); setStatus('Adjustment cleared', 'info'); }
+
+function submitStockAdjustment() {
+  if (!adjustmentItems.length) { setStatus('No adjustments to submit', 'error'); return; }
+  const { submittedBy, userPin, pinId } = getSubmitIdentity('adjustments');
+  if (!submittedBy || !userPin) { setStatus('Select employee and enter PIN', 'error'); return; }
+  
+  const payload = { store: storeName(), submittedBy, userPin, items: adjustmentItems, timestamp: new Date().toISOString() };
+  const count = adjustmentItems.length;
+  adjustmentItems = [];
+  updateAdjustmentTable();
+  clearPin(pinId);
+  queueAndSync('adjustments', payload, `${count} adjustment(s) queued.`);
+  hideStockAdjustment();
+}
+
+function showExpenseModal() { document.getElementById('expense-modal').style.display = 'flex'; }
+function hideExpenseModal() { document.getElementById('expense-modal').style.display = 'none'; }
+
+function submitExpense() {
+  const category = document.getElementById('expense-category').value.trim();
+  const amount = parseMoney(document.getElementById('expense-amount').value);
+  const paymentMethod = document.getElementById('expense-payment').value;
+  const description = document.getElementById('expense-description').value.trim();
+  
+  if (!category) { setStatus('Please enter a category', 'error'); return; }
+  if (!amount || amount <= 0) { setStatus('Please enter a valid amount', 'error'); return; }
+  
+  const { submittedBy, userPin, pinId } = getSubmitIdentity('cashout');
+  if (!submittedBy || !userPin) { setStatus('Select employee and enter PIN', 'error'); return; }
+  
+  const payload = { store: storeName(), submittedBy, userPin, category, amount, paymentMethod, description, timestamp: new Date().toISOString() };
+  clearPin(pinId);
+  hideExpenseModal();
+  document.getElementById('expense-category').value = '';
+  document.getElementById('expense-amount').value = '';
+  document.getElementById('expense-description').value = '';
+  queueAndSync('cashout', payload, `Expense of ${formatMoney(amount)} queued.`);
+}
+
+// DOM Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const saleForm = document.getElementById('sale-form');
+  if (saleForm) saleForm.addEventListener('submit', e => { e.preventDefault(); addToSale(); });
+  attachMoneyFormatting();
+  
+  const itemInput = document.getElementById('item');
+  if (itemInput) { itemInput.addEventListener('change', updatePrice); itemInput.addEventListener('input', updateSelectedStockInfo); }
+  const unitSelect = document.getElementById('unit');
+  if (unitSelect) unitSelect.addEventListener('change', updatePrice);
+  const quantityInput = document.getElementById('quantity');
+  if (quantityInput) quantityInput.addEventListener('input', calculateTotal);
+  const adjustmentSearch = document.getElementById('adjustment-search');
+  if (adjustmentSearch) adjustmentSearch.addEventListener('input', updateAdjustmentStockInfo);
+  
+  console.log('POS System Initialized');
+});
+
+// Expose functions globally
+window.selectStore = selectStore;
+window.removeSale = removeSale;
+window.clearAllSales = clearAllSales;
+window.submitAllSales = submitAllSales;
+window.showStockLevels = showStockLevels;
+window.hideStockLevels = hideStockLevels;
+window.showStockAdjustment = showStockAdjustment;
+window.hideStockAdjustment = hideStockAdjustment;
+window.addItemToAdjustment = addItemToAdjustment;
+window.updateAdjustmentUnit = updateAdjustmentUnit;
+window.updateAdjustmentType = updateAdjustmentType;
+window.updateAdjustmentQuantity = updateAdjustmentQuantity;
+window.removeAdjustmentItem = removeAdjustmentItem;
+window.clearAdjustments = clearAdjustments;
+window.submitStockAdjustment = submitStockAdjustment;
+window.showExpenseModal = showExpenseModal;
+window.hideExpenseModal = hideExpenseModal;
+window.submitExpense = submitExpense;
